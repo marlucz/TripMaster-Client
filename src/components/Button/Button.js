@@ -1,9 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import { color, theme, shadow } from 'theme/GlobalStyle';
 
-const ButtonWrapper = styled.button`
+const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +11,7 @@ const ButtonWrapper = styled.button`
   height: 4rem;
   text-align: center;
   margin: 0 auto;
-  background-color: ${theme.themeSecondary};
+  background-color: ${({ bgColor }) => bgColor || theme.themeSecondary};
   border: none;
   box-shadow: ${shadow.hard};
   font-family: 'Lato', sans-serif;
@@ -25,7 +24,5 @@ const ButtonWrapper = styled.button`
     cursor: pointer;
   }
 `;
-
-const Button = ({ children }) => <ButtonWrapper>{children}</ButtonWrapper>;
 
 export default Button;
