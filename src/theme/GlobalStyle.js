@@ -8,8 +8,8 @@ export const color = {
 };
 
 export const theme = {
-  themePrimary: '#05A859',
-  themeSecondary: '#F15E4C',
+  primary: '#05A859',
+  secondary: '#F15E4C',
 };
 
 export const gradient = {

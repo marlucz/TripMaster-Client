@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 
+import { theme } from 'theme/GlobalStyle';
 import Button from './Button';
 
 storiesOf('Button', module)
@@ -9,10 +10,10 @@ storiesOf('Button', module)
   .add('Primary', () => {
     const label = 'Colors';
     const options = {
-      Primary: '#05A859',
-      Secondary: '#F15E4C',
+      Primary: `${theme.primary}`,
+      Secondary: `${theme.secondary}`,
     };
-    const defaultValue = '#F15E4C';
+    const defaultValue = `${theme.secondary}`;
     const groupId = 'GROUP-ID1';
     const value = select(label, options, defaultValue, groupId);
 
