@@ -18,6 +18,11 @@ export const gradient = {
   dark: '#007B76',
 };
 
+export const gradientPolygon = {
+  top: `polygon(0% 0%, 0% 101%, 101% 0%)`,
+  bottom: `polygon(100% 0, 0% 100%, 100% 100%)`,
+};
+
 const shadows = {
   hard: `rgba(0,0,0, 0.8)`,
   light: `rgba(0,0,0,0.3)`,
