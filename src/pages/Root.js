@@ -1,13 +1,13 @@
 import React from 'react';
 
 import GlobalStyle from 'theme/GlobalStyle';
-import Button from 'components/Button/Button';
+import GradientContainer from 'components/GradientContainer/GradientContainer';
 
 const Root = () => (
   <>
     <GlobalStyle />
+    <GradientContainer />
     <h1>TripMaster</h1>
-    <Button>Button</Button>
   </>
 );
 
