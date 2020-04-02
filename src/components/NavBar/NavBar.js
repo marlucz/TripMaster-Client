@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
@@ -81,7 +82,12 @@ const NavBar = ({ isInTrip }) =>
       <StyledList>
         {navTop.map(item => (
           <StyledListItem>
-            <StyledIcon to={item.slug} icon={item.icon} activeclass="active" />
+            <StyledIcon
+              as={NavLink}
+              to={item.slug}
+              icon={item.icon}
+              activeclass="active"
+            />
             <StyledText>{item.title}</StyledText>
           </StyledListItem>
         ))}
@@ -92,7 +98,12 @@ const NavBar = ({ isInTrip }) =>
       <StyledList>
         {navInTrip.map(item => (
           <StyledListItem>
-            <StyledIcon to={item.slug} icon={item.icon} activeclass="active" />
+            <StyledIcon
+              as={NavLink}
+              to={item.slug}
+              icon={item.icon}
+              activeclass="active"
+            />
             <StyledText>{item.title}</StyledText>
           </StyledListItem>
         ))}

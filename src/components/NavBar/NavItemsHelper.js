@@ -14,7 +14,7 @@ export const navTop = [
 
 export const navInTrip = [
   { slug: '/summary', title: 'Summary', icon: summary },
-  { slug: '/:slug/itinerary', title: 'Itinerary', icon: itinerary },
-  { slug: '/:slug/expenses', title: 'Expenses', icon: expenses },
-  { slug: '/:slug/todo', title: 'Todo List', icon: todo },
+  { slug: '/trip/itinerary', title: 'Itinerary', icon: itinerary },
+  { slug: '/trip/expenses', title: 'Expenses', icon: expenses },
+  { slug: '/trip/todo', title: 'Todo List', icon: todo },
 ];

@@ -4,4 +4,10 @@ import NavBar from './NavBar';
 
 storiesOf('NavBar', module)
   .add('Top', () => <NavBar />)
-  .add('Bottom', () => <NavBar isInTrip />);
+  .add('Bottom', () => <NavBar isInTrip />)
+  .add('Both Oopen', () => (
+    <>
+      <NavBar />
+      <NavBar isInTrip />
+    </>
+  ));
