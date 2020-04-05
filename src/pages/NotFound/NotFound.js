@@ -31,8 +31,8 @@ const Status = styled.h2`
 const Message = styled.p`
   color: ${color.white};
   margin-top: auto;
-  margin-bottom: 2rem;
-  padding: 2rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem 2rem;
   font-size: 2rem;
 `;
 
