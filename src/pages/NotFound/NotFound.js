@@ -8,6 +8,10 @@ import { color } from 'theme/GlobalStyle';
 import Button from 'components/Button/Button';
 
 const StyledWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,6 +21,7 @@ const StyledWrapper = styled.div`
   background: url(${NotFoundBackground}) no-repeat center;
   background-size: cover;
   padding-bottom: 10vh;
+  z-index: 10;
 `;
 
 const Status = styled.h2`

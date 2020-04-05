@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import SignIn from 'pages/Auth/SignIn';
 import SignUp from 'pages/Auth/SignUp';
@@ -13,10 +13,10 @@ import TodoList from 'pages/Trip/TodoList/TodoList';
 import MainTemplate from 'templates/MainTemplate';
 
 const Root = () => (
-  <MainTemplate>
-    <BrowserRouter>
+  <BrowserRouter>
+    <MainTemplate>
       <Switch>
-        <Route exact path="/" component={() => <Redirect to="/trips" />} />
+        <Route exact path="/" component={Trips} />
         <Route exact path="/account" component={SignIn} />
         <Route path="/account/register" component={SignUp} />
         <Route path="/trip" component={Trip} />
@@ -26,8 +26,8 @@ const Root = () => (
         <Route path="/trip/todo" component={TodoList} />
         <Route component={NotFound} />
       </Switch>
-    </BrowserRouter>
-  </MainTemplate>
+    </MainTemplate>
+  </BrowserRouter>
 );
 
 export default Root;

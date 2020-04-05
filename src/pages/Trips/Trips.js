@@ -1,12 +1,5 @@
 import React from 'react';
 
-import NavBar from 'components/NavBar/NavBar';
-
-const Home = () => (
-  <>
-    <NavBar />
-    <NavBar isInTrip />
-  </>
-);
+const Home = () => <h1> Trips </h1>;
 
 export default Home;

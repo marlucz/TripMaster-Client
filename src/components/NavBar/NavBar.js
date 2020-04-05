@@ -81,7 +81,7 @@ const NavBar = ({ isInTrip }) =>
     <StyledWrapper>
       <StyledList>
         {navTop.map(item => (
-          <StyledListItem>
+          <StyledListItem key={item.title}>
             <StyledIcon
               as={NavLink}
               to={item.slug}
@@ -97,7 +97,7 @@ const NavBar = ({ isInTrip }) =>
     <StyledWrapper bottom>
       <StyledList>
         {navInTrip.map(item => (
-          <StyledListItem>
+          <StyledListItem key={item.title}>
             <StyledIcon
               as={NavLink}
               to={item.slug}
