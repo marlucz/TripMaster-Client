@@ -10,11 +10,10 @@ import Expenses from 'pages/Trip/Expenses/Expenses';
 import Itinerary from 'pages/Trip/Itinerary/Itinerary';
 import TodoList from 'pages/Trip/TodoList/TodoList';
 
-import GlobalStyle from 'theme/GlobalStyle';
+import MainTemplate from 'templates/MainTemplate';
 
 const Root = () => (
-  <>
-    <GlobalStyle />
+  <MainTemplate>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={() => <Redirect to="/trips" />} />
@@ -28,7 +27,7 @@ const Root = () => (
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
-  </>
+  </MainTemplate>
 );
 
 export default Root;

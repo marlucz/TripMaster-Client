@@ -11,7 +11,8 @@ const Button = styled.button`
   height: 4rem;
   text-align: center;
   margin: 0 auto;
-  background-color: ${({ bgColor }) => bgColor || theme.secondary};
+  background-color: ${({ secondary }) =>
+    secondary ? theme.secondary : theme.primary};
   border: none;
   box-shadow: ${shadow.hard};
   font-family: 'Lato', sans-serif;
