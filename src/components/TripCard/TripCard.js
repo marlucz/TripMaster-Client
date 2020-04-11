@@ -6,6 +6,8 @@ import { ReactComponent as CalendarLogo } from 'assets/icons/calendar.svg';
 import { ReactComponent as ClockLogo } from 'assets/icons/clock.svg';
 
 const StyledWrapper = styled.div`
+  width: 100%;
+  max-width: 50rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -19,7 +21,7 @@ const StyledWrapper = styled.div`
 
 const StyledImageWrapper = styled.div`
   width: 25%;
-  height: 100%;
+  height: 12vh;
 
   @media ${breakpoints.md} {
     width: 100%;
@@ -48,21 +50,23 @@ const StyledInfoSection = styled.div`
   align-items: flex-start;
   flex-grow: 1;
   padding-left: 1rem;
-  height: 90%;
+  height: 11vh;
   box-shadow: ${shadow.light};
 
   @media ${breakpoints.md} {
     width: 100%;
     height: auto;
-    padding: 0 1.5rem;
+    padding: 1rem 1.5rem;
   }
 `;
 
 const StyledHeader = styled.h3`
   font-size: 1.6rem;
+  padding-bottom: 0.5rem;
 
   @media ${breakpoints.md} {
     font-size: 2.2rem;
+    padding-bottom: 1rem;
   }
 `;
 
