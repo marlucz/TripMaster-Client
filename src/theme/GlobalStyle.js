@@ -59,7 +59,7 @@ export const breakpoints = {
 export const gap = {
   small: ` 5px`,
   medium: `1rem`,
-  $ig: `2rem`,
+  big: `2rem`,
 };
 
 const GlobalStyle = createGlobalStyle`
