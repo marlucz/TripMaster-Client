@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { breakpoints, shadow, theme } from 'theme/GlobalStyle';
+import { breakpoints, shadow, theme, color } from 'theme/GlobalStyle';
 import { ReactComponent as CalendarLogo } from 'assets/icons/calendar.svg';
 import { ReactComponent as ClockLogo } from 'assets/icons/clock.svg';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  max-width: 50rem;
+  max-width: 40rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -53,6 +53,7 @@ const StyledInfoSection = styled.div`
   padding-left: 1rem;
   height: 11vh;
   box-shadow: ${shadow.light};
+  background-color: ${color.white};
 
   @media ${breakpoints.md} {
     width: 100%;
