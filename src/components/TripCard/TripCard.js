@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { breakpoints, shadow, theme } from 'theme/GlobalStyle';
 import { ReactComponent as CalendarLogo } from 'assets/icons/calendar.svg';
@@ -127,6 +128,15 @@ const TripCard = ({ image, name, startDate, endDate, duration, startsIn }) => {
       </StyledInfoSection>
     </StyledWrapper>
   );
+};
+
+TripCard.protoTypes = {
+  image: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  startDate: PropTypes.instanceOf(Date).isRequired,
+  endDate: PropTypes.instanceOf(Date).isRequired,
+  duration: PropTypes.number.isRequired,
+  startsIn: PropTypes.number.isRequired,
 };
 
 export default TripCard;
