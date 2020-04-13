@@ -3,16 +3,22 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import NavBar from 'components/NavBar/NavBar';
 
+import { breakpoints } from 'theme/GlobalStyle';
+
 const LayoutWrapper = styled.div`
   position: relative;
 `;
 
 const Main = styled.main`
-  width: 80%;
-  max-width: 110rem;
+  width: 100%;
   margin: 0 auto;
-  margin-top: 6rem;
-  padding: 2rem 0.5em;
+  margin-top: 4.1rem;
+  padding: 0;
+
+  @media ${breakpoints.md} {
+    margin-top: 6rem;
+    padding-top: 1.5rem;
+  }
 `;
 
 const AuthUserTemplate = ({ children }) => (

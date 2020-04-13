@@ -17,11 +17,16 @@ const StyledWrapper = styled.nav`
   &::after {
     content: '';
     position: absolute;
-    left: 2.5%;
+    left: 0;
     top: 100%;
     height: 1px;
-    width: 95%;
+    width: 100%;
     background-color: ${color.black};
+
+    @media ${breakpoints.md} {
+      left: 2.5%;
+      width: 95%;
+    }
   }
 
   ${({ bottom }) =>

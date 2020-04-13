@@ -10,11 +10,11 @@ import Expenses from 'pages/Trip/Expenses/Expenses';
 import Itinerary from 'pages/Trip/Itinerary/Itinerary';
 import TodoList from 'pages/Trip/TodoList/TodoList';
 
-import MainTemplate from 'templates/MainTemplate';
+import GlobalTemplate from 'templates/GlobalTemplate';
 
 const Root = () => (
   <BrowserRouter>
-    <MainTemplate>
+    <GlobalTemplate>
       <Switch>
         <Route exact path="/" component={Trips} />
         <Route exact path="/account" component={SignIn} />
@@ -26,7 +26,7 @@ const Root = () => (
         <Route path="/trip/todo" component={TodoList} />
         <Route component={NotFound} />
       </Switch>
-    </MainTemplate>
+    </GlobalTemplate>
   </BrowserRouter>
 );
 
