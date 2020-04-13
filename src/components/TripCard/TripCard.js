@@ -12,11 +12,9 @@ const StyledWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
 
   @media ${breakpoints.md} {
     flex-direction: column;
-    margin-bottom: 2rem;
   }
 `;
 
@@ -138,6 +136,10 @@ TripCard.protoTypes = {
   endDate: PropTypes.instanceOf(Date).isRequired,
   duration: PropTypes.number.isRequired,
   startsIn: PropTypes.number.isRequired,
+};
+
+TripCard.defaultProps = {
+  image: null,
 };
 
 export default TripCard;

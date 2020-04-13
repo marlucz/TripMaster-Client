@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { theme, breakpoints, fontSize } from 'theme/GlobalStyle';
 
 const HeaderWrapper = styled.header`
-  padding: 2rem;
+  margin-bottom: 1rem;
 `;
 
 const Heading = styled.h2`
