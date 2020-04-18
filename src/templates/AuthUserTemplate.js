@@ -17,7 +17,6 @@ const Main = styled.main`
 
   @media ${breakpoints.md} {
     margin-top: 6rem;
-    padding-top: 1.5rem;
   }
 `;
 

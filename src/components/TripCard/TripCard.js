@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { breakpoints, shadow, theme, color } from 'theme/GlobalStyle';
+import { breakpoints, shadow, theme, color, gradient } from 'theme/GlobalStyle';
 import { ReactComponent as CalendarLogo } from 'assets/icons/calendar.svg';
 import { ReactComponent as ClockLogo } from 'assets/icons/clock.svg';
 
@@ -12,6 +12,11 @@ const StyledWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  background-color: ${color.white};
+  border: 1px solid ${gradient.dark};
+  border-radius: 1rem;
+  box-shadow: ${shadow.light};
+  overflow: hidden;
 
   @media ${breakpoints.md} {
     flex-direction: column;
@@ -49,9 +54,7 @@ const StyledInfoSection = styled.div`
   align-items: flex-start;
   flex-grow: 1;
   padding-left: 1rem;
-  height: 11vh;
-  box-shadow: ${shadow.light};
-  background-color: ${color.white};
+  height: 12vh;
 
   @media ${breakpoints.md} {
     width: 100%;
