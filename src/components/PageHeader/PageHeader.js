@@ -8,16 +8,7 @@ const HeaderWrapper = styled.header`
 `;
 
 const Heading = styled.h2`
-  margin-bottom: 1rem;
   text-transform: uppercase;
-
-  @media ${breakpoints.sm} {
-    margin-bottom: 1.8rem;
-  }
-
-  @media ${breakpoints.ld} {
-    margin-bottom: 2rem;
-  }
 `;
 
 const SubHeading = styled.span`
@@ -25,7 +16,6 @@ const SubHeading = styled.span`
   display: block;
   text-transform: uppercase;
   color: ${theme.secondary};
-
   @media ${breakpoints.sm} {
     font-size: ${fontSize.textSecondaryTablet};
   }

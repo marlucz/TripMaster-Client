@@ -2,12 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
-import MainSectionTemplate from 'templates/MainSectionTemplate';
 import TripCard from 'components/TripCard/TripCard';
 import PageHeader from 'components/PageHeader/PageHeader';
 
 import { gap, breakpoints } from 'theme/GlobalStyle';
 import { trips } from './TripsHelper';
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
 const StyledTripsList = styled.ul`
   display: grid;
@@ -16,6 +21,7 @@ const StyledTripsList = styled.ul`
   grid-gap: ${gap.small};
   margin-bottom: ${gap.medium};
   list-style: none;
+  overflow-y: scroll;
 
   @media ${breakpoints.md} {
     grid-gap: ${gap.medium};
@@ -38,8 +44,8 @@ const StyledListItem = styled.li`
 `;
 
 const Home = () => (
-  <AuthUserTemplate>
-    <MainSectionTemplate>
+  <AuthUserTemplate withTrip>
+    <StyledWrapper>
       <PageHeader header="Trips" subHeader="your" />
       <StyledTripsList>
         {trips.map(
@@ -57,7 +63,7 @@ const Home = () => (
           ),
         )}
       </StyledTripsList>
-    </MainSectionTemplate>
+    </StyledWrapper>
   </AuthUserTemplate>
 );
 
