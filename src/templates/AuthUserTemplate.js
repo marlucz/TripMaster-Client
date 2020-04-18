@@ -20,15 +20,21 @@ const Main = styled.main`
   }
 `;
 
-const AuthUserTemplate = ({ children }) => (
+const AuthUserTemplate = ({ children, inTrip }) => (
   <LayoutWrapper>
     <NavBar />
     <Main>{children}</Main>
+    {inTrip && <NavBar isInTrip />}
   </LayoutWrapper>
 );
 
 AuthUserTemplate.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
+  inTrip: PropTypes.bool,
+};
+
+AuthUserTemplate.defaultProps = {
+  inTrip: false,
 };
 
 export default AuthUserTemplate;
