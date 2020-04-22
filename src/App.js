@@ -13,21 +13,21 @@ import TodoList from 'pages/Trip/TodoList/TodoList';
 import GlobalTemplate from 'templates/GlobalTemplate';
 
 const Root = () => (
-  <BrowserRouter>
-    <GlobalTemplate>
-      <Switch>
-        <Route exact path="/" component={Trips} />
-        <Route exact path="/account" component={SignIn} />
-        <Route path="/account/register" component={SignUp} />
-        <Route path="/trip" component={Trip} />
-        <Route exact path="/trips" component={Trips} />
-        <Route path="/trip/expenses" component={Expenses} />
-        <Route path="/trip/itinerary" component={Itinerary} />
-        <Route path="/trip/todo" component={TodoList} />
-        <Route component={NotFound} />
-      </Switch>
-    </GlobalTemplate>
-  </BrowserRouter>
+    <BrowserRouter>
+        <GlobalTemplate>
+            <Switch>
+                <Route exact path="/" component={Trips} />
+                <Route exact path="/account" component={SignIn} />
+                <Route path="/account/register" component={SignUp} />
+                <Route exact path="/trip" component={Trip} />
+                <Route exact path="/trips" component={Trips} />
+                <Route path="/trip/expenses" component={Expenses} />
+                <Route path="/trip/itinerary" component={Itinerary} />
+                <Route path="/trip/todo" component={TodoList} />
+                <Route component={NotFound} />
+            </Switch>
+        </GlobalTemplate>
+    </BrowserRouter>
 );
 
 export default Root;

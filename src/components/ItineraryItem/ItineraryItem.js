@@ -19,10 +19,8 @@ const StyledWrapper = styled.li`
     grid-template-columns: 25% min-content 1fr;
     padding: 0.5rem 0;
     width: 100%;
-    max-width: 37.5rem;
     background-color: ${color.white};
     border: 1px solid ${gradient.dark};
-    border-radius: 1rem;
     box-shadow: ${shadow.light};
 
     @media ${breakpoints.md} {
