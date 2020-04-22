@@ -1,65 +1,71 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const color = {
-  white: '#FFFFFF',
-  black: '#002535',
-  grayDark: '#707B84',
-  grayLight: '#F6F8F5',
+    white: '#FFFFFF',
+    black: '#002535',
+    grayDark: '#707B84',
+    grayLight: '#F6F8F5',
 };
 
 export const theme = {
-  primary: '#05A859',
-  secondary: '#F15E4C',
+    primary: '#05A859',
+    secondary: '#F15E4C',
 };
 
 export const gradient = {
-  light: '#D8E6C5',
-  medium: '#008884',
-  dark: '#007B76',
+    light: '#D8E6C5',
+    medium: '#008884',
+    dark: '#007B76',
+};
+
+export const pinColor = {
+    done: '#707B84',
+    now: '#05A859',
+    next: '#002535',
 };
 
 export const gradientPolygon = {
-  top: `polygon(0% 0%, 0% 101%, 101% 0%)`,
-  bottom: `polygon(100% 0, 0% 100%, 100% 100%)`,
+    top: `polygon(0% 0%, 0% 101%, 101% 0%)`,
+    bottom: `polygon(100% 0, 0% 100%, 100% 100%)`,
 };
 
 const shadows = {
-  hard: `rgba(0,0,0, 0.8)`,
-  light: `rgba(0,0,0,0.3)`,
+    hard: `rgba(0,0,0, 0.8)`,
+    light: `rgba(0,0,0,0.3)`,
 };
 
 export const shadow = {
-  hard: `2px 2px 4px ${shadows.hard}`,
-  light: `0 0 5px ${shadows.light}`,
+    hard: `2px 2px 4px ${shadows.hard}`,
+    light: `0 0 5px ${shadows.light}`,
 };
 
 export const fontFamily = {
-  main: `'Lato', sans-serif`,
-  logo: `'Mr Dafoe', cursive`,
+    main: `'Lato', sans-serif`,
+    logo: `'Mr Dafoe', cursive`,
 };
 
 export const fontSize = {
-  textSecondaryScreen: '1.2rem',
-  textPrimaryScreen: '1.4rem',
+    textSecondaryScreen: '1.2rem',
+    textPrimaryScreen: '1.4rem',
 
-  textSecondarytablet: '1.3rem',
-  textPrimaryTablet: '1.6rem',
+    textSecondarytablet: '1.3rem',
+    textPrimaryTablet: '1.6rem',
 
-  textSecondaryDesktop: '1.4rem',
-  textPrimaryDesktop: '1.7rem',
+    textSecondaryDesktop: '1.4rem',
+    textPrimaryDesktop: '1.7rem',
 };
 
 export const breakpoints = {
-  sm: `(min-width: 576px)`,
-  md: `(min-width: 768px)`,
-  ld: `(min-width: 992px)`,
-  xld: `(min-width: 1200px)`,
+    sm: `(min-width: 576px)`,
+    md: `(min-width: 768px)`,
+    ld: `(min-width: 992px)`,
+    xld: `(min-width: 1200px)`,
 };
 
 export const gap = {
-  small: ` 5px`,
-  medium: `1rem`,
-  big: `2rem`,
+    small: ` 5px`,
+    medium: `1rem`,
+    big: `2rem`,
 };
 
 const GlobalStyle = createGlobalStyle`
