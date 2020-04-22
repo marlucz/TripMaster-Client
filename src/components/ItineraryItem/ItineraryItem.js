@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import {
     breakpoints,
@@ -161,5 +162,20 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => (
         </StyledItineraryDetails>
     </StyledWrapper>
 );
+
+ItineraryItem.propTypes = {
+    date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+        .isRequired,
+    hour: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+        .isRequired,
+    name: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    status: PropTypes.string.isRequired,
+};
+
+ItineraryItem.defaultProps = {
+    description: null,
+};
 
 export default ItineraryItem;
