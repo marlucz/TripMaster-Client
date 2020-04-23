@@ -6,7 +6,7 @@ import NavBar from 'components/NavBar/NavBar';
 import { breakpoints } from 'theme/GlobalStyle';
 
 const LayoutWrapper = styled.div`
-  position: relative;
+    position: relative;
 `;
 
 const Main = styled.main`
@@ -16,13 +16,13 @@ const Main = styled.main`
   margin-top: 4.1rem;
 
   ${({ withTrip }) =>
-    withTrip
-      ? css`
-          height: calc(100vh - 7rem);
-        `
-      : css`
-          height: calc(100vh - 4.1rem);
-        `}
+      withTrip
+          ? css`
+                height: calc(100vh - 8rem);
+            `
+          : css`
+                height: calc(100vh - 4.1rem);
+            `}
 
   @media ${breakpoints.md} {
     width: 90%;
@@ -31,31 +31,32 @@ const Main = styled.main`
     margin-top: 6rem;
 
     ${({ withTrip }) =>
-      withTrip
-        ? css`
-            height: calc(100vh - 10rem);
-          `
-        : css`
-            height: calc(100vh - 6rem);
-          `}
+        withTrip
+            ? css`
+                  height: calc(100vh - 10rem);
+              `
+            : css`
+                  height: calc(100vh - 6rem);
+              `}
   }
 `;
 
 const AuthUserTemplate = ({ children, withTrip }) => (
-  <LayoutWrapper>
-    <NavBar />
-    <Main withTrip={withTrip}>{children}</Main>
-    {withTrip && <NavBar isInTrip />}
-  </LayoutWrapper>
+    <LayoutWrapper>
+        <NavBar />
+        <Main withTrip={withTrip}>{children}</Main>
+        {withTrip && <NavBar isInTrip />}
+    </LayoutWrapper>
 );
 
 AuthUserTemplate.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
-  withTrip: PropTypes.bool,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])
+        .isRequired,
+    withTrip: PropTypes.bool,
 };
 
 AuthUserTemplate.defaultProps = {
-  withTrip: false,
+    withTrip: false,
 };
 
 export default AuthUserTemplate;

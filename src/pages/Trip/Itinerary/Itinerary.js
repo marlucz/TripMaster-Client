@@ -5,8 +5,9 @@ import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ItineraryItem from 'components/ItineraryItem/ItineraryItem';
 import PageHeader from 'components/PageHeader/PageHeader';
 
-import { breakpoints, shadow, gradient } from 'theme/GlobalStyle';
 import mapPlaceholder from 'assets/photos/map_placeholder.JPG';
+import add from 'assets/icons/add.svg';
+import { breakpoints, shadow, gradient } from 'theme/GlobalStyle';
 import { itineraries } from './ItineraryHelper';
 
 const StyledWrapper = styled.div`
@@ -69,6 +70,21 @@ const StyledMap = styled.div`
     height: 100%;
 `;
 
+const StyledButton = styled.button`
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    background: none;
+    background-image: url(${add});
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100% 100%;
+    margin-left: 25%;
+    margin-top: 2rem;
+    border: none;
+    cursor: pointer;
+`;
+
 const Itinerary = () => (
     <AuthUserTemplate withTrip>
         <PageHeader
@@ -94,6 +110,7 @@ const Itinerary = () => (
                         </StyledListItem>
                     ),
                 )}
+                <StyledButton />
             </StyledItineraryList>
         </StyledWrapper>
     </AuthUserTemplate>

@@ -68,8 +68,9 @@ const StyledItineraryDetails = styled.div`
 const StyledPinIcon = styled.div`
     justify-self: center;
     position: relative;
-    padding: 0 5px;
+    padding: 0;
     padding-top: 1rem;
+    margin: 0 1rem;
     height: 100%;
     display: flex;
 
