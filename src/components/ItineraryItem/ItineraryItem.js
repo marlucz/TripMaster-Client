@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -14,7 +14,7 @@ import { ReactComponent as PinNow } from 'assets/icons/pin-now.svg';
 import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
 import { ReactComponent as Chevron } from 'assets/icons/chevron.svg';
 
-const StyledWrapper = styled.li`
+const StyledWrapper = styled.div`
     display: grid;
     grid-template-columns: 25% min-content 1fr;
     padding: 0.5rem 0;
@@ -69,8 +69,8 @@ const StyledPinIcon = styled.div`
     justify-self: center;
     position: relative;
     padding: 0 5px;
+    padding-top: 1rem;
     height: 100%;
-    padding-top: 2.5rem;
     display: flex;
 
     @media ${breakpoints.md} {
@@ -85,7 +85,7 @@ const StyledPinIcon = styled.div`
     &:before {
         content: '';
         position: absolute;
-        top: calc(4.5rem);
+        top: calc(3rem);
         left: calc(50% - 1px);
         height: 100%;
         width: 2px;
@@ -114,10 +114,18 @@ const StyledHeader = styled.h3`
 `;
 
 const StyledDescription = styled.div`
-    max-height: 100%;
-    opacity: 1;
+    max-height: 0;
+    opacity: 0;
     transition: all 0.35s 0.2s linear;
     overflow: hidden;
+
+    ${({ collapsed }) =>
+        !collapsed &&
+        css`
+            max-height: 100%;
+            opacity: 1;
+            transition: all 0.35s 0.2s linear;
+        `}
 `;
 
 const StyledChevron = styled(Chevron)`
@@ -130,6 +138,8 @@ const StyledChevron = styled(Chevron)`
     &:hover {
         cursor: pointer;
     }
+
+    ${({ rotate }) => (rotate ? `transform: rotate(180deg)` : ``)}
 `;
 
 const StyledSpan = styled.span`
@@ -141,25 +151,40 @@ const StyledSpan = styled.span`
     }
 `;
 
-const ItineraryItem = ({ date, hour, name, location, description, status }) => (
-    <StyledWrapper>
-        <StyledTime>
-            <StyledParagraph>{date}</StyledParagraph>
-            <StyledParagraph>{hour}</StyledParagraph>
-        </StyledTime>
-        <StyledPinIcon status={status}>
-            {status === 'done' && <PinDone />}
-            {status === 'now' && <PinNow />}
-            {status === 'next' && <PinNext />}
-        </StyledPinIcon>
-        <StyledItineraryDetails>
-            <StyledHeader status={status}>{name}</StyledHeader>
-            <StyledSpan>{location}</StyledSpan>
-            <StyledChevron />
-            <StyledDescription>{description}</StyledDescription>
-        </StyledItineraryDetails>
-    </StyledWrapper>
-);
+const ItineraryItem = ({ date, hour, name, location, description, status }) => {
+    const [isCollapsed, setCollapsed] = useState(true);
+    const [isChevronRotated, changeChevronRotation] = useState(false);
+
+    const handleChevronClick = () => {
+        setCollapsed(!isCollapsed);
+        changeChevronRotation(!isChevronRotated);
+    };
+
+    return (
+        <StyledWrapper>
+            <StyledTime>
+                <StyledParagraph>{date}</StyledParagraph>
+                <StyledParagraph>{hour}</StyledParagraph>
+            </StyledTime>
+            <StyledPinIcon status={status}>
+                {status === 'done' && <PinDone />}
+                {status === 'now' && <PinNow />}
+                {status === 'next' && <PinNext />}
+            </StyledPinIcon>
+            <StyledItineraryDetails>
+                <StyledHeader status={status}>{name}</StyledHeader>
+                <StyledSpan>{location}</StyledSpan>
+                <StyledChevron
+                    onClick={handleChevronClick}
+                    rotate={isChevronRotated ? 1 : undefined}
+                />
+                <StyledDescription collapsed={isCollapsed}>
+                    {description}
+                </StyledDescription>
+            </StyledItineraryDetails>
+        </StyledWrapper>
+    );
+};
 
 ItineraryItem.propTypes = {
     date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])

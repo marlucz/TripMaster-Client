@@ -10,12 +10,10 @@ import mapPlaceholder from 'assets/photos/map_placeholder.JPG';
 import { itineraries } from './ItineraryHelper';
 
 const StyledWrapper = styled.div`
+    height: 100%;
     display: grid;
     grid-template-rows: 40% 50%;
-
-    @media ${breakpoints.md} {
-        grid-template-rows: 50% 42%;
-    }
+    grid-gap: 0.5rem;
 
     @media screen and (min-width: 1024px) and (orientation: landscape),
         (min-width: 1200px) {
@@ -31,10 +29,8 @@ const StyledWrapper = styled.div`
 
 const StyledItineraryList = styled.ul`
     list-style: none;
-    max-height: 50vh;
     width: 100%;
     overflow-y: scroll;
-    margin-top: 1.5rem;
 
     @media screen and (min-width: 1024px) and (orientation: landscape),
         (min-width: 1200px) {
@@ -52,7 +48,6 @@ const StyledListItem = styled.li`
 `;
 
 const StyledMapContainer = styled.div`
-    margin-bottom: 1rem;
     border: 1px solid ${gradient.dark};
     box-shadow: ${shadow.light};
 
