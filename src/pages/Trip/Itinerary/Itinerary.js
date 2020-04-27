@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ItineraryItem from 'components/ItineraryItem/ItineraryItem';
 import PageHeader from 'components/PageHeader/PageHeader';
+import Button from 'components/Button/Button';
 
 import mapPlaceholder from 'assets/photos/map_placeholder.JPG';
-import add from 'assets/icons/add.svg';
 import { breakpoints, shadow, gradient } from 'theme/GlobalStyle';
 import { itineraries } from './ItineraryHelper';
 
@@ -46,6 +46,10 @@ const StyledItineraryList = styled.ul`
 const StyledListItem = styled.li`
     margin: 0;
     padding: 0;
+
+    &:last-of-type {
+        overflow: hidden;
+    }
 `;
 
 const StyledMapContainer = styled.div`
@@ -70,19 +74,10 @@ const StyledMap = styled.div`
     height: 100%;
 `;
 
-const StyledButton = styled.button`
-    display: block;
-    width: 4rem;
-    height: 4rem;
-    background: none;
-    background-image: url(${add});
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: 100% 100%;
-    margin-left: 25%;
-    margin-top: 2rem;
-    border: none;
-    cursor: pointer;
+const StyledButton = styled(Button)`
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem auto;
 `;
 
 const Itinerary = () => (
@@ -110,7 +105,7 @@ const Itinerary = () => (
                         </StyledListItem>
                     ),
                 )}
-                <StyledButton />
+                <StyledButton secondary>Add Next Stop</StyledButton>
             </StyledItineraryList>
         </StyledWrapper>
     </AuthUserTemplate>

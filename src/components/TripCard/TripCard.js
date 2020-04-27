@@ -137,8 +137,12 @@ const TripCard = ({ image, name, startDate, endDate, duration, startsIn }) => {
 TripCard.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
-    startDate: PropTypes.instanceOf(Date).isRequired,
-    endDate: PropTypes.instanceOf(Date).isRequired,
+    startDate: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+    ]).isRequired,
+    endDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+        .isRequired,
     duration: PropTypes.number.isRequired,
     startsIn: PropTypes.number.isRequired,
 };
