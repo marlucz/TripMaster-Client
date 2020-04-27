@@ -31,7 +31,8 @@ const StyledWrapper = styled.div`
     @media screen and (min-width: 1024px) and (orientation: landscape),
         (min-width: 1200px) {
         padding-bottom: 1rem;
-        grid-template-columns: 22% min-content 1fr;
+        padding-left: 1rem;
+        grid-template-columns: 25% min-content 1fr;
     }
 `;
 
@@ -63,6 +64,10 @@ const StyledParagraph = styled.p`
 
 const StyledItineraryDetails = styled.div`
     position: relative;
+
+    @media ${breakpoints.md} {
+        padding-top: 0.3rem;
+    }
 `;
 
 const StyledPinIcon = styled.div`
@@ -86,11 +91,17 @@ const StyledPinIcon = styled.div`
     &:before {
         content: '';
         position: absolute;
-        top: calc(3rem);
+        width: 2px;
+        top: 3rem;
         left: calc(50% - 1px);
         height: 100%;
-        width: 2px;
         background-color: ${({ status }) => pinColor[status]};
+
+        @media ${breakpoints.md} {
+            width: 1px;
+            top: 3.2rem;
+            left: calc(50% - 1px);
+        }
     }
 
     svg {
@@ -98,6 +109,11 @@ const StyledPinIcon = styled.div`
         height: 2rem;
         z-index: 1;
         background-color: ${color.white};
+
+        @media ${breakpoints.md} {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
 
         path {
             ${({ status }) =>
@@ -112,6 +128,10 @@ const StyledPinIcon = styled.div`
 const StyledHeader = styled.h3`
     font-size: 1.6rem;
     color: ${({ status }) => pinColor[status]};
+
+    @media ${breakpoints.md} {
+        margin-bottom: 0.3rem;
+    }
 `;
 
 const StyledDescription = styled.div`
@@ -135,6 +155,10 @@ const StyledChevron = styled(Chevron)`
     right: 2.5rem;
     width: 2rem;
     height: 2rem;
+
+    @media ${breakpoints.md} {
+        padding-top: 0.5rem;
+    }
 
     &:hover {
         cursor: pointer;

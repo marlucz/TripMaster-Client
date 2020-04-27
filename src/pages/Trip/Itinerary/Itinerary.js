@@ -29,6 +29,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledItineraryList = styled.ul`
+    position: relative;
     list-style: none;
     width: 100%;
     overflow-y: scroll;
@@ -39,7 +40,7 @@ const StyledItineraryList = styled.ul`
         height: 100%;
         grid-area: timeline;
         height: 100%;
-        max-height: 70vh;
+        max-height: 75vh;
     }
 `;
 
@@ -63,7 +64,7 @@ const StyledMapContainer = styled.div`
     @media screen and (min-width: 1024px) and (orientation: landscape),
         (min-width: 1200px) {
         grid-area: map;
-        max-height: 70vh;
+        max-height: 75vh;
     }
 `;
 
@@ -78,6 +79,13 @@ const StyledButton = styled(Button)`
     width: 100%;
     max-width: 100%;
     margin: 1rem auto;
+    z-index: 10;
+    flex-shrink: 0;
+
+    &:hover {
+        transform: none;
+        cursor: pointer;
+    }
 `;
 
 const Itinerary = () => (
