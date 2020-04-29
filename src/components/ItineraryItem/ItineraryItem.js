@@ -38,7 +38,7 @@ const StyledWrapper = styled.div`
     }
 `;
 
-const StyledItineraryDetails = styled.div`
+const StyledDetails = styled.div`
     position: relative;
 
     @media ${breakpoints.md} {
@@ -172,7 +172,7 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => {
                 {status === 'now' && <PinNow />}
                 {status === 'next' && <PinNext />}
             </StyledPinIcon>
-            <StyledItineraryDetails>
+            <StyledDetails>
                 <StyledHeader status={status}>{name}</StyledHeader>
                 <StyledSpan>{location}</StyledSpan>
                 <StyledChevron
@@ -182,7 +182,7 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => {
                 <StyledDescription collapsed={isCollapsed}>
                     {description}
                 </StyledDescription>
-            </StyledItineraryDetails>
+            </StyledDetails>
         </StyledWrapper>
     );
 };
