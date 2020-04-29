@@ -6,6 +6,7 @@ import { color, gradient, shadow, breakpoints } from 'theme/GlobalStyle';
 import { currencies } from 'components/ExpenseItem/currencies';
 import TimeContainer from 'components/TimeContainer/TimeContainer';
 import Paragraph from 'components/Paragraph/Paragraph';
+import EditItems from 'components/EditItems/EditItems';
 
 const StyledWrapper = styled.div`
     display: grid;
@@ -93,6 +94,7 @@ const ExpenseItem = ({ date, hour, name, tags, value, currency }) => (
                 <span>{currencies[currency].symbol_native}</span>
             </StyledValue>
         </StyledDetails>
+        <EditItems />
     </StyledWrapper>
 );
 

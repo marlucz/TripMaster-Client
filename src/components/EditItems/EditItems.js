@@ -1,0 +1,54 @@
+import React from 'react';
+import styled, { css } from 'styled-components';
+
+import { breakpoints, theme } from 'theme/GlobalStyle';
+import { ReactComponent as Edit } from 'assets/icons/edit.svg';
+import { ReactComponent as Delete } from 'assets/icons/delete.svg';
+
+const StyledWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    @media ${breakpoints.md} {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+`;
+
+const PinIcon = styled.div`
+    svg {
+        width: 2rem;
+        height: 2rem;
+        margin: 2px;
+
+        path {
+            ${({ color }) =>
+                color &&
+                css`
+                    fill: ${theme[color]};
+                `}
+        }
+
+        @media ${breakpoints.ld} {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: 0.5rem;
+        }
+    }
+`;
+
+const EditItems = () => (
+    <StyledWrapper>
+        <PinIcon color="primary">
+            <Edit />
+        </PinIcon>
+        <PinIcon color="secondary">
+            <Delete />
+        </PinIcon>
+    </StyledWrapper>
+);
+
+export default EditItems;
