@@ -13,6 +13,8 @@ import { ReactComponent as PinDone } from 'assets/icons/pin-done.svg';
 import { ReactComponent as PinNow } from 'assets/icons/pin-now.svg';
 import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
 import { ReactComponent as Chevron } from 'assets/icons/chevron.svg';
+import TimeContainer from 'components/TimeContainer/TimeContainer';
+import Paragraph from 'components/Paragraph/Paragraph';
 
 const StyledWrapper = styled.div`
     display: grid;
@@ -33,32 +35,6 @@ const StyledWrapper = styled.div`
         padding-bottom: 1rem;
         padding-left: 1rem;
         grid-template-columns: 25% min-content 1fr;
-    }
-`;
-
-const StyledTime = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-
-    @media screen and (min-width: 1024px) and (orientation: landscape),
-        (min-width: 1200px) {
-        align-items: flex-start;
-    }
-`;
-
-const StyledParagraph = styled.p`
-    font-size: 1.2rem;
-    word-wrap: normal;
-    margin: 3px 0;
-
-    @media ${breakpoints.md} {
-        font-size: 1.6rem;
-    }
-
-    &:first-child {
-        font-weight: bold;
     }
 `;
 
@@ -187,10 +163,10 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => {
 
     return (
         <StyledWrapper>
-            <StyledTime>
-                <StyledParagraph>{date}</StyledParagraph>
-                <StyledParagraph>{hour}</StyledParagraph>
-            </StyledTime>
+            <TimeContainer>
+                <Paragraph>{date}</Paragraph>
+                <Paragraph>{hour}</Paragraph>
+            </TimeContainer>
             <StyledPinIcon status={status}>
                 {status === 'done' && <PinDone />}
                 {status === 'now' && <PinNow />}
