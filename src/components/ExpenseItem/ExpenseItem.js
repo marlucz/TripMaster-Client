@@ -16,6 +16,14 @@ const StyledWrapper = styled.div`
     background-color: ${color.white};
     border: 1px solid ${gradient.dark};
     box-shadow: ${shadow.light};
+
+    @media ${breakpoints.md} {
+        padding: 0.5rem;
+    }
+
+    @media ${breakpoints.ld} {
+        grid-template-columns: 15% 1fr min-content;
+    }
 `;
 
 const StyledDetails = styled.div`
@@ -33,6 +41,8 @@ const StyledDetails = styled.div`
 
     @media ${breakpoints.ld} {
         display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
         align-items: center;
     }
 `;
@@ -47,11 +57,20 @@ const StyledHeader = styled.h3`
     @media ${breakpoints.md} {
         margin-bottom: 0.3rem;
     }
+
+    @media ${breakpoints.ld} {
+        margin: 0;
+    }
 `;
 
 const StyledTags = styled.ul`
     display: flex;
     list-style: none;
+    font-size: 1.2rem;
+
+    @media (min-width: 360px) {
+        font-size: 1.4rem;
+    }
 
     @media ${breakpoints.md} {
         font-size: 1.8rem;
@@ -104,7 +123,7 @@ ExpenseItem.propTypes = {
     hour: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
         .isRequired,
     name: PropTypes.string.isRequired,
-    tags: PropTypes.objectOf(PropTypes.string),
+    tags: PropTypes.arrayOf(PropTypes.string),
     value: PropTypes.number.isRequired,
     currency: PropTypes.string,
 };
