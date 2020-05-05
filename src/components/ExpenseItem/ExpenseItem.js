@@ -8,7 +8,7 @@ import TimeContainer from 'components/TimeContainer/TimeContainer';
 import Paragraph from 'components/Paragraph/Paragraph';
 import EditItems from 'components/EditItems/EditItems';
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.li`
     display: grid;
     grid-template-columns: 25% 1fr min-content;
     padding: 0.5rem 0;
@@ -40,10 +40,10 @@ const StyledDetails = styled.div`
     }
 
     @media ${breakpoints.ld} {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-evenly;
+        display: grid;
+        grid-template-columns: 1fr 1fr 15%;
         align-items: center;
+        direction: rtl;
     }
 `;
 
@@ -60,6 +60,7 @@ const StyledHeader = styled.h3`
 
     @media ${breakpoints.ld} {
         margin: 0;
+        margin-right: 3rem;
     }
 `;
 
@@ -74,6 +75,7 @@ const StyledTags = styled.ul`
 
     @media ${breakpoints.md} {
         font-size: 1.8rem;
+        justify-self: flex-end;
     }
 
     li {
@@ -92,6 +94,10 @@ const StyledTags = styled.ul`
 const StyledValue = styled.p`
     span {
         display: inline-block;
+    }
+
+    @media ${breakpoints.ld} {
+        margin-right: 2rem;
     }
 `;
 
