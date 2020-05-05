@@ -8,7 +8,7 @@ import { ReactComponent as Delete } from 'assets/icons/delete.svg';
 const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-end;
 
     @media ${breakpoints.md} {

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ExpenseItem from 'components/ExpenseItem/ExpenseItem';
 import PageHeader from 'components/PageHeader/PageHeader';
+import Button from 'components/Button/Button';
 
 import { expenses } from './ExpensesHelper';
 
@@ -11,6 +12,19 @@ const StyledItineraryList = styled.ul`
     height: 90%;
     list-style: none;
     overflow-y: scroll;
+`;
+
+const StyledButton = styled(Button)`
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem auto;
+    z-index: 10;
+    flex-shrink: 0;
+
+    &:hover {
+        transform: none;
+        cursor: pointer;
+    }
 `;
 
 const Expenses = () => {
@@ -29,6 +43,7 @@ const Expenses = () => {
                         currency={currency}
                     />
                 ))}
+                <StyledButton secondary>Add Expense</StyledButton>
             </StyledItineraryList>
         </AuthUserTemplate>
     );
