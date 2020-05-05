@@ -15,6 +15,7 @@ import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
 import { ReactComponent as Chevron } from 'assets/icons/chevron.svg';
 import TimeContainer from 'components/TimeContainer/TimeContainer';
 import Paragraph from 'components/Paragraph/Paragraph';
+import EditItems from 'components/EditItems/EditItems';
 
 const StyledWrapper = styled.div`
     display: grid;
@@ -152,6 +153,11 @@ const StyledSpan = styled.span`
     }
 `;
 
+const StyledEditItems = styled(EditItems)`
+    flex-direction: row;
+    justify-content: flex-end;
+`;
+
 const ItineraryItem = ({ date, hour, name, location, description, status }) => {
     const [isCollapsed, setCollapsed] = useState(true);
     const [isChevronRotated, changeChevronRotation] = useState(false);
@@ -181,6 +187,7 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => {
                 />
                 <StyledDescription collapsed={isCollapsed}>
                     {description}
+                    <StyledEditItems />
                 </StyledDescription>
             </StyledDetails>
         </StyledWrapper>

@@ -13,12 +13,16 @@ const StyledWrapper = styled.div`
 
     @media ${breakpoints.md} {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
     }
 `;
 
-const PinIcon = styled.div`
+const PinIcon = styled.button`
+    background: none;
+    border: none;
+    cursor: pointer;
+
     svg {
         width: 2rem;
         height: 2rem;
