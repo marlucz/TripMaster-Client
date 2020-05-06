@@ -9,7 +9,7 @@ import { ReactComponent as TodoIcon } from 'assets/icons/todo.svg';
 
 const StyledWrapper = styled.div`
     display: grid;
-    grid-template-columns: min-content 1fr min-content;
+    grid-template-columns: 10% 1fr 10%;
     align-items: center;
     padding: 0.5rem;
     width: 100%;
@@ -52,7 +52,6 @@ const StyledHeader = styled.h3`
 
 const StyledIcon = styled.button`
     background: none;
-    padding-right: 1rem;
     border: none;
     cursor: pointer;
 

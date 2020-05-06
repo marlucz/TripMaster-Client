@@ -12,10 +12,10 @@ import {
 import { ReactComponent as PinDone } from 'assets/icons/pin-done.svg';
 import { ReactComponent as PinNow } from 'assets/icons/pin-now.svg';
 import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
-import { ReactComponent as Chevron } from 'assets/icons/chevron.svg';
 import TimeContainer from 'components/TimeContainer/TimeContainer';
 import Paragraph from 'components/Paragraph/Paragraph';
 import EditItems from 'components/EditItems/EditItems';
+import Chevron from 'components/Chevron/Chevron';
 
 const StyledWrapper = styled.div`
     display: grid;
@@ -126,24 +126,6 @@ const StyledDescription = styled.div`
         `}
 `;
 
-const StyledChevron = styled(Chevron)`
-    position: absolute;
-    top: 0;
-    right: 2.5rem;
-    width: 2rem;
-    height: 2rem;
-
-    @media ${breakpoints.md} {
-        padding-top: 0.5rem;
-    }
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    ${({ rotate }) => (rotate ? `transform: rotate(180deg)` : ``)}
-`;
-
 const StyledSpan = styled.span`
     color: ${color.grayDark};
     line-height: 1.6;
@@ -160,11 +142,11 @@ const StyledEditItems = styled(EditItems)`
 
 const ItineraryItem = ({ date, hour, name, location, description, status }) => {
     const [isCollapsed, setCollapsed] = useState(true);
-    const [isChevronRotated, changeChevronRotation] = useState(false);
+    const [isChevronRotated, rotateChevron] = useState(false);
 
     const handleChevronClick = () => {
         setCollapsed(!isCollapsed);
-        changeChevronRotation(!isChevronRotated);
+        rotateChevron(!isChevronRotated);
     };
 
     return (
@@ -181,7 +163,7 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => {
             <StyledDetails>
                 <StyledHeader status={status}>{name}</StyledHeader>
                 <StyledSpan>{location}</StyledSpan>
-                <StyledChevron
+                <Chevron
                     onClick={handleChevronClick}
                     rotate={isChevronRotated ? 1 : undefined}
                 />

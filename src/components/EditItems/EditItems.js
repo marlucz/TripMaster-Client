@@ -7,7 +7,6 @@ import { ReactComponent as Delete } from 'assets/icons/delete.svg';
 
 const StyledWrapper = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
 

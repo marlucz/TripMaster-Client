@@ -27,26 +27,24 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const Expenses = () => {
-    return (
-        <AuthUserTemplate withTrip>
-            <PageHeader header="My trip" subHeader="Expenses" />
-            <StyledItineraryList>
-                {expenses.map(({ date, hour, name, tags, value, currency }) => (
-                    <ExpenseItem
-                        key={name}
-                        date={date}
-                        hour={hour}
-                        name={name}
-                        tags={tags}
-                        value={value}
-                        currency={currency}
-                    />
-                ))}
-                <StyledButton secondary>Add Expense</StyledButton>
-            </StyledItineraryList>
-        </AuthUserTemplate>
-    );
-};
+const Expenses = () => (
+    <AuthUserTemplate withTrip>
+        <PageHeader header="My trip" subHeader="Expenses" />
+        <StyledItineraryList>
+            {expenses.map(({ date, hour, name, tags, value, currency }) => (
+                <ExpenseItem
+                    key={name}
+                    date={date}
+                    hour={hour}
+                    name={name}
+                    tags={tags}
+                    value={value}
+                    currency={currency}
+                />
+            ))}
+            <StyledButton secondary>Add Expense</StyledButton>
+        </StyledItineraryList>
+    </AuthUserTemplate>
+);
 
 export default Expenses;
