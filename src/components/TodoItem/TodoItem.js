@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
     display: grid;
     grid-template-columns: min-content 1fr min-content;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     width: 100%;
     background-color: ${color.white};
     border: 1px solid ${gradient.dark};
@@ -19,13 +19,25 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledHeader = styled.h3`
+    text-align: center;
+    display: block;
+    position: relative;
+    width: 100%;
     font-size: 1.6rem;
     justify-self: center;
     color: ${theme.secondary};
     ${({ done }) =>
         done &&
         css`
-            text-decoration: line-through;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                background-color: ${theme.primary};
+            }
             color: ${theme.primary};
         `}
 
@@ -35,14 +47,13 @@ const StyledHeader = styled.h3`
 
     @media ${breakpoints.ld} {
         margin: 0;
-        margin-right: 3rem;
     }
 `;
 
 const StyledIcon = styled.button`
     background: none;
+    padding-right: 1rem;
     border: none;
-    margin-right: 2rem;
     cursor: pointer;
 
     svg {
@@ -62,8 +73,8 @@ const StyledIcon = styled.button`
     }
 `;
 
-const TodoItem = ({ name }) => {
-    const [isDone, setDone] = useState(false);
+const TodoItem = ({ name, done }) => {
+    const [isDone, setDone] = useState(done);
 
     const handleIconClick = () => {
         setDone(!isDone);
@@ -81,7 +92,12 @@ const TodoItem = ({ name }) => {
 };
 
 TodoItem.propTypes = {
+    done: PropTypes.bool,
     name: PropTypes.string.isRequired,
+};
+
+TodoItem.defaultProps = {
+    done: false,
 };
 
 export default TodoItem;
