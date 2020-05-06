@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -62,23 +62,26 @@ const StyledIcon = styled.button`
     }
 `;
 
-const TodoItem = ({ done, name }) => (
-    <StyledWrapper>
-        <StyledIcon done={done}>
-            {done ? <DoneIcon /> : <TodoIcon />}
-        </StyledIcon>
-        <StyledHeader done={done}>{name}</StyledHeader>
-        <EditItems />
-    </StyledWrapper>
-);
+const TodoItem = ({ name }) => {
+    const [isDone, setDone] = useState(false);
 
-TodoItem.propTypes = {
-    done: PropTypes.bool,
-    name: PropTypes.string.isRequired,
+    const handleIconClick = () => {
+        setDone(!isDone);
+    };
+
+    return (
+        <StyledWrapper>
+            <StyledIcon done={isDone} onClick={handleIconClick}>
+                {isDone ? <DoneIcon /> : <TodoIcon />}
+            </StyledIcon>
+            <StyledHeader done={isDone}>{name}</StyledHeader>
+            <EditItems />
+        </StyledWrapper>
+    );
 };
 
-TodoItem.defaultProps = {
-    done: false,
+TodoItem.propTypes = {
+    name: PropTypes.string.isRequired,
 };
 
 export default TodoItem;
