@@ -19,11 +19,11 @@ const Root = () => (
                 <Route exact path="/" component={Trips} />
                 <Route exact path="/account" component={SignIn} />
                 <Route path="/account/register" component={SignUp} />
-                <Route exact path="/trip" component={Trip} />
+                <Route exact path="/trip/:id" component={Trip} />
                 <Route exact path="/trips" component={Trips} />
-                <Route path="/trip/expenses" component={Expenses} />
-                <Route path="/trip/itinerary" component={Itinerary} />
-                <Route path="/trip/todo" component={TodoList} />
+                <Route path="/trip/:id/expenses" component={Expenses} />
+                <Route path="/trip/:id/itinerary" component={Itinerary} />
+                <Route path="/trip/:id/todo" component={TodoList} />
                 <Route component={NotFound} />
             </Switch>
         </GlobalTemplate>

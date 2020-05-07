@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -99,42 +100,65 @@ const StyledIcon = styled.div`
     }
 `;
 
-const TripCard = ({ image, name, startDate, endDate, duration, startsIn }) => {
-    const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
+class TripCard extends Component {
+    state = {
+        redirect: false,
+    };
 
-    return (
-        <StyledWrapper>
-            <StyledImageWrapper>
-                <StyledImage src={image || stockImage} alt={name} />
-            </StyledImageWrapper>
-            <StyledInfoSection>
-                <StyledHeader>{name}</StyledHeader>
-                <StyledData>
-                    <StyledIcon>
-                        <CalendarLogo />
-                    </StyledIcon>
-                    <span>
-                        {startDate} - {endDate}
-                    </span>
-                </StyledData>
-                <StyledData>
-                    <StyledIcon>
-                        <ClockLogo />
-                    </StyledIcon>
-                    <span>
-                        {`${duration} ${
-                            duration > 1 ? 'days' : 'day'
-                        } trip, starts in ${startsIn} ${
-                            startsIn > 1 ? 'days' : 'day'
-                        }`}
-                    </span>
-                </StyledData>
-            </StyledInfoSection>
-        </StyledWrapper>
-    );
-};
+    handleCardClick = () => this.setState({ redirect: true });
+
+    render() {
+        const {
+            id,
+            image,
+            name,
+            startDate,
+            endDate,
+            duration,
+            startsIn,
+        } = this.props;
+        const { redirect } = this.state;
+        const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
+
+        if (redirect) {
+            return <Redirect to={`trip/${id}`} />;
+        }
+
+        return (
+            <StyledWrapper onClick={this.handleCardClick}>
+                <StyledImageWrapper>
+                    <StyledImage src={image || stockImage} alt={name} />
+                </StyledImageWrapper>
+                <StyledInfoSection>
+                    <StyledHeader>{name}</StyledHeader>
+                    <StyledData>
+                        <StyledIcon>
+                            <CalendarLogo />
+                        </StyledIcon>
+                        <span>
+                            {startDate} - {endDate}
+                        </span>
+                    </StyledData>
+                    <StyledData>
+                        <StyledIcon>
+                            <ClockLogo />
+                        </StyledIcon>
+                        <span>
+                            {`${duration} ${
+                                duration > 1 ? 'days' : 'day'
+                            } trip, starts in ${startsIn} ${
+                                startsIn > 1 ? 'days' : 'day'
+                            }`}
+                        </span>
+                    </StyledData>
+                </StyledInfoSection>
+            </StyledWrapper>
+        );
+    }
+}
 
 TripCard.propTypes = {
+    id: PropTypes.number.isRequired,
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
     startDate: PropTypes.oneOfType([

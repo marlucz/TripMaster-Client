@@ -44,12 +44,13 @@ const StyledListItem = styled.li`
 `;
 
 const Trips = () => (
-    <AuthUserTemplate withTrip>
+    <AuthUserTemplate>
         <StyledWrapper>
             <PageHeader header="Trips" subHeader="your" />
             <StyledTripsList>
                 {trips.map(
                     ({
+                        id,
                         image,
                         name,
                         startDate,
@@ -57,8 +58,9 @@ const Trips = () => (
                         duration,
                         startsIn,
                     }) => (
-                        <StyledListItem key={name}>
+                        <StyledListItem key={id}>
                             <TripCard
+                                id={id}
                                 image={image}
                                 name={name}
                                 startDate={startDate}
