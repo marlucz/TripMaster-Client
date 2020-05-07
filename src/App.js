@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import SignIn from 'pages/Auth/SignIn';
-import SignUp from 'pages/Auth/SignUp';
 import Trips from 'pages/Trips/Trips';
 import NotFound from 'pages/NotFound/NotFound';
 import Trip from 'pages/Trip/Trip';
@@ -17,8 +15,6 @@ const Root = () => (
         <GlobalTemplate>
             <Switch>
                 <Route exact path="/" component={Trips} />
-                <Route exact path="/account" component={SignIn} />
-                <Route path="/account/register" component={SignUp} />
                 <Route exact path="/trip/:id" component={Trip} />
                 <Route exact path="/trips" component={Trips} />
                 <Route path="/trip/:id/expenses" component={Expenses} />

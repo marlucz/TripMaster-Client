@@ -88,7 +88,7 @@ const NavBar = ({ isInTrip }) =>
                     <StyledListItem key={item.title}>
                         <StyledIcon
                             as={NavLink}
-                            to={item.slug}
+                            to={item.route}
                             icon={item.icon}
                             activeclass="active"
                         />
@@ -104,7 +104,7 @@ const NavBar = ({ isInTrip }) =>
                     <StyledListItem key={item.title}>
                         <StyledIcon
                             as={NavLink}
-                            to={item.slug}
+                            to={item.route}
                             icon={item.icon}
                             activeclass="active"
                         />

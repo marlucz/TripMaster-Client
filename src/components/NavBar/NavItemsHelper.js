@@ -7,14 +7,14 @@ import expenses from 'assets/icons/expenses.svg';
 import todo from 'assets/icons/todo-list.svg';
 
 export const navTop = [
-    { slug: '/trips', title: 'Trips', icon: trips },
-    { slug: '/upcoming', title: 'Upcoming', icon: upcoming },
-    { slug: '/trips/add', title: 'Add Trip', icon: add },
+    { route: '/trips', title: 'Trips', icon: trips },
+    { route: '/upcoming', title: 'Upcoming', icon: upcoming },
+    { route: '/trips/add', title: 'Add Trip', icon: add },
 ];
 
 export const navInTrip = [
-    { slug: '/summary', title: 'Summary', icon: summary },
-    { slug: '/trip/:id/itinerary', title: 'Itinerary', icon: itinerary },
-    { slug: '/trip/:id/expenses', title: 'Expenses', icon: expenses },
-    { slug: '/trip/:id/todo', title: 'Todo List', icon: todo },
+    { route: '/trip/:id', title: 'Summary', icon: summary },
+    { route: '/trip/:id/itinerary', title: 'Itinerary', icon: itinerary },
+    { route: '/trip/:id/expenses', title: 'Expenses', icon: expenses },
+    { route: '/trip/:id/todo', title: 'Todo List', icon: todo },
 ];
