@@ -16,7 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     trips: tripsReducer,
     itinerary: itineraryReducer,
-    todo: todoReducer,
+    todos: todoReducer,
     expenses: expensesReducer,
 });
 

@@ -33,7 +33,7 @@ const TodoList = ({ todos }) => {
             <PageHeader header="My Trip" subHeader="Todo List" />
             <StyledTagsList>
                 {todos.map(({ tag, list }) => (
-                    <TodoListTagged todoList={list} tag={tag} key={tag} />
+                    <TodoListTagged list={list} tag={tag} key={tag} />
                 ))}
                 <StyledButton secondary>Add Todo Item</StyledButton>
             </StyledTagsList>
@@ -44,8 +44,8 @@ const TodoList = ({ todos }) => {
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(
         PropTypes.shape({
-            done: PropTypes.bool,
-            name: PropTypes.string.isRequired,
+            tag: PropTypes.string.isRequired,
+            list: PropTypes.arrayOf(PropTypes.object).isRequired,
         }),
     ).isRequired,
 };

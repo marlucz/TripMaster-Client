@@ -62,7 +62,7 @@ const StyledChevron = styled(Chevron)`
         rotate ? `transform: rotate(180deg); margin-top: .7rem` : ``}
 `;
 
-const TodoListTagged = ({ tag, todoList }) => {
+const TodoListTagged = ({ tag, list }) => {
     const [isCollapsed, setCollapsed] = useState(true);
     const [isChevronRotated, rotateChevron] = useState(false);
 
@@ -81,8 +81,8 @@ const TodoListTagged = ({ tag, todoList }) => {
         <StyledWrapper>
             <StyledTagWrapper>
                 <StyledItemsDone>
-                    <Paragraph>{getItemsDone(todoList)}</Paragraph>/
-                    <Paragraph>{getAllItems(todoList)}</Paragraph>
+                    <Paragraph>{getItemsDone(list)}</Paragraph>/
+                    <Paragraph>{getAllItems(list)}</Paragraph>
                 </StyledItemsDone>
                 <StyledTagHeader>{tag}</StyledTagHeader>
                 <StyledChevron
@@ -91,7 +91,7 @@ const TodoListTagged = ({ tag, todoList }) => {
                 />
             </StyledTagWrapper>
             <StyledTodoList collapsed={isCollapsed}>
-                {todoList.map(({ name, done }) => (
+                {list.map(({ name, done }) => (
                     <TodoItem key={name} name={name} done={done} />
                 ))}
             </StyledTodoList>
@@ -100,7 +100,7 @@ const TodoListTagged = ({ tag, todoList }) => {
 };
 
 TodoListTagged.propTypes = {
-    todoList: PropTypes.arrayOf(PropTypes.object).isRequired,
+    list: PropTypes.arrayOf(PropTypes.object).isRequired,
     tag: PropTypes.string.isRequired,
 };
 
