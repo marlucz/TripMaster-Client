@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
@@ -38,6 +39,15 @@ const TodoList = ({ todos }) => {
             </StyledTagsList>
         </AuthUserTemplate>
     );
+};
+
+TodoList.propTypes = {
+    todos: PropTypes.arrayOf(
+        PropTypes.shape({
+            done: PropTypes.bool,
+            name: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
 };
 
 const mapStateToProps = ({ todos }) => todos;

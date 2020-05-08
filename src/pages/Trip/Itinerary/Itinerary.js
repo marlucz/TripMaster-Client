@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
@@ -117,6 +118,26 @@ const Itinerary = ({ itinerary }) => (
         </StyledWrapper>
     </AuthUserTemplate>
 );
+
+Itinerary.propTypes = {
+    itinerary: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            date: PropTypes.oneOfType([
+                PropTypes.instanceOf(Date),
+                PropTypes.string,
+            ]).isRequired,
+            hour: PropTypes.oneOfType([
+                PropTypes.instanceOf(Date),
+                PropTypes.string,
+            ]).isRequired,
+            name: PropTypes.string.isRequired,
+            location: PropTypes.string.isRequired,
+            description: PropTypes.string,
+            status: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
+};
 
 const mapStateToProps = ({ itinerary }) => itinerary;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
@@ -75,6 +76,26 @@ const Trips = ({ trips }) => (
         </StyledWrapper>
     </AuthUserTemplate>
 );
+
+Trips.propTypes = {
+    trips: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            image: PropTypes.string,
+            name: PropTypes.string.isRequired,
+            startDate: PropTypes.oneOfType([
+                PropTypes.instanceOf(Date),
+                PropTypes.string,
+            ]).isRequired,
+            endDate: PropTypes.oneOfType([
+                PropTypes.instanceOf(Date),
+                PropTypes.string,
+            ]).isRequired,
+            duration: PropTypes.number.isRequired,
+            startsIn: PropTypes.number.isRequired,
+        }),
+    ).isRequired,
+};
 
 const mapStateToProps = ({ trips }) => trips;
 
