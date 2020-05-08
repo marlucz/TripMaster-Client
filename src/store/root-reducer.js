@@ -7,7 +7,7 @@ import tripsReducer from 'store/trips/trips.reducer';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['trips'],
+    whitelist: [],
 };
 
 const rootReducer = combineReducers({

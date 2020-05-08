@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TripCard from 'components/TripCard/TripCard';
 import PageHeader from 'components/PageHeader/PageHeader';
 
 import { gap, breakpoints } from 'theme/GlobalStyle';
-import { trips } from './TripsHelper';
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -43,7 +43,7 @@ const StyledListItem = styled.li`
     padding: 0;
 `;
 
-const Trips = () => (
+const Trips = ({ trips }) => (
     <AuthUserTemplate>
         <StyledWrapper>
             <PageHeader header="Trips" subHeader="your" />
@@ -76,4 +76,6 @@ const Trips = () => (
     </AuthUserTemplate>
 );
 
-export default Trips;
+const mapStateToProps = ({ trips }) => trips;
+
+export default connect(mapStateToProps)(Trips);

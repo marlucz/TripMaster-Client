@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { Provider } from 'react-redux';
@@ -16,5 +17,10 @@ export const StoreProvider = ({ children }) => (
         <PersistGate persistor={persistor}>{children}</PersistGate>
     </Provider>
 );
+
+StoreProvider.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.node])
+        .isRequired,
+};
 
 export default store;

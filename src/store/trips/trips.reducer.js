@@ -1,4 +1,4 @@
-// import TripsActionTypes from 'store/trips/trips.types';
+import TripsActionTypes from 'store/trips/trips.types';
 
 const INITIAL_STATE = {
     trips: [
@@ -78,10 +78,15 @@ const INITIAL_STATE = {
 };
 
 const tripsReducer = (state = INITIAL_STATE, action) => {
-    console.log(action);
-    return {
-        ...state,
-    };
+    switch (action.type) {
+        case TripsActionTypes.GET_TRIPS:
+            return {
+                ...state,
+                trips: state.trips,
+            };
+        default:
+            return state;
+    }
 };
 
 export default tripsReducer;
