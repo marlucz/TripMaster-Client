@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
@@ -8,7 +8,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import rootReducer from 'store/root-reducer';
 
-const store = createStore(rootReducer, applyMiddleware(logger));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(logger)),
+);
 
 const persistor = persistStore(store);
 
