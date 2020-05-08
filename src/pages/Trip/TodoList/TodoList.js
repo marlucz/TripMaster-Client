@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TodoListTagged from 'components/TodoListTagged/TodoListTagged';
 import PageHeader from 'components/PageHeader/PageHeader';
 import Button from 'components/Button/Button';
-
-import { todoList } from './TodoListHelper';
 
 const StyledTagsList = styled.ul`
     height: 90%;
@@ -27,12 +26,12 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const TodoList = () => {
+const TodoList = ({ todos }) => {
     return (
         <AuthUserTemplate withTrip>
             <PageHeader header="My Trip" subHeader="Todo List" />
             <StyledTagsList>
-                {todoList.map(({ tag, list }) => (
+                {todos.map(({ tag, list }) => (
                     <TodoListTagged todoList={list} tag={tag} key={tag} />
                 ))}
                 <StyledButton secondary>Add Todo Item</StyledButton>
@@ -41,4 +40,6 @@ const TodoList = () => {
     );
 };
 
-export default TodoList;
+const mapStateToProps = ({ todos }) => todos;
+
+export default connect(mapStateToProps)(TodoList);

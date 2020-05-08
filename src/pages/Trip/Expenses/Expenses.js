@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ExpenseItem from 'components/ExpenseItem/ExpenseItem';
 import PageHeader from 'components/PageHeader/PageHeader';
 import Button from 'components/Button/Button';
-
-import { expenses } from './ExpensesHelper';
 
 const StyledItineraryList = styled.ul`
     height: 90%;
@@ -27,7 +26,7 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const Expenses = () => (
+const Expenses = ({ expenses }) => (
     <AuthUserTemplate withTrip>
         <PageHeader header="My trip" subHeader="Expenses" />
         <StyledItineraryList>
@@ -47,4 +46,6 @@ const Expenses = () => (
     </AuthUserTemplate>
 );
 
-export default Expenses;
+const mapStateToProps = ({ expenses }) => expenses;
+
+export default connect(mapStateToProps)(Expenses);
