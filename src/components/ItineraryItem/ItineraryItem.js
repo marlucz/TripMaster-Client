@@ -26,6 +26,10 @@ const StyledWrapper = styled.div`
     border: 1px solid ${gradient.dark};
     box-shadow: ${shadow.light};
 
+    &:last-of-type {
+        overflow: hidden;
+    }
+
     @media ${breakpoints.md} {
         padding-bottom: 1.5rem;
         grid-template-columns: 18% min-content 1fr;
@@ -140,7 +144,15 @@ const StyledEditItems = styled(EditItems)`
     justify-content: flex-end;
 `;
 
-const ItineraryItem = ({ date, hour, name, location, description, status }) => {
+const ItineraryItem = ({
+    id,
+    date,
+    hour,
+    name,
+    location,
+    description,
+    status,
+}) => {
     const [isCollapsed, setCollapsed] = useState(true);
     const [isChevronRotated, rotateChevron] = useState(false);
 
@@ -150,7 +162,7 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => {
     };
 
     return (
-        <StyledWrapper>
+        <StyledWrapper key={id}>
             <TimeContainer>
                 <Paragraph>{date}</Paragraph>
                 <Paragraph>{hour}</Paragraph>
@@ -177,6 +189,7 @@ const ItineraryItem = ({ date, hour, name, location, description, status }) => {
 };
 
 ItineraryItem.propTypes = {
+    id: PropTypes.number.isRequired,
     date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
         .isRequired,
     hour: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])

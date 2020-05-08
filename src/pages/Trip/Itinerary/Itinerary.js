@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ItineraryItem from 'components/ItineraryItem/ItineraryItem';
@@ -8,7 +9,6 @@ import Button from 'components/Button/Button';
 
 import mapPlaceholder from 'assets/photos/map_placeholder.JPG';
 import { breakpoints, shadow, gradient } from 'theme/GlobalStyle';
-import { itineraries } from './ItineraryHelper';
 
 const StyledWrapper = styled.div`
     height: 100%;
@@ -41,15 +41,6 @@ const StyledItineraryList = styled.ul`
         grid-area: timeline;
         height: 100%;
         max-height: 75vh;
-    }
-`;
-
-const StyledListItem = styled.li`
-    margin: 0;
-    padding: 0;
-
-    &:last-of-type {
-        overflow: hidden;
     }
 `;
 
@@ -88,7 +79,7 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const Itinerary = () => (
+const Itinerary = ({ itinerary }) => (
     <AuthUserTemplate withTrip>
         <PageHeader
             header="My trip"
@@ -99,18 +90,26 @@ const Itinerary = () => (
                 <StyledMap />
             </StyledMapContainer>
             <StyledItineraryList>
-                {itineraries.map(
-                    ({ date, hour, name, location, description, status }) => (
-                        <StyledListItem key={name}>
-                            <ItineraryItem
-                                date={date}
-                                hour={hour}
-                                name={name}
-                                location={location}
-                                description={description}
-                                status={status}
-                            />
-                        </StyledListItem>
+                {itinerary.map(
+                    ({
+                        id,
+                        date,
+                        hour,
+                        name,
+                        location,
+                        description,
+                        status,
+                    }) => (
+                        <ItineraryItem
+                            key={id}
+                            id={id}
+                            date={date}
+                            hour={hour}
+                            name={name}
+                            location={location}
+                            description={description}
+                            status={status}
+                        />
                     ),
                 )}
                 <StyledButton secondary>Add Next Stop</StyledButton>
@@ -119,4 +118,6 @@ const Itinerary = () => (
     </AuthUserTemplate>
 );
 
-export default Itinerary;
+const mapStateToProps = ({ itinerary }) => itinerary;
+
+export default connect(mapStateToProps)(Itinerary);
