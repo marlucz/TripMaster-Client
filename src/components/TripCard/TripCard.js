@@ -135,7 +135,7 @@ class TripCard extends Component {
         const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
 
         if (redirect) {
-            return <Redirect to={`trip/${id}`} />;
+            return <Redirect to={`trip/${id}/itinerary`} />;
         }
 
         return (

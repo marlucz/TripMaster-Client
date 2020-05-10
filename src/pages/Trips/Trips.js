@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import withPageContext from 'hoc/withPageContext';
 import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
@@ -44,10 +45,10 @@ const StyledListItem = styled.li`
     padding: 0;
 `;
 
-const Trips = ({ trips }) => (
+const Trips = ({ trips, pageContext }) => (
     <AuthUserTemplate>
         <StyledWrapper>
-            <PageHeader header="Trips" subHeader="your" />
+            <PageHeader header={pageContext} subHeader="your" />
             <StyledTripsList>
                 {trips.map(
                     ({
@@ -95,8 +96,10 @@ Trips.propTypes = {
             startsIn: PropTypes.number.isRequired,
         }),
     ).isRequired,
+    pageContext: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo'])
+        .isRequired,
 };
 
 const mapStateToProps = ({ trips }) => trips;
 
-export default connect(mapStateToProps)(Trips);
+export default connect(mapStateToProps)(withPageContext(Trips));

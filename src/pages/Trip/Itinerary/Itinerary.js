@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import withPageContext from 'hoc/withPageContext';
 import { connect } from 'react-redux';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
@@ -80,12 +81,9 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const Itinerary = ({ itinerary }) => (
+const Itinerary = ({ itinerary, pageContext }) => (
     <AuthUserTemplate withTrip>
-        <PageHeader
-            header="My trip"
-            subHeader="Thu, Sep 14 - Fri, Sep 20, 2019"
-        />
+        <PageHeader header="My Trip" subHeader={pageContext} />
         <StyledWrapper>
             <StyledMapContainer>
                 <StyledMap />
@@ -137,8 +135,10 @@ Itinerary.propTypes = {
             status: PropTypes.string.isRequired,
         }),
     ).isRequired,
+    pageContext: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo'])
+        .isRequired,
 };
 
 const mapStateToProps = ({ itinerary }) => itinerary;
 
-export default connect(mapStateToProps)(Itinerary);
+export default connect(mapStateToProps)(withPageContext(Itinerary));

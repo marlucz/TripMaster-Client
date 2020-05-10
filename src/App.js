@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Trips from 'pages/Trips/Trips';
 import NotFound from 'pages/NotFound/NotFound';
-import Trip from 'pages/Trip/Trip';
 import Expenses from 'pages/Trip/Expenses/Expenses';
 import Itinerary from 'pages/Trip/Itinerary/Itinerary';
 import TodoList from 'pages/Trip/TodoList/TodoList';
@@ -15,7 +14,6 @@ const Root = () => (
         <GlobalTemplate>
             <Switch>
                 <Route exact path="/" component={Trips} />
-                <Route exact path="/trip/:id" component={Trip} />
                 <Route exact path="/trips" component={Trips} />
                 <Route path="/trip/:id/expenses" component={Expenses} />
                 <Route path="/trip/:id/itinerary" component={Itinerary} />
