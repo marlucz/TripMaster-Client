@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import withPageContext from 'hoc/withPageContext';
 
 import Button from 'components/Button/Button';
 import PageHeader from 'components/PageHeader/PageHeader';
+
+import { addTrip as addTripAction } from 'store/trips/trips.actions';
 
 import { color, gradient, shadow } from 'theme/GlobalStyle';
 
@@ -60,36 +63,55 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const AddItemForm = ({ pageContext: { pageType, toggleAddItemForm } }) => (
-    <StyledWrapper>
-        <PageHeader header={pageType} subHeader="Add new" />
-        <StyledForm onSubmit={toggleAddItemForm}>
-            <StyledInput
-                type="text"
-                name="name"
-                placeholder={`${pageType} title`}
-            />
-            <StyledInput
-                type="date"
-                name="startDate"
-                placeholder="Start date"
-            />
-            <StyledInput type="date" name="endDate" placeholder="End date" />
-            <StyledInput type="number" name="duration" placeholder="Duration" />
-            <StyledInput
-                type="number"
-                name="startsIn"
-                placeholder="Starts in"
-            />
-            <StyledTextArea
-                name="content"
-                as="textarea"
-                placeholder={`${pageType} description`}
-            />
-            <StyledButton type="submit">Add item</StyledButton>
-        </StyledForm>
-    </StyledWrapper>
-);
+const AddItemForm = ({
+    pageContext: { pageType, toggleAddItemForm },
+    addTrip,
+}) => {
+    const handleFormSubmit = () => {
+        // eslint-disable-next-line
+        console.log(addTrip);
+        toggleAddItemForm();
+    };
+
+    return (
+        <StyledWrapper>
+            <PageHeader header={pageType} subHeader="Add new" />
+            <StyledForm onSubmit={handleFormSubmit}>
+                <StyledInput
+                    type="text"
+                    name="name"
+                    placeholder={`${pageType} title`}
+                />
+                <StyledInput
+                    type="date"
+                    name="startDate"
+                    placeholder="Start date"
+                />
+                <StyledInput
+                    type="date"
+                    name="endDate"
+                    placeholder="End date"
+                />
+                <StyledInput
+                    type="number"
+                    name="duration"
+                    placeholder="Duration"
+                />
+                <StyledInput
+                    type="number"
+                    name="startsIn"
+                    placeholder="Starts in"
+                />
+                <StyledTextArea
+                    name="content"
+                    as="textarea"
+                    placeholder={`${pageType} description`}
+                />
+                <StyledButton type="submit">Add item</StyledButton>
+            </StyledForm>
+        </StyledWrapper>
+    );
+};
 
 AddItemForm.propTypes = {
     pageContext: PropTypes.shape({
@@ -99,4 +121,8 @@ AddItemForm.propTypes = {
     }).isRequired,
 };
 
-export default withPageContext(AddItemForm);
+const mapDispatchToProps = dispatch => ({
+    addTrip: tripContent => dispatch(addTripAction(tripContent)),
+});
+
+export default connect(null, mapDispatchToProps)(withPageContext(AddItemForm));
