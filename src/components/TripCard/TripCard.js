@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import EditItems from 'components/EditItems/EditItems';
 import { breakpoints, shadow, theme, color, gradient } from 'theme/GlobalStyle';
 import { ReactComponent as CalendarLogo } from 'assets/icons/calendar.svg';
 import { ReactComponent as ClockLogo } from 'assets/icons/clock.svg';
@@ -66,11 +67,15 @@ const StyledInfoSection = styled.div`
 
 const StyledHeader = styled.h3`
     font-size: 1.6rem;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 0.5rem 0 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 
     @media ${breakpoints.md} {
         font-size: 2.2rem;
         padding-bottom: 1rem;
+        padding-right: 0;
     }
 `;
 
@@ -130,7 +135,12 @@ class TripCard extends Component {
                     <StyledImage src={image || stockImage} alt={name} />
                 </StyledImageWrapper>
                 <StyledInfoSection>
-                    <StyledHeader>{name}</StyledHeader>
+                    <StyledHeader>
+                        {name}
+                        <span>
+                            <EditItems />
+                        </span>
+                    </StyledHeader>
                     <StyledData>
                         <StyledIcon>
                             <CalendarLogo />
