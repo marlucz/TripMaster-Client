@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TripCard from 'components/TripCard/TripCard';
 import PageHeader from 'components/PageHeader/PageHeader';
+import Button from 'components/Button/Button';
 
 import { gap, breakpoints } from 'theme/GlobalStyle';
 
@@ -21,7 +22,6 @@ const StyledTripsList = styled.ul`
     grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
     grid-template-rows: min-content;
     grid-gap: ${gap.small};
-    margin-bottom: ${gap.medium};
     list-style: none;
     overflow-y: scroll;
 
@@ -43,6 +43,19 @@ const StyledTripsList = styled.ul`
 const StyledListItem = styled.li`
     margin: 0;
     padding: 0;
+`;
+
+const StyledButton = styled(Button)`
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem auto;
+    z-index: 10;
+    flex-shrink: 0;
+
+    &:hover {
+        transform: none;
+        cursor: pointer;
+    }
 `;
 
 const Trips = ({ trips, pageContext }) => (
@@ -74,6 +87,7 @@ const Trips = ({ trips, pageContext }) => (
                     ),
                 )}
             </StyledTripsList>
+            <StyledButton secondary>Add Trip</StyledButton>
         </StyledWrapper>
     </AuthUserTemplate>
 );
