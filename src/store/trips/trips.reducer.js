@@ -84,6 +84,15 @@ const tripsReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 trips: state.trips,
             };
+        case TripsActionTypes.REMOVE_TRIP:
+            return {
+                ...state,
+                trips: [
+                    ...state.trips.filter(
+                        trip => trip.id !== action.payload.id,
+                    ),
+                ],
+            };
         default:
             return state;
     }

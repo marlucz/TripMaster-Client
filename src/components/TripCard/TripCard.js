@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import EditItems from 'components/EditItems/EditItems';
 import { breakpoints, shadow, theme, color, gradient } from 'theme/GlobalStyle';
 import { ReactComponent as CalendarLogo } from 'assets/icons/calendar.svg';
 import { ReactComponent as ClockLogo } from 'assets/icons/clock.svg';
+
+import { removeTrip as removeTripAction } from 'store/trips/trips.actions';
 
 const StyledWrapper = styled.div`
     width: 100%;
@@ -65,12 +68,17 @@ const StyledInfoSection = styled.div`
     }
 `;
 
-const StyledHeader = styled.h3`
-    font-size: 1.6rem;
-    padding: 0.5rem 0.5rem 0 0;
+const StyledHeaderWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+`;
+
+const StyledHeader = styled.h3`
+    font-size: 1.6rem;
+    padding: 0.5rem 0.5rem 0 0;
+
+    cursor: pointer;
 
     @media ${breakpoints.md} {
         font-size: 2.2rem;
@@ -121,6 +129,7 @@ class TripCard extends Component {
             endDate,
             duration,
             startsIn,
+            removeTrip,
         } = this.props;
         const { redirect } = this.state;
         const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
@@ -130,17 +139,17 @@ class TripCard extends Component {
         }
 
         return (
-            <StyledWrapper onClick={this.handleCardClick}>
+            <StyledWrapper>
                 <StyledImageWrapper>
                     <StyledImage src={image || stockImage} alt={name} />
                 </StyledImageWrapper>
                 <StyledInfoSection>
-                    <StyledHeader>
-                        {name}
-                        <span>
-                            <EditItems />
-                        </span>
-                    </StyledHeader>
+                    <StyledHeaderWrapper>
+                        <StyledHeader onClick={this.handleCardClick}>
+                            {name}
+                        </StyledHeader>
+                        <EditItems handleClickRemove={() => removeTrip(id)} />
+                    </StyledHeaderWrapper>
                     <StyledData>
                         <StyledIcon>
                             <CalendarLogo />
@@ -179,10 +188,15 @@ TripCard.propTypes = {
         .isRequired,
     duration: PropTypes.number.isRequired,
     startsIn: PropTypes.number.isRequired,
+    removeTrip: PropTypes.func.isRequired,
 };
 
 TripCard.defaultProps = {
     image: null,
 };
 
-export default TripCard;
+const mapDispatchToProps = dispatch => ({
+    removeTrip: id => dispatch(removeTripAction(id)),
+});
+
+export default connect(null, mapDispatchToProps)(TripCard);
