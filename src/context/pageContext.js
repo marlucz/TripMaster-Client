@@ -6,7 +6,7 @@ export const PageContext = React.createContext();
 class PageProvider extends Component {
     state = {
         pageType: 'trips',
-        isAddItemFormVisible: false,
+        isAddItemFormVisible: true,
     };
 
     componentDidMount() {
