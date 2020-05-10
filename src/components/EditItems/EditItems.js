@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { breakpoints, theme } from 'theme/GlobalStyle';
 import { ReactComponent as Edit } from 'assets/icons/edit.svg';
@@ -43,15 +44,25 @@ const PinIcon = styled.button`
     }
 `;
 
-const EditItems = () => (
+const EditItems = ({ handleClickRemove, handleClickEdit }) => (
     <StyledWrapper>
-        <PinIcon color="primary">
+        <PinIcon color="primary" onClick={handleClickEdit}>
             <Edit />
         </PinIcon>
-        <PinIcon color="secondary">
+        <PinIcon color="secondary" onClick={handleClickRemove}>
             <Delete />
         </PinIcon>
     </StyledWrapper>
 );
+
+EditItems.propTypes = {
+    handleClickEdit: PropTypes.func,
+    handleClickRemove: PropTypes.func,
+};
+
+EditItems.defaultProps = {
+    handleClickEdit: null,
+    handleClickRemove: null,
+};
 
 export default EditItems;
