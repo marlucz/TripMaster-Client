@@ -1,7 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import withPageContext from 'hoc/withPageContext';
+
 import NavBar from 'components/NavBar/NavBar';
+import AddItemForm from 'components/AddItemForm/AddItemForm';
 
 import { breakpoints } from 'theme/GlobalStyle';
 
@@ -41,10 +44,16 @@ const Main = styled.main`
   }
 `;
 
-const AuthUserTemplate = ({ children, withTrip }) => (
+const AuthUserTemplate = ({
+    children,
+    withTrip,
+    pageContext: { isAddItemFormVisible },
+}) => (
     <LayoutWrapper>
         <NavBar />
-        <Main withTrip={withTrip}>{children}</Main>
+        <Main withTrip={withTrip}>
+            {isAddItemFormVisible ? <AddItemForm /> : children}
+        </Main>
         {withTrip && <NavBar isInTrip />}
     </LayoutWrapper>
 );
@@ -59,4 +68,4 @@ AuthUserTemplate.defaultProps = {
     withTrip: false,
 };
 
-export default AuthUserTemplate;
+export default withPageContext(AuthUserTemplate);

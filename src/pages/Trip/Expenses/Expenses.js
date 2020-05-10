@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import withPageContext from 'hoc/withPageContext';
+
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ExpenseItem from 'components/ExpenseItem/ExpenseItem';
 import PageHeader from 'components/PageHeader/PageHeader';
@@ -27,9 +29,12 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const Expenses = ({ expenses }) => (
+const Expenses = ({
+    expenses,
+    pageContext: { pageType, toggleAddItemForm },
+}) => (
     <AuthUserTemplate withTrip>
-        <PageHeader header="My trip" subHeader="Expenses" />
+        <PageHeader header="My trip" subHeader={pageType} />
         <StyledItineraryList>
             {expenses.map(({ date, hour, name, tags, value, currency }) => (
                 <ExpenseItem
@@ -42,7 +47,9 @@ const Expenses = ({ expenses }) => (
                     currency={currency}
                 />
             ))}
-            <StyledButton secondary>Add Expense</StyledButton>
+            <StyledButton secondary onClick={toggleAddItemForm}>
+                Add Expense
+            </StyledButton>
         </StyledItineraryList>
     </AuthUserTemplate>
 );
@@ -64,8 +71,13 @@ Expenses.propTypes = {
             currency: PropTypes.string,
         }),
     ).isRequired,
+    pageContext: PropTypes.shape({
+        pageType: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo']),
+        isAddItemFormVisible: PropTypes.bool,
+        toggleAddItemForm: PropTypes.func,
+    }).isRequired,
 };
 
 const mapStateToProps = ({ expenses }) => expenses;
 
-export default connect(mapStateToProps)(Expenses);
+export default connect(mapStateToProps)(withPageContext(Expenses));

@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import withPageContext from 'hoc/withPageContext';
 import { connect } from 'react-redux';
+
+import withPageContext from 'hoc/withPageContext';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TripCard from 'components/TripCard/TripCard';
@@ -58,10 +59,10 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const Trips = ({ trips, pageContext }) => (
+const Trips = ({ trips, pageContext: { pageType, toggleAddItemForm } }) => (
     <AuthUserTemplate>
         <StyledWrapper>
-            <PageHeader header={pageContext} subHeader="your" />
+            <PageHeader header={pageType} subHeader="your" />
             <StyledTripsList>
                 {trips.map(
                     ({
@@ -87,7 +88,9 @@ const Trips = ({ trips, pageContext }) => (
                     ),
                 )}
             </StyledTripsList>
-            <StyledButton secondary>Add Trip</StyledButton>
+            <StyledButton secondary onClick={toggleAddItemForm}>
+                Add Trip
+            </StyledButton>
         </StyledWrapper>
     </AuthUserTemplate>
 );
@@ -110,8 +113,11 @@ Trips.propTypes = {
             startsIn: PropTypes.number.isRequired,
         }),
     ).isRequired,
-    pageContext: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo'])
-        .isRequired,
+    pageContext: PropTypes.shape({
+        pageType: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo']),
+        isAddItemFormVisible: PropTypes.bool,
+        toggleAddItemForm: PropTypes.func,
+    }).isRequired,
 };
 
 const mapStateToProps = ({ trips }) => trips;

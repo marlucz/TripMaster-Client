@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import withPageContext from 'hoc/withPageContext';
 import { connect } from 'react-redux';
+
+import withPageContext from 'hoc/withPageContext';
 
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ItineraryItem from 'components/ItineraryItem/ItineraryItem';
@@ -81,9 +82,12 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const Itinerary = ({ itinerary, pageContext }) => (
+const Itinerary = ({
+    itinerary,
+    pageContext: { pageType, toggleAddItemForm },
+}) => (
     <AuthUserTemplate withTrip>
-        <PageHeader header="My Trip" subHeader={pageContext} />
+        <PageHeader header="My Trip" subHeader={pageType} />
         <StyledWrapper>
             <StyledMapContainer>
                 <StyledMap />
@@ -111,7 +115,9 @@ const Itinerary = ({ itinerary, pageContext }) => (
                         />
                     ),
                 )}
-                <StyledButton secondary>Add Next Stop</StyledButton>
+                <StyledButton secondary onClick={toggleAddItemForm}>
+                    Add Next Stop
+                </StyledButton>
             </StyledItineraryList>
         </StyledWrapper>
     </AuthUserTemplate>
@@ -135,8 +141,11 @@ Itinerary.propTypes = {
             status: PropTypes.string.isRequired,
         }),
     ).isRequired,
-    pageContext: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo'])
-        .isRequired,
+    pageContext: PropTypes.shape({
+        pageType: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo']),
+        isAddItemFormVisible: PropTypes.bool,
+        toggleAddItemForm: PropTypes.func,
+    }).isRequired,
 };
 
 const mapStateToProps = ({ itinerary }) => itinerary;
