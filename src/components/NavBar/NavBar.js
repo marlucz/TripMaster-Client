@@ -85,17 +85,26 @@ const StyledText = styled.span`
     }
 `;
 
-const NavBar = ({ isInTrip, pageContext: { toggleAddItemForm } }) => {
+const NavBar = ({
+    isInTrip,
+    pageContext: { isAddItemFormVisible, toggleAddItemForm },
+}) => {
     const handleAddTripClick = () => {
-        toggleAddItemForm();
+        toggleAddItemForm('trips');
         return <Redirect to="/trips" />;
     };
+
+    const handleChangeRoute = () =>
+        isAddItemFormVisible ? toggleAddItemForm() : '';
 
     return !isInTrip ? (
         <StyledWrapper>
             <StyledList>
                 {navTop.map(item => (
-                    <StyledListItem key={item.title}>
+                    <StyledListItem
+                        key={item.title}
+                        onClick={handleChangeRoute}
+                    >
                         <StyledIcon
                             as={NavLink}
                             to={item.route}
@@ -116,7 +125,10 @@ const NavBar = ({ isInTrip, pageContext: { toggleAddItemForm } }) => {
         <StyledWrapper bottom>
             <StyledList>
                 {navInTrip.map(item => (
-                    <StyledListItem key={item.title}>
+                    <StyledListItem
+                        key={item.title}
+                        onClick={handleChangeRoute}
+                    >
                         <StyledIcon
                             as={NavLink}
                             to={item.route}

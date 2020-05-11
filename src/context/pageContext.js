@@ -34,7 +34,10 @@ class PageProvider extends Component {
         const { children } = this.props;
         const { pageType, isAddItemFormVisible } = this.state;
 
-        const toggleAddItemForm = () => {
+        const toggleAddItemForm = passedPageType => {
+            if (passedPageType) {
+                this.setState({ pageType: passedPageType });
+            }
             this.setState(prevState => ({
                 isAddItemFormVisible: !prevState.isAddItemFormVisible,
             }));
