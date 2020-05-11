@@ -44,7 +44,7 @@ class LocationSearchInput extends React.Component {
             .then(results => getLatLng(results[0]))
             .then(({ lat, lng }) => {
                 // eslint-disable-next-line
-                this.props.setLatLng(lat, lng);
+                this.props.setLocation(address, lat, lng);
             })
             .catch(error => console.error('Error', error));
     };

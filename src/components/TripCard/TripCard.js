@@ -177,7 +177,7 @@ class TripCard extends Component {
 }
 
 TripCard.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
     startDate: PropTypes.oneOfType([

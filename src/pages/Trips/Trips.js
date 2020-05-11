@@ -81,7 +81,8 @@ const Trips = ({ trips, pageContext: { pageType } }) => (
 Trips.propTypes = {
     trips: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number.isRequired,
+            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+                .isRequired,
             image: PropTypes.string,
             name: PropTypes.string.isRequired,
             startDate: PropTypes.oneOfType([

@@ -96,7 +96,7 @@ const tripsReducer = (state = INITIAL_STATE, action) => {
         case TripsActionTypes.ADD_TRIP:
             return {
                 ...state,
-                trips: [...state.trips, action.payload.tripContent],
+                trips: [...state.trips, action.payload.trip],
             };
         default:
             return state;

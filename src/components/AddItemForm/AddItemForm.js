@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Formik } from 'formik';
+import { Formik, Form } from 'formik';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
     padding-top: 2rem;
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styled(Form)`
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -72,8 +72,9 @@ const StyledRowInputsWrapper = styled.div`
 
 class AddItemForm extends Component {
     state = {
-        lat: null,
-        lng: null,
+        location: '',
+        latitude: '',
+        longitude: '',
     };
 
     render() {
@@ -82,71 +83,92 @@ class AddItemForm extends Component {
             addTrip,
         } = this.props;
 
-        const { lat, lng } = this.state;
+        const { location, latitude, longitude } = this.state;
 
-        const handleFormSubmit = () => {
-            // eslint-disable-next-line
-            console.log(addTrip);
-            toggleAddItemForm();
-        };
-
-        const handleLocationSelect = (latInput, lngInput) => {
-            this.setState({ lat: latInput, lng: lngInput });
+        const handleLocationSelect = (loc, lat, lng) => {
+            this.setState({ location: loc, latitude: lat, longitude: lng });
         };
 
         return (
             <StyledWrapper>
                 <PageHeader header={pageType} subHeader="Add new" />
                 <Formik
-                    initialValue={{
+                    initialValues={{
                         name: '',
                         location: '',
-                        lat: null,
-                        lng: null,
-                        startDate: null,
-                        endDate: null,
+                        lat: '',
+                        lng: '',
+                        startDate: '',
+                        endDate: '',
                     }}
                     onSubmit={values => {
-                        console.log(values);
+                        let newValues = { ...values };
+                        newValues = {
+                            ...newValues,
+                            location,
+                            lat: latitude,
+                            lng: longitude,
+                        };
+                        addTrip(newValues);
+                        toggleAddItemForm();
                     }}
                 >
-                    <StyledForm onSubmit={handleFormSubmit}>
-                        <StyledInput
-                            type="text"
-                            name="name"
-                            placeholder={`${pageType} title`}
-                        />
-                        <StyledLocationSearchInput
-                            setLatLng={handleLocationSelect}
-                        />
-                        <StyledRowInputsWrapper>
+                    {({ values, handleChange, handleBlur }) => (
+                        <StyledForm>
                             <StyledInput
-                                type="number"
-                                name="lat"
-                                placeholder="latitude"
-                                value={lat || 'Latitude'}
-                                readOnly
+                                type="text"
+                                name="name"
+                                placeholder={`${pageType} title`}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                            />
+                            <StyledLocationSearchInput
+                                setLocation={handleLocationSelect}
+                                onChange={() => values.location}
+                                onBlur={handleBlur}
+                                value={values.location}
+                            />
+                            <StyledRowInputsWrapper>
+                                <StyledInput
+                                    type="number"
+                                    name="lat"
+                                    placeholder="latitude"
+                                    value={latitude}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched
+                                    dirty
+                                />
+                                <StyledInput
+                                    type="number"
+                                    name="lng"
+                                    placeholder="longitude"
+                                    value={longitude}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    touched
+                                />
+                            </StyledRowInputsWrapper>
+                            <StyledInput
+                                type="date"
+                                name="startDate"
+                                placeholder="Start date"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.startDate}
                             />
                             <StyledInput
-                                type="number"
-                                name="lng"
-                                placeholder="longitude"
-                                value={lng || 'Longitude'}
-                                readOnly
+                                type="date"
+                                name="endDate"
+                                placeholder="End date"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.endDate}
                             />
-                        </StyledRowInputsWrapper>
-                        <StyledInput
-                            type="date"
-                            name="startDate"
-                            placeholder="Start date"
-                        />
-                        <StyledInput
-                            type="date"
-                            name="endDate"
-                            placeholder="End date"
-                        />
-                        <StyledButton type="submit">Add item</StyledButton>
-                    </StyledForm>
+                            <StyledButton type="submit">Add item</StyledButton>
+                        </StyledForm>
+                    )}
                 </Formik>
             </StyledWrapper>
         );
