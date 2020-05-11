@@ -68,6 +68,11 @@ const StyledLocationSearchInput = styled(LocationSearchInput)`
     width: 100%;
 `;
 
+const StyledRowInputsWrapper = styled.div`
+    display: flex;
+    width: 100%;
+`;
+
 const AddItemForm = ({
     pageContext: { pageType, toggleAddItemForm },
     addTrip,
@@ -88,6 +93,18 @@ const AddItemForm = ({
                     placeholder={`${pageType} title`}
                 />
                 <StyledLocationSearchInput />
+                <StyledRowInputsWrapper>
+                    <StyledInput
+                        type="number"
+                        name="lat"
+                        placeholder="lattitude"
+                    />
+                    <StyledInput
+                        type="number"
+                        name="lng"
+                        placeholder="longitude"
+                    />
+                </StyledRowInputsWrapper>
                 <StyledInput
                     type="date"
                     name="startDate"

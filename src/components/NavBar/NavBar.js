@@ -1,8 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
+import withPageContext from 'hoc/withPageContext';
+
+import add from 'assets/icons/add.svg';
 import { color, theme, breakpoints } from 'theme/GlobalStyle';
 import { navTop, navInTrip } from './NavItemsHelper';
 
@@ -55,6 +59,7 @@ const StyledListItem = styled.li`
     justify-content: center;
     align-items: center;
     flex-basis: 25%;
+    cursor: pointer;
 `;
 const StyledIcon = styled.button`
     display: block;
@@ -80,8 +85,13 @@ const StyledText = styled.span`
     }
 `;
 
-const NavBar = ({ isInTrip }) =>
-    !isInTrip ? (
+const NavBar = ({ isInTrip, pageContext: { toggleAddItemForm } }) => {
+    const handleAddTripClick = () => {
+        toggleAddItemForm();
+        return <Redirect to="/trips" />;
+    };
+
+    return !isInTrip ? (
         <StyledWrapper>
             <StyledList>
                 {navTop.map(item => (
@@ -89,12 +99,17 @@ const NavBar = ({ isInTrip }) =>
                         <StyledIcon
                             as={NavLink}
                             to={item.route}
+                            exact
                             icon={item.icon}
                             activeclass="active"
                         />
                         <StyledText>{item.title}</StyledText>
                     </StyledListItem>
                 ))}
+                <StyledListItem key="Add Trip" onClick={handleAddTripClick}>
+                    <StyledIcon icon={add} />
+                    <StyledText>Add Trip</StyledText>
+                </StyledListItem>
             </StyledList>
         </StyledWrapper>
     ) : (
@@ -105,6 +120,7 @@ const NavBar = ({ isInTrip }) =>
                         <StyledIcon
                             as={NavLink}
                             to={item.route}
+                            exact
                             icon={item.icon}
                             activeclass="active"
                         />
@@ -114,13 +130,19 @@ const NavBar = ({ isInTrip }) =>
             </StyledList>
         </StyledWrapper>
     );
+};
 
 NavBar.propTypes = {
     isInTrip: PropTypes.bool,
+    pageContext: PropTypes.shape({
+        pageType: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo']),
+        isAddItemFormVisible: PropTypes.bool,
+        toggleAddItemForm: PropTypes.func,
+    }).isRequired,
 };
 
 NavBar.defaultProps = {
     isInTrip: false,
 };
 
-export default NavBar;
+export default withPageContext(NavBar);

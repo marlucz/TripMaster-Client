@@ -8,7 +8,6 @@ import withPageContext from 'hoc/withPageContext';
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TripCard from 'components/TripCard/TripCard';
 import PageHeader from 'components/PageHeader/PageHeader';
-import Button from 'components/Button/Button';
 
 import { gap, breakpoints } from 'theme/GlobalStyle';
 
@@ -46,20 +45,7 @@ const StyledListItem = styled.li`
     padding: 0;
 `;
 
-const StyledButton = styled(Button)`
-    width: 100%;
-    max-width: 100%;
-    margin: 1rem auto;
-    z-index: 10;
-    flex-shrink: 0;
-
-    &:hover {
-        transform: none;
-        cursor: pointer;
-    }
-`;
-
-const Trips = ({ trips, pageContext: { pageType, toggleAddItemForm } }) => (
+const Trips = ({ trips, pageContext: { pageType } }) => (
     <AuthUserTemplate>
         <StyledWrapper>
             <PageHeader header={pageType} subHeader="your" />
@@ -88,9 +74,6 @@ const Trips = ({ trips, pageContext: { pageType, toggleAddItemForm } }) => (
                     ),
                 )}
             </StyledTripsList>
-            <StyledButton secondary onClick={toggleAddItemForm}>
-                Add Trip
-            </StyledButton>
         </StyledWrapper>
     </AuthUserTemplate>
 );
