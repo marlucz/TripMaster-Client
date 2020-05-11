@@ -9,7 +9,7 @@ import TodoList from 'pages/Trip/TodoList/TodoList';
 
 import GlobalTemplate from 'templates/GlobalTemplate';
 
-const Root = () => (
+const App = () => (
     <BrowserRouter>
         <GlobalTemplate>
             <Switch>
@@ -24,4 +24,4 @@ const Root = () => (
     </BrowserRouter>
 );
 
-export default Root;
+export default App;

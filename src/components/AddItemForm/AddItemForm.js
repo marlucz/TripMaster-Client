@@ -7,6 +7,7 @@ import withPageContext from 'hoc/withPageContext';
 
 import Button from 'components/Button/Button';
 import PageHeader from 'components/PageHeader/PageHeader';
+import LocationSearchInput from 'components/LocationSearchInput/LocationSearchInput';
 
 import { addTrip as addTripAction } from 'store/trips/trips.actions';
 
@@ -63,6 +64,10 @@ const StyledButton = styled(Button)`
     }
 `;
 
+const StyledLocationSearchInput = styled(LocationSearchInput)`
+    width: 100%;
+`;
+
 const AddItemForm = ({
     pageContext: { pageType, toggleAddItemForm },
     addTrip,
@@ -82,6 +87,7 @@ const AddItemForm = ({
                     name="name"
                     placeholder={`${pageType} title`}
                 />
+                <StyledLocationSearchInput />
                 <StyledInput
                     type="date"
                     name="startDate"
