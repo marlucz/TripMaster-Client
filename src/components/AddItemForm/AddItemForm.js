@@ -12,7 +12,7 @@ import LocationSearchInput from 'components/LocationSearchInput/LocationSearchIn
 
 import { addTrip as addTripAction } from 'store/trips/trips.actions';
 
-import { color, gradient, shadow } from 'theme/GlobalStyle';
+import { color, shadow } from 'theme/GlobalStyle';
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -39,7 +39,6 @@ const StyledInput = styled.input`
     margin-top: 1rem;
     padding: 1.2rem 2rem;
     background-color: rgba(${color.grayLight}, 0.8);
-    border: 1px solid ${gradient.dark};
     box-shadow: ${shadow.light};
     border: none;
     color: ${color.grayDark};
