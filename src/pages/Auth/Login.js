@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { Formik, Form } from 'formik';
 import { NavLink } from 'react-router-dom';
 
@@ -80,15 +81,23 @@ const Login = () => (
     <StyledWrapper>
         <StyledHeader>TripMaster</StyledHeader>
         <Formik
-            initialValues={{ username: '', password: '' }}
-            onSubmit={() => console.log('submit')}
+            initialValues={{ email: '', password: '' }}
+            onSubmit={({ email, password }) =>
+                axios
+                    .post('http://localhost:3000/api/user/login', {
+                        email,
+                        password,
+                    })
+                    .then(() => console.log('Login successful'))
+                    .catch(err => console.log(err))
+            }
         >
             {({ handleChange, handleBlur, values }) => (
                 <StyledForm>
                     <StyledTopForm>
                         <StyledInput
                             type="email"
-                            name="username"
+                            name="email"
                             placeholder="Login"
                             onChange={handleChange}
                             onBlur={handleBlur}
