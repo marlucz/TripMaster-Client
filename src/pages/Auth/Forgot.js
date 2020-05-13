@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { Formik } from 'formik';
-import { NavLink } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 
@@ -12,7 +11,6 @@ import {
     StyledTopForm,
     StyledBottomForm,
     StyledInput,
-    StyledLink,
 } from 'pages/Auth/Auth.styles';
 
 const Login = () => (
@@ -22,7 +20,7 @@ const Login = () => (
             initialValues={{ email: '', password: '' }}
             onSubmit={({ email, password }) =>
                 axios
-                    .post('http://localhost:3000/api/user/login', {
+                    .post('http://localhost:3000/api/user/forgot', {
                         email,
                         password,
                     })
@@ -36,30 +34,16 @@ const Login = () => (
                         <StyledInput
                             type="email"
                             name="email"
-                            placeholder="Login"
+                            placeholder="Email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.title}
                         />
-                        <StyledInput
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.title}
-                        />
-                        <StyledLink as={NavLink} to="/forgot">
-                            Forgot you password?
-                        </StyledLink>
                     </StyledTopForm>
                     <StyledBottomForm>
                         <Button secondary type="submit">
-                            Sign In
+                            Reset your password
                         </Button>
-                        <StyledLink as={NavLink} to="/register">
-                            Don&apos;t have an account?
-                        </StyledLink>
                     </StyledBottomForm>
                 </StyledForm>
             )}

@@ -6,8 +6,9 @@ import NotFound from 'pages/NotFound/NotFound';
 import Expenses from 'pages/Trip/Expenses/Expenses';
 import Itinerary from 'pages/Trip/Itinerary/Itinerary';
 import TodoList from 'pages/Trip/TodoList/TodoList';
-import Login from 'pages/Auth/Login';
 import Register from 'pages/Auth/Register';
+import Login from 'pages/Auth/Login';
+import Forgot from 'pages/Auth/Forgot';
 
 import GlobalTemplate from 'templates/GlobalTemplate';
 
@@ -15,8 +16,9 @@ const App = () => (
     <BrowserRouter>
         <GlobalTemplate>
             <Switch>
-                <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/forgot" component={Forgot} />
                 <Route exact path="/" component={Trips} />
                 <Route exact path="/trips" component={Trips} />
                 <Route path="/trip/:id/expenses" component={Expenses} />
