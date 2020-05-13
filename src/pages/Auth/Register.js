@@ -77,18 +77,18 @@ const StyledBottomForm = styled.div`
     margin-top: auto;
 `;
 
-const Login = () => (
+const Register = () => (
     <StyledWrapper>
         <StyledHeader>TripMaster</StyledHeader>
         <Formik
             initialValues={{ email: '', password: '' }}
             onSubmit={({ email, password }) =>
                 axios
-                    .post('http://localhost:3000/api/user/login', {
+                    .post('http://localhost:3000/api/user/register', {
                         email,
                         password,
                     })
-                    .then(() => console.log('Login successful'))
+                    .then(() => console.log('Register successful'))
                     .catch(err => console.log(err))
             }
         >
@@ -96,9 +96,17 @@ const Login = () => (
                 <StyledForm>
                     <StyledTopForm>
                         <StyledInput
+                            type="text"
+                            name="name"
+                            placeholder="Username"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.title}
+                        />
+                        <StyledInput
                             type="email"
                             name="email"
-                            placeholder="Login"
+                            placeholder="Email"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.title}
@@ -111,16 +119,21 @@ const Login = () => (
                             onBlur={handleBlur}
                             value={values.title}
                         />
-                        <StyledLink as={NavLink} to="/forgot">
-                            Forgot you password?
-                        </StyledLink>
+                        <StyledInput
+                            type="password"
+                            name="passwordConfirm"
+                            placeholder="Confirm your password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.title}
+                        />
                     </StyledTopForm>
                     <StyledBottomForm>
                         <Button secondary type="submit">
                             Sign In
                         </Button>
-                        <StyledLink as={NavLink} to="/register">
-                            Don&apos;t have an account?
+                        <StyledLink as={NavLink} to="/login">
+                            Already have an account?
                         </StyledLink>
                     </StyledBottomForm>
                 </StyledForm>
@@ -129,4 +142,4 @@ const Login = () => (
     </StyledWrapper>
 );
 
-export default Login;
+export default Register;
