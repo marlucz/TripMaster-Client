@@ -1,7 +1,7 @@
 import UserActionsTypes from 'store/user/user.types';
 import axios from 'axios';
 
-export const authenticateAction = (email, password) => dispatch => {
+export const authenticate = (email, password) => dispatch => {
     dispatch({ type: UserActionsTypes.AUTH_REQUEST });
 
     return axios

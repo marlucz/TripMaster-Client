@@ -16,10 +16,10 @@ const App = () => (
     <BrowserRouter>
         <GlobalTemplate>
             <Switch>
+                <Route exact path="/" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/forgot" component={Forgot} />
-                <Route exact path="/" component={Trips} />
                 <Route exact path="/trips" component={Trips} />
                 <Route path="/trip/:id/expenses" component={Expenses} />
                 <Route path="/trip/:id/itinerary" component={Itinerary} />

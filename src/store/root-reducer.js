@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import userReducer from 'store/user/user.reducer';
 import tripsReducer from 'store/trips/trips.reducer';
 import itineraryReducer from 'store/itinerary/itinerary.reducer';
 import todoReducer from 'store/todo/todo.reducer';
@@ -14,6 +15,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+    user: userReducer,
     trips: tripsReducer,
     itinerary: itineraryReducer,
     todos: todoReducer,
