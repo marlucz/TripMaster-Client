@@ -1,7 +1,9 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import { NavLink } from 'react-router-dom';
+
+import { authenticateAction } from 'store/user/user.actions';
 
 import Button from 'components/Button/Button';
 
@@ -15,20 +17,14 @@ import {
     StyledLink,
 } from 'pages/Auth/Auth.styles';
 
-const Login = () => (
+const Login = ({ authenticate }) => (
     <StyledWrapper>
         <StyledHeader>TripMaster</StyledHeader>
         <Formik
             initialValues={{ email: '', password: '' }}
-            onSubmit={({ email, password }) =>
-                axios
-                    .post('http://localhost:3000/api/user/login', {
-                        email,
-                        password,
-                    })
-                    .then(() => console.log('Login successful'))
-                    .catch(err => console.log(err))
-            }
+            onSubmit={({ email, password }) => {
+                authenticate(email, password);
+            }}
         >
             {({ handleChange, handleBlur, values }) => (
                 <StyledForm>
@@ -66,5 +62,9 @@ const Login = () => (
         </Formik>
     </StyledWrapper>
 );
+const mapDispatchToProps = dispatch => ({
+    authenticate: (email, password) =>
+        dispatch(authenticateAction(email, password)),
+});
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
