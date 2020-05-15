@@ -11,7 +11,7 @@ import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TripCard from 'components/TripCard/TripCard';
 import PageHeader from 'components/PageHeader/PageHeader';
 
-import { gap, breakpoints } from 'theme/GlobalStyle';
+import { gap, breakpoints, theme } from 'theme/GlobalStyle';
 
 const StyledWrapper = styled.div`
     display: flex;
@@ -47,6 +47,16 @@ const StyledListItem = styled.li`
     padding: 0;
 `;
 
+const StyledButton = styled.button`
+    display: inline;
+    font-size: 2rem;
+    margin-left: 1rem;
+    color: ${theme.secondary};
+    border: none;
+    background: none;
+    cursor: pointer;
+`;
+
 class Trips extends Component {
     componentDidMount() {
         // eslint-disable-next-line
@@ -56,37 +66,47 @@ class Trips extends Component {
     render() {
         const {
             trips,
-            pageContext: { pageType },
+            pageContext: { pageType, toggleAddItemForm },
         } = this.props;
         return (
             <AuthUserTemplate>
                 <StyledWrapper>
                     <PageHeader header={pageType} subHeader="your" />
-                    <StyledTripsList>
-                        {trips.map(
-                            ({
-                                id,
-                                image,
-                                name,
-                                startDate,
-                                endDate,
-                                duration,
-                                startsIn,
-                            }) => (
-                                <StyledListItem key={id}>
-                                    <TripCard
-                                        id={id}
-                                        image={image}
-                                        name={name}
-                                        startDate={startDate}
-                                        endDate={endDate}
-                                        duration={duration}
-                                        startsIn={startsIn}
-                                    />
-                                </StyledListItem>
-                            ),
-                        )}
-                    </StyledTripsList>
+                    {trips.length ? (
+                        <StyledTripsList>
+                            {trips.map(
+                                ({
+                                    id,
+                                    image,
+                                    name,
+                                    startDate,
+                                    endDate,
+                                    duration,
+                                    startsIn,
+                                }) => (
+                                    <StyledListItem key={id}>
+                                        <TripCard
+                                            id={id}
+                                            image={image}
+                                            name={name}
+                                            startDate={startDate}
+                                            endDate={endDate}
+                                            duration={duration}
+                                            startsIn={startsIn}
+                                        />
+                                    </StyledListItem>
+                                ),
+                            )}
+                        </StyledTripsList>
+                    ) : (
+                        <h2>
+                            You don&apos;t have any trips, do you want to
+                            <StyledButton onClick={toggleAddItemForm}>
+                                {' '}
+                                ADD TRIP?
+                            </StyledButton>
+                        </h2>
+                    )}
                 </StyledWrapper>
             </AuthUserTemplate>
         );
