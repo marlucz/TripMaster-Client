@@ -9,12 +9,12 @@ export const fetchTrips = () => (dispatch, getState) => {
                 userID: getState().user.userID,
             },
         })
-        .then(({ data }) =>
+        .then(({ data }) => {
             dispatch({
                 type: TripsActionsTypes.FETCH_TRIPS_SUCCESS,
                 payload: data,
-            }),
-        )
+            });
+        })
         .catch(err =>
             dispatch({
                 type: TripsActionsTypes.FETCH_TRIPS_FAILURE,

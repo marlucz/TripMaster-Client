@@ -121,6 +121,16 @@ class TripCard extends Component {
     handleCardClick = () => this.setState({ redirect: true });
 
     render() {
+        const getDateOnly = date => {
+            const year = date.getUTCFullYear();
+            const month = date.getUTCMonth() + 1;
+            const day = date.getUTCDate();
+
+            return `${year}.${month < 10 ? `0${month}` : month}.${
+                day < 10 ? `0${day}` : day
+            }`;
+        };
+
         const {
             id,
             image,
@@ -155,7 +165,8 @@ class TripCard extends Component {
                             <CalendarLogo />
                         </StyledIcon>
                         <span>
-                            {startDate} - {endDate}
+                            {getDateOnly(new Date(startDate))} -{' '}
+                            {getDateOnly(new Date(endDate))}
                         </span>
                     </StyledData>
                     <StyledData>
