@@ -9,7 +9,12 @@ const tripsReducer = (state = INITIAL_STATE, action) => {
         case TripsActionTypes.FETCH_TRIPS_SUCCESS:
             return {
                 ...state,
-                trips: state.trips,
+                trips: [...action.payload],
+            };
+        case TripsActionTypes.ADD_TRIP_SUCCESS:
+            return {
+                ...state,
+                trips: [...state.trips, action.payload.data],
             };
         case TripsActionTypes.REMOVE_TRIP:
             return {
@@ -20,11 +25,7 @@ const tripsReducer = (state = INITIAL_STATE, action) => {
                     ),
                 ],
             };
-        case TripsActionTypes.ADD_TRIP_SUCCESS:
-            return {
-                ...state,
-                trips: [...state.trips, action.payload.trip],
-            };
+
         default:
             return state;
     }

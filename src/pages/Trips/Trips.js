@@ -76,7 +76,7 @@ class Trips extends Component {
                         <StyledTripsList>
                             {trips.map(
                                 ({
-                                    id,
+                                    _id,
                                     image,
                                     name,
                                     startDate,
@@ -84,9 +84,9 @@ class Trips extends Component {
                                     duration,
                                     startsIn,
                                 }) => (
-                                    <StyledListItem key={id}>
+                                    <StyledListItem key={_id}>
                                         <TripCard
-                                            id={id}
+                                            id={_id}
                                             image={image}
                                             name={name}
                                             startDate={startDate}
@@ -116,7 +116,7 @@ class Trips extends Component {
 Trips.propTypes = {
     trips: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+            _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
                 .isRequired,
             image: PropTypes.string,
             name: PropTypes.string.isRequired,

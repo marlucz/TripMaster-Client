@@ -9,8 +9,11 @@ export const fetchTrips = () => (dispatch, getState) => {
                 userID: getState().user.userID,
             },
         })
-        .then(payload =>
-            dispatch({ type: TripsActionsTypes.FETCH_TRIPS_SUCCESS, payload }),
+        .then(({ data }) =>
+            dispatch({
+                type: TripsActionsTypes.FETCH_TRIPS_SUCCESS,
+                payload: data,
+            }),
         )
         .catch(err =>
             dispatch({
@@ -26,17 +29,19 @@ export const removeTrip = id => ({
 });
 
 export const addTrip = tripContent => (dispatch, getState) => {
-    dispatch({ type: TripsActionsTypes.ADD_TRIP });
+    dispatch({
+        type: TripsActionsTypes.ADD_TRIP_REQUEST,
+    });
 
     return axios
-        .post('https://localhost:3000/api/trips', {
+        .post('http://localhost:3000/api/trips', {
             userID: getState().userID,
             ...tripContent,
         })
-        .then(({ trip }) => {
+        .then(payload => {
             dispatch({
                 type: TripsActionsTypes.ADD_TRIP_SUCCESS,
-                payload: trip,
+                payload,
             });
         })
         .catch(err => {
