@@ -1,7 +1,11 @@
-const TripsActionTypes = {
-    GET_TRIPS: 'GET_TRIPS',
-    REMOVE_TRIP: 'REMOVE_TRIP',
+const TripsActionsTypes = {
+    FETCH_TRIPS_REQUEST: 'FETCH_TRIPS_REQUEST',
+    FETCH_TRIPS_SUCCESS: 'FETCH_TRIPS_SUCCESS',
+    FETCH_TRIPS_FAILURE: 'FETCH_TRIPS_FAILURE',
     ADD_TRIP: 'ADD_TRIP',
+    ADD_TRIP_SUCCESS: 'ADD_TRIP_SUCCESS',
+    ADD_TRIP_FAILURE: 'ADD_TRIP_FAILURE',
+    REMOVE_TRIP: 'REMOVE_TRIP',
 };
 
-export default TripsActionTypes;
+export default TripsActionsTypes;

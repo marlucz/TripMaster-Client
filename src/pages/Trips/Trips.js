@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import { fetchTrips } from 'store/trips/trips.actions';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -45,38 +47,51 @@ const StyledListItem = styled.li`
     padding: 0;
 `;
 
-const Trips = ({ trips, pageContext: { pageType } }) => (
-    <AuthUserTemplate>
-        <StyledWrapper>
-            <PageHeader header={pageType} subHeader="your" />
-            <StyledTripsList>
-                {trips.map(
-                    ({
-                        id,
-                        image,
-                        name,
-                        startDate,
-                        endDate,
-                        duration,
-                        startsIn,
-                    }) => (
-                        <StyledListItem key={id}>
-                            <TripCard
-                                id={id}
-                                image={image}
-                                name={name}
-                                startDate={startDate}
-                                endDate={endDate}
-                                duration={duration}
-                                startsIn={startsIn}
-                            />
-                        </StyledListItem>
-                    ),
-                )}
-            </StyledTripsList>
-        </StyledWrapper>
-    </AuthUserTemplate>
-);
+class Trips extends Component {
+    componentDidMount() {
+        // eslint-disable-next-line
+        this.props.fetchTrips();
+    }
+
+    render() {
+        const {
+            trips,
+            pageContext: { pageType },
+        } = this.props;
+        return (
+            <AuthUserTemplate>
+                <StyledWrapper>
+                    <PageHeader header={pageType} subHeader="your" />
+                    <StyledTripsList>
+                        {trips.map(
+                            ({
+                                id,
+                                image,
+                                name,
+                                startDate,
+                                endDate,
+                                duration,
+                                startsIn,
+                            }) => (
+                                <StyledListItem key={id}>
+                                    <TripCard
+                                        id={id}
+                                        image={image}
+                                        name={name}
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        duration={duration}
+                                        startsIn={startsIn}
+                                    />
+                                </StyledListItem>
+                            ),
+                        )}
+                    </StyledTripsList>
+                </StyledWrapper>
+            </AuthUserTemplate>
+        );
+    }
+}
 
 Trips.propTypes = {
     trips: PropTypes.arrayOf(
@@ -106,4 +121,11 @@ Trips.propTypes = {
 
 const mapStateToProps = ({ trips }) => trips;
 
-export default connect(mapStateToProps)(withPageContext(Trips));
+const mapDispatchToProps = dispatch => ({
+    fetchTrips: () => dispatch(fetchTrips()),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(withPageContext(Trips));

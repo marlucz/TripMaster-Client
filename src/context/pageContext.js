@@ -34,10 +34,13 @@ class PageProvider extends Component {
         const { children } = this.props;
         const { pageType, isAddItemFormVisible } = this.state;
 
-        const toggleAddItemForm = passedPageType => {
-            if (passedPageType) {
-                this.setState({ pageType: passedPageType });
-            }
+        const setCurrentToTrips = () => {
+            this.setState(prevState =>
+                prevState.pageType === 'trips' ? '' : { pageType: 'trips' },
+            );
+        };
+
+        const toggleAddItemForm = () => {
             this.setState(prevState => ({
                 isAddItemFormVisible: !prevState.isAddItemFormVisible,
             }));
@@ -49,6 +52,7 @@ class PageProvider extends Component {
                     pageType,
                     isAddItemFormVisible,
                     toggleAddItemForm,
+                    setCurrentToTrips,
                 }}
             >
                 {children}

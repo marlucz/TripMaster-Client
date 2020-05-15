@@ -1,52 +1,48 @@
-import TripsActionTypes from 'store/trips/trips.types';
+import TripsActionsTypes from 'store/trips/trips.types';
+import axios from 'axios';
 
-export const getTrips = () => ({
-    type: TripsActionTypes.GET_TRIPS,
-});
+export const fetchTrips = () => (dispatch, getState) => {
+    dispatch({ type: TripsActionsTypes.FETCH_TRIPS_REQUEST });
+    return axios
+        .get('http://localhost:3000/api/trips', {
+            params: {
+                userID: getState().user.userID,
+            },
+        })
+        .then(payload =>
+            dispatch({ type: TripsActionsTypes.FETCH_TRIPS_SUCCESS, payload }),
+        )
+        .catch(err =>
+            dispatch({
+                type: TripsActionsTypes.FETCH_TRIPS_FAILURE,
+                payload: err,
+            }),
+        );
+};
 
 export const removeTrip = id => ({
-    type: TripsActionTypes.REMOVE_TRIP,
+    type: TripsActionsTypes.REMOVE_TRIP,
     payload: { id },
 });
 
-export const addTrip = tripContent => {
-    const getId = () =>
-        `_${Math.random()
-            .toString(36)
-            .substr(2, 9)}`;
+export const addTrip = tripContent => (dispatch, getState) => {
+    dispatch({ type: TripsActionsTypes.ADD_TRIP });
 
-    const treatAsUTC = date => {
-        const result = new Date(date);
-        result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
-        return result;
-    };
-
-    const getDuration = () => {
-        const { startDate, endDate } = tripContent;
-        const millisecondsPerDay = 24 * 60 * 60 * 1000;
-        return (
-            (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay
-        );
-    };
-
-    const getStartsIn = () => {
-        const { startDate } = tripContent;
-        const millisecondsPerDay = 24 * 60 * 60 * 1000;
-        return Math.ceil(
-            (treatAsUTC(startDate) - treatAsUTC(Date.now())) /
-                millisecondsPerDay,
-        );
-    };
-
-    return {
-        type: 'ADD_TRIP',
-        payload: {
-            trip: {
-                id: getId(),
-                duration: getDuration(), // better time handling by the server
-                startsIn: getStartsIn(), // better time handling by the server
-                ...tripContent,
-            },
-        },
-    };
+    return axios
+        .post('https://localhost:3000/api/trips', {
+            userID: getState().userID,
+            ...tripContent,
+        })
+        .then(({ trip }) => {
+            dispatch({
+                type: TripsActionsTypes.ADD_TRIP_SUCCESS,
+                payload: trip,
+            });
+        })
+        .catch(err => {
+            dispatch({
+                type: TripsActionsTypes.ADD_TRIP_FAILURE,
+                payload: err,
+            });
+        });
 };

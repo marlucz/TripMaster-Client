@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
@@ -87,15 +87,15 @@ const StyledText = styled.span`
 
 const NavBar = ({
     isInTrip,
-    pageContext: { isAddItemFormVisible, toggleAddItemForm },
+    pageContext: { isAddItemFormVisible, toggleAddItemForm, setCurrentToTrips },
 }) => {
-    const handleAddTripClick = () => {
-        toggleAddItemForm('trips');
-        return <Redirect to="/trips" />;
-    };
-
     const handleChangeRoute = () =>
         isAddItemFormVisible ? toggleAddItemForm() : '';
+
+    const handleAddTripClick = () => {
+        setCurrentToTrips();
+        return isAddItemFormVisible ? '' : toggleAddItemForm();
+    };
 
     return !isInTrip ? (
         <StyledWrapper>

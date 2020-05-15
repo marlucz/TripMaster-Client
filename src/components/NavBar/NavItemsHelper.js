@@ -12,7 +12,7 @@ export const navTop = [
 
 export const navInTrip = [
     // { route: '/trip/:id', title: 'Summary', icon: summary },  // won't be active until trip summary component is done
-    { route: '/trip/:id/itinerary', title: 'Itinerary', icon: itinerary },
-    { route: '/trip/:id/expenses', title: 'Expenses', icon: expenses },
-    { route: '/trip/:id/todo', title: 'Todo List', icon: todo },
+    { route: '/trip/:id/itinerary', title: 'itinerary', icon: itinerary },
+    { route: '/trip/:id/expenses', title: 'expenses', icon: expenses },
+    { route: '/trip/:id/todo', title: 'todo list', icon: todo },
 ];
