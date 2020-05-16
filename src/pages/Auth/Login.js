@@ -17,7 +17,7 @@ import {
     StyledLink,
 } from 'pages/Auth/Auth.styles';
 
-const Login = ({ userID, authenticate }) => (
+const Login = ({ currentUser, authenticate }) => (
     <StyledWrapper>
         <StyledHeader>TripMaster</StyledHeader>
         <Formik
@@ -27,7 +27,7 @@ const Login = ({ userID, authenticate }) => (
             }}
         >
             {({ handleChange, handleBlur, values }) => {
-                if (userID) {
+                if (currentUser) {
                     return <Redirect to="/trips" />;
                 }
                 return (
@@ -68,7 +68,7 @@ const Login = ({ userID, authenticate }) => (
     </StyledWrapper>
 );
 
-const mapStateToProps = ({ user: userID = null }) => userID;
+const mapStateToProps = ({ user: { currentUser = null } }) => ({ currentUser });
 
 const mapDispatchToProps = dispatch => ({
     authenticate: (email, password) =>
