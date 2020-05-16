@@ -95,7 +95,7 @@ const Itinerary = ({
             <StyledItineraryList>
                 {itinerary.map(
                     ({
-                        id,
+                        _id,
                         date,
                         hour,
                         name,
@@ -104,8 +104,8 @@ const Itinerary = ({
                         status,
                     }) => (
                         <ItineraryItem
-                            key={id}
-                            id={id}
+                            key={_id}
+                            id={_id}
                             date={date}
                             hour={hour}
                             name={name}
@@ -126,7 +126,9 @@ const Itinerary = ({
 Itinerary.propTypes = {
     itinerary: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number.isRequired,
+            _id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            slug: PropTypes.string,
             date: PropTypes.oneOfType([
                 PropTypes.instanceOf(Date),
                 PropTypes.string,
@@ -135,7 +137,6 @@ Itinerary.propTypes = {
                 PropTypes.instanceOf(Date),
                 PropTypes.string,
             ]).isRequired,
-            name: PropTypes.string.isRequired,
             location: PropTypes.string.isRequired,
             description: PropTypes.string,
             status: PropTypes.string.isRequired,

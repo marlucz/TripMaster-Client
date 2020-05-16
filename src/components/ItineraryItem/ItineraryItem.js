@@ -146,9 +146,10 @@ const StyledEditItems = styled(EditItems)`
 
 const ItineraryItem = ({
     id,
+    name,
+    // slug,
     date,
     hour,
-    name,
     location,
     description,
     status,
@@ -190,11 +191,12 @@ const ItineraryItem = ({
 
 ItineraryItem.propTypes = {
     id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    // slug: PropTypes.string,
     date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
         .isRequired,
     hour: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
         .isRequired,
-    name: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     description: PropTypes.string,
     status: PropTypes.string.isRequired,
@@ -202,6 +204,7 @@ ItineraryItem.propTypes = {
 
 ItineraryItem.defaultProps = {
     description: null,
+    // slug: null,
 };
 
 export default ItineraryItem;

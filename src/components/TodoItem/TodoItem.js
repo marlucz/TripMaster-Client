@@ -72,7 +72,7 @@ const StyledIcon = styled.button`
     }
 `;
 
-const TodoItem = ({ name, done }) => {
+const TodoItem = ({ id, name, done }) => {
     const [isDone, setDone] = useState(done);
 
     const handleIconClick = () => {
@@ -81,7 +81,7 @@ const TodoItem = ({ name, done }) => {
 
     return (
         <StyledWrapper>
-            <StyledIcon done={isDone} onClick={handleIconClick}>
+            <StyledIcon done={isDone} onClick={handleIconClick} id={id}>
                 {isDone ? <DoneIcon /> : <TodoIcon />}
             </StyledIcon>
             <StyledHeader done={isDone}>{name}</StyledHeader>
@@ -91,6 +91,7 @@ const TodoItem = ({ name, done }) => {
 };
 
 TodoItem.propTypes = {
+    id: PropTypes.number.isRequired,
     done: PropTypes.bool,
     name: PropTypes.string.isRequired,
 };

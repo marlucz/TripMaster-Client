@@ -36,17 +36,20 @@ const Expenses = ({
     <AuthUserTemplate withTrip>
         <PageHeader header="My trip" subHeader={pageType} />
         <StyledItineraryList>
-            {expenses.map(({ date, hour, name, tags, value, currency }) => (
-                <ExpenseItem
-                    key={name}
-                    date={date}
-                    hour={hour}
-                    name={name}
-                    tags={tags}
-                    value={value}
-                    currency={currency}
-                />
-            ))}
+            {expenses.map(
+                ({ _id, date, hour, name, tags, value, currency }) => (
+                    <ExpenseItem
+                        id={_id}
+                        key={name}
+                        date={date}
+                        hour={hour}
+                        name={name}
+                        tags={tags}
+                        value={value}
+                        currency={currency}
+                    />
+                ),
+            )}
             <StyledButton secondary onClick={toggleAddItemForm}>
                 Add Expense
             </StyledButton>
@@ -57,6 +60,7 @@ const Expenses = ({
 Expenses.propTypes = {
     expenses: PropTypes.arrayOf(
         PropTypes.shape({
+            _id: PropTypes.number.isRequired,
             date: PropTypes.oneOfType([
                 PropTypes.instanceOf(Date),
                 PropTypes.string,
