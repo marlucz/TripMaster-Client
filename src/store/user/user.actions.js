@@ -59,6 +59,8 @@ const logOut = () => {
 };
 
 export const checkSession = () => dispatch => {
+    dispatch({ type: UserActionsTypes.CHECK_SESSION });
+
     if (localStorage.jwtToken) {
         const decoded = jwt_decode(localStorage.jwtToken);
         const currentTime = Date.now() / 1000;

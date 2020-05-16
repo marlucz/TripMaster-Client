@@ -12,6 +12,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 currentUser: action.payload,
+                isAuth: true,
             };
         default:
             return state;
