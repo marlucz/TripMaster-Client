@@ -1,45 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import withPageContext from 'hoc/withPageContext';
 
+import {
+    StyledExpensesList,
+    StyledButton,
+    StyledInlinEButton,
+} from 'pages/Trip/Expenses/Expenses.styles';
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ExpenseItem from 'components/ExpenseItem/ExpenseItem';
 import PageHeader from 'components/PageHeader/PageHeader';
-import Button from 'components/Button/Button';
-
-import { theme } from 'theme/GlobalStyle';
-
-const StyledItineraryList = styled.ul`
-    height: 90%;
-    list-style: none;
-    overflow-y: scroll;
-`;
-
-const StyledButton = styled(Button)`
-    width: 100%;
-    max-width: 100%;
-    margin: 1rem auto;
-    z-index: 10;
-    flex-shrink: 0;
-
-    &:hover {
-        transform: none;
-        cursor: pointer;
-    }
-`;
-
-const StyledInlinEButton = styled.button`
-    display: inline;
-    font-size: 2rem;
-    margin-left: 1rem;
-    color: ${theme.secondary};
-    border: none;
-    background: none;
-    cursor: pointer;
-`;
 
 const Expenses = ({
     expenses,
@@ -48,7 +20,7 @@ const Expenses = ({
     <AuthUserTemplate withTrip>
         <PageHeader header="My trip" subHeader={pageType} />
         {expenses.length ? (
-            <StyledItineraryList>
+            <StyledExpensesList>
                 {expenses.map(
                     ({ _id, date, hour, name, tags, value, currency }) => (
                         <ExpenseItem
@@ -66,7 +38,7 @@ const Expenses = ({
                 <StyledButton secondary onClick={toggleAddItemForm}>
                     Add Expense
                 </StyledButton>
-            </StyledItineraryList>
+            </StyledExpensesList>
         ) : (
             <h2>
                 You don&apos;t have any trips, do you want to

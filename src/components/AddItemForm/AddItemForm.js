@@ -1,73 +1,21 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 
 import withPageContext from 'hoc/withPageContext';
 
-import Button from 'components/Button/Button';
 import PageHeader from 'components/PageHeader/PageHeader';
-import LocationSearchInput from 'components/LocationSearchInput/LocationSearchInput';
+import {
+    StyledWrapper,
+    StyledForm,
+    StyledInput,
+    StyledButton,
+    StyledLocationSearchInput,
+    StyledRowInputsWrapper,
+} from 'components/AddItemForm/AddItemForm.styles';
 
 import { addTrip as addTripAction } from 'store/trips/trips.actions';
-
-import { color, shadow } from 'theme/GlobalStyle';
-
-const StyledWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding-top: 2rem;
-`;
-
-const StyledForm = styled(Form)`
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    max-width: 50rem;
-`;
-
-const StyledInput = styled.input`
-    display: block;
-    font-family: inherit;
-    font-size: 1.6rem;
-    width: 100%;
-    margin-top: 1rem;
-    padding: 1.2rem 2rem;
-    background-color: rgba(${color.grayLight}, 0.8);
-    box-shadow: ${shadow.light};
-    border: none;
-    color: ${color.grayDark};
-
-    &::placeholder {
-        text-transform: capitalize;
-    }
-`;
-
-const StyledButton = styled(Button)`
-    margin: 1rem auto;
-    margin-top: auto;
-    z-index: 10;
-    flex-shrink: 0;
-
-    &:hover {
-        transform: none;
-        cursor: pointer;
-    }
-`;
-
-const StyledLocationSearchInput = styled(LocationSearchInput)`
-    width: 100%;
-`;
-
-const StyledRowInputsWrapper = styled.div`
-    display: flex;
-    width: 100%;
-`;
 
 class AddItemForm extends Component {
     state = {

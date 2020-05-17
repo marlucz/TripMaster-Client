@@ -1,66 +1,17 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { color } from 'theme/GlobalStyle';
+import {
+    StyledWrapper,
+    StyledTagWrapper,
+    StyledItemsDone,
+    StyledTagHeader,
+    StyledChevron,
+    StyledTodoList,
+} from 'components/TodoListTagged/TodoListTagged.styles';
 
 import Paragraph from 'components/Paragraph/Paragraph';
-import Chevron from 'components/Chevron/Chevron';
 import TodoItem from 'components/TodoItem/TodoItem';
-
-const StyledWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-`;
-
-const StyledTagWrapper = styled.li`
-    position: relative;
-    display: grid;
-    grid-template-columns: 10% 80%;
-    align-items: center;
-    padding: 0.5rem;
-    width: 100%;
-    color: ${color.white};
-    background-color: ${color.grayDark};
-`;
-
-const StyledItemsDone = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${color.whihte};
-`;
-
-const StyledTagHeader = styled.h2`
-    text-align: center;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-`;
-
-const StyledTodoList = styled.ul`
-    max-height: 0;
-    opacity: 0;
-    transition: all 0.35s 0.2s linear;
-    overflow: hidden;
-
-    ${({ collapsed }) =>
-        !collapsed &&
-        css`
-            max-height: 100%;
-            opacity: 1;
-            transition: all 0.35s 0.2s linear;
-        `}
-`;
-
-const StyledChevron = styled(Chevron)`
-    margin-top: 0.5rem;
-    polygon {
-        fill: ${color.white};
-    }
-    ${({ rotate }) =>
-        rotate ? `transform: rotate(180deg); margin-top: .7rem` : ``}
-`;
 
 const TodoListTagged = ({ tag, list }) => {
     const [isCollapsed, setCollapsed] = useState(true);

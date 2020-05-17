@@ -10,5 +10,5 @@ const list = [
 ];
 
 storiesOf('TodoListTagged', module).add('Normal', () => (
-    <TodoListTagged todoList={list} tag={tag} />
+    <TodoListTagged list={list} tag={tag} />
 ));

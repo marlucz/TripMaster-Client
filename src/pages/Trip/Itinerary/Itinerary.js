@@ -1,96 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import withPageContext from 'hoc/withPageContext';
 
+import {
+    StyledWrapper,
+    StyledMapContainer,
+    StyledMap,
+    StyledItineraryList,
+    StyledButton,
+    StyledInlinEButton,
+} from 'pages/Trip/Itinerary/Itinerary.styles';
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ItineraryItem from 'components/ItineraryItem/ItineraryItem';
 import PageHeader from 'components/PageHeader/PageHeader';
-import Button from 'components/Button/Button';
-
-import mapPlaceholder from 'assets/photos/map_placeholder.JPG';
-import { theme, breakpoints, shadow, gradient } from 'theme/GlobalStyle';
-
-const StyledWrapper = styled.div`
-    height: 100%;
-    display: grid;
-    grid-template-rows: 40% 50%;
-    grid-gap: 0.5rem;
-
-    @media screen and (min-width: 1024px) and (orientation: landscape),
-        (min-width: 1200px) {
-        grid-template-rows: 1fr;
-        grid-template-columns: 40% 60%;
-        grid-template-areas: 'timeline map';
-    }
-
-    @media (min-width: 1600px) {
-        grid-template-columns: 35% 65%;
-    }
-`;
-
-const StyledItineraryList = styled.ul`
-    position: relative;
-    list-style: none;
-    width: 100%;
-    overflow-y: scroll;
-
-    @media screen and (min-width: 1024px) and (orientation: landscape),
-        (min-width: 1200px) {
-        width: 100%;
-        height: 100%;
-        grid-area: timeline;
-        height: 100%;
-        max-height: 75vh;
-    }
-`;
-
-const StyledMapContainer = styled.div`
-    border: 1px solid ${gradient.dark};
-    box-shadow: ${shadow.light};
-
-    @media ${breakpoints.ld} {
-        margin-bottom: 2rem;
-    }
-
-    @media screen and (min-width: 1024px) and (orientation: landscape),
-        (min-width: 1200px) {
-        grid-area: map;
-        max-height: 75vh;
-    }
-`;
-
-const StyledMap = styled.div`
-    background: url(${mapPlaceholder}) no-repeat center;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-`;
-
-const StyledButton = styled(Button)`
-    width: 100%;
-    max-width: 100%;
-    margin: 1rem auto;
-    z-index: 10;
-    flex-shrink: 0;
-
-    &:hover {
-        transform: none;
-        cursor: pointer;
-    }
-`;
-
-const StyledInlinEButton = styled.button`
-    display: inline;
-    font-size: 2rem;
-    margin-left: 1rem;
-    color: ${theme.secondary};
-    border: none;
-    background: none;
-    cursor: pointer;
-`;
 
 const Itinerary = ({
     itinerary,
