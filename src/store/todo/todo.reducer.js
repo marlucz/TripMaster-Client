@@ -1,7 +1,7 @@
 import TodoActionsTypes from 'store/todo/todo.types';
 
 const INITIAL_STATE = {
-    todos: [
+    items: [
         // {
         //     tag: 'food',
         //     list: [

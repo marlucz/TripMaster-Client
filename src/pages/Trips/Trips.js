@@ -1,61 +1,20 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { fetchTrips } from 'store/trips/trips.actions';
-
 import withPageContext from 'hoc/withPageContext';
 
+import {
+    StyledWrapper,
+    StyledTripsList,
+    StyledListItem,
+    StyledInlineButton,
+} from 'pages/Trips/Trips.styles';
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TripCard from 'components/TripCard/TripCard';
 import PageHeader from 'components/PageHeader/PageHeader';
 
-import { gap, breakpoints, theme } from 'theme/GlobalStyle';
-
-const StyledWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-`;
-
-const StyledTripsList = styled.ul`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
-    grid-template-rows: min-content;
-    grid-gap: ${gap.small};
-    list-style: none;
-    overflow-y: scroll;
-
-    @media ${breakpoints.md} {
-        grid-gap: ${gap.medium};
-    }
-
-    @media ${breakpoints.ld} {
-        grid-gap: ${gap.big};
-        margin-bottom: ${gap.big};
-    }
-
-    @media screen and (min-width: 1024px) and (orientation: portrait),
-        (min-width: 1200px) {
-        grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
-    }
-`;
-
-const StyledListItem = styled.li`
-    margin: 0;
-    padding: 0;
-`;
-
-const StyledInlineButton = styled.button`
-    display: inline;
-    font-size: 2rem;
-    margin-left: 1rem;
-    color: ${theme.secondary};
-    border: none;
-    background: none;
-    cursor: pointer;
-`;
+import { fetchTrips } from 'store/trips/trips.actions';
 
 class Trips extends Component {
     componentDidMount() {

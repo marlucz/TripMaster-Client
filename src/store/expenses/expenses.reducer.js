@@ -1,7 +1,7 @@
 import ExpensesActionsTypes from 'store/expenses/expenses.types';
 
 const INITIAL_STATE = {
-    expenses: [
+    items: [
         // {
         //     id: 1,
         //     date: '2020.04.28',

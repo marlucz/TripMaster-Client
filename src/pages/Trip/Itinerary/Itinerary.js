@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -19,53 +20,66 @@ import PageHeader from 'components/PageHeader/PageHeader';
 const Itinerary = ({
     itinerary,
     pageContext: { pageType, toggleAddItemForm },
-}) => (
-    <AuthUserTemplate withTrip>
-        <PageHeader header="My Trip" subHeader={pageType} />
-        {itinerary.length ? (
-            <StyledWrapper>
-                <StyledMapContainer>
-                    <StyledMap />
-                </StyledMapContainer>
-                <StyledItineraryList>
-                    {itinerary.map(
-                        ({
-                            _id,
-                            date,
-                            hour,
-                            name,
-                            location,
-                            description,
-                            status,
-                        }) => (
-                            <ItineraryItem
-                                key={_id}
-                                id={_id}
-                                date={date}
-                                hour={hour}
-                                name={name}
-                                location={location}
-                                description={description}
-                                status={status}
-                            />
-                        ),
-                    )}
-                    <StyledButton secondary onClick={toggleAddItemForm}>
-                        Add Next Stop
-                    </StyledButton>
-                </StyledItineraryList>
-            </StyledWrapper>
-        ) : (
-            <h2>
-                You don&apos;t have any trips, do you want to
-                <StyledInlinEButton onClick={toggleAddItemForm}>
-                    {' '}
-                    ADD TRIP STOP?
-                </StyledInlinEButton>
-            </h2>
-        )}
-    </AuthUserTemplate>
-);
+    activeTrip,
+}) => {
+    useEffect(() => {
+        console.log(activeTrip);
+        axios
+            .get(`http://localhost:3000/api/trips/${activeTrip}/itinerary`)
+            .then(({ data }) => {
+                console.log(data);
+            })
+            .catch(err => console.log(err));
+    });
+
+    return (
+        <AuthUserTemplate withTrip>
+            <PageHeader header="My Trip" subHeader={pageType} />
+            {itinerary.length ? (
+                <StyledWrapper>
+                    <StyledMapContainer>
+                        <StyledMap />
+                    </StyledMapContainer>
+                    <StyledItineraryList>
+                        {itinerary.map(
+                            ({
+                                _id,
+                                date,
+                                hour,
+                                name,
+                                location,
+                                description,
+                                status,
+                            }) => (
+                                <ItineraryItem
+                                    key={_id}
+                                    id={_id}
+                                    date={date}
+                                    hour={hour}
+                                    name={name}
+                                    location={location}
+                                    description={description}
+                                    status={status}
+                                />
+                            ),
+                        )}
+                        <StyledButton secondary onClick={toggleAddItemForm}>
+                            Add Next Stop
+                        </StyledButton>
+                    </StyledItineraryList>
+                </StyledWrapper>
+            ) : (
+                <h2>
+                    You don&apos;t have any trips, do you want to
+                    <StyledInlinEButton onClick={toggleAddItemForm}>
+                        {' '}
+                        ADD TRIP STOP?
+                    </StyledInlinEButton>
+                </h2>
+            )}
+        </AuthUserTemplate>
+    );
+};
 
 Itinerary.propTypes = {
     itinerary: PropTypes.arrayOf(
@@ -93,6 +107,11 @@ Itinerary.propTypes = {
     }).isRequired,
 };
 
-const mapStateToProps = ({ itinerary }) => itinerary;
+const mapStateToProps = ({ itinerary }, ownProps) => {
+    return {
+        activeTrip: ownProps.match.params.id,
+        itinerary: itinerary.items,
+    };
+};
 
-export default connect(mapStateToProps)(withPageContext(Itinerary));
+export default withPageContext(connect(mapStateToProps)(Itinerary));

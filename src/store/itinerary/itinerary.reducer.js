@@ -1,7 +1,7 @@
 import ItineraryActionsTypes from 'store/itinerary/itinerary.types';
 
 const INITIAL_STATE = {
-    itinerary: [
+    items: [
         // {
         //     id: 1,
         //     date: '2020.04.28',
