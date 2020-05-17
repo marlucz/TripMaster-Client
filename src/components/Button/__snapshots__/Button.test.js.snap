@@ -3,7 +3,7 @@
 exports[`<Button /> renders correctly 1`] = `
 <DocumentFragment>
   <button
-    class="sc-AxjAm ihIHJ"
+    class="sc-AxjAm hkxYKh"
   />
 </DocumentFragment>
 `;

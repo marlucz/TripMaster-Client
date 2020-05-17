@@ -6,7 +6,7 @@ import {
 } from 'components/GlobalSpinner/GlobalSpinner.styles';
 
 const GlobalSpinner = () => (
-    <StyledSpinnerOverlay>
+    <StyledSpinnerOverlay data-testid="Spinner">
         <StyledSpinnerContainer />
     </StyledSpinnerOverlay>
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createStore, applyMiddleware, compose } from 'redux';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
@@ -11,9 +11,9 @@ import rootReducer from 'store/root-reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const middlewares = [logger, thunk];
+const middlewares = [thunk];
 
-const store = createStore(
+export const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(...middlewares)),
 );

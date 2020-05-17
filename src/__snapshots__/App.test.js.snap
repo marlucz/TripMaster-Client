@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders <App /> component 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-fzoLsD jyEnQr"
+  >
+    <div
+      class="sc-fzpans sc-fzplWN crGuTY"
+    />
+    <div
+      class="sc-fzpans sc-fznyAO bBeVwp"
+    />
+  </div>
+  <div>
+    <div
+      class="sc-AxhCb msitV"
+    >
+      <h1
+        class="sc-AxhUy biDTtC"
+      >
+        TripMaster
+      </h1>
+      <form
+        action="#"
+        class="sc-AxgMl cCduxA"
+      >
+        <div
+          class="sc-AxheI dPFwAA"
+        >
+          <input
+            class="sc-Axmtr UpGFG"
+            name="email"
+            placeholder="Login"
+            type="email"
+            value=""
+          />
+          <input
+            class="sc-Axmtr UpGFG"
+            name="password"
+            placeholder="Password"
+            type="password"
+            value=""
+          />
+          <a
+            class="sc-AxmLO hiPRJm"
+            href="/auth/forgot"
+          >
+            Forgot you password?
+          </a>
+        </div>
+        <div
+          class="sc-fzozJi dwmVYI"
+        >
+          <button
+            class="sc-AxiKw eMyAEm"
+            type="submit"
+          >
+            Sign In
+          </button>
+          <a
+            class="sc-AxmLO hiPRJm"
+            href="/auth/register"
+          >
+            Don't have an account?
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,9 +1,31 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { render, wait, waitForElement } from '@testing-library/react';
+import { withProvider } from 'utils/testUtils';
+import { _App } from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+const AppWithProvider = withProvider(_App);
+
+describe('<App />', () => {
+    const props = {
+        isAuth: false,
+    };
+
+    // eslint-disable-next-line
+    const setup = props => {
+        const utils = render(AppWithProvider(props));
+        return { ...utils };
+    };
+
+    it('renders <App /> component', async () => {
+        const { asFragment } = setup(props);
+        await wait(); // wait for import to be resolved
+
+        expect(asFragment()).toMatchSnapshot();
+    });
+
+    it('renders <Spinner /> when `isAuth` prop is null', async () => {
+        const { getByTestId } = setup({ ...props, isAuth: null });
+        const spinner = await waitForElement(() => getByTestId('Spinner'));
+
+        expect(spinner).toBeInTheDocument();
+    });
 });

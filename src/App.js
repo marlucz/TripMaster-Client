@@ -6,7 +6,7 @@ import GlobalSpinner from 'components/GlobalSpinner/GlobalSpinner';
 const AuthApp = lazy(() => import('./AuthApp'));
 const UnauthApp = lazy(() => import('./UnauthApp'));
 
-const App = ({ isAuth }) => (
+export const _App = ({ isAuth }) => (
     <Suspense fallback={<GlobalSpinner />}>
         {isAuth === null && <GlobalSpinner />}
         {isAuth === false && <UnauthApp />}
@@ -14,4 +14,4 @@ const App = ({ isAuth }) => (
     </Suspense>
 );
 
-export default withSession(App);
+export default withSession(_App);
