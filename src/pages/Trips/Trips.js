@@ -47,7 +47,7 @@ const StyledListItem = styled.li`
     padding: 0;
 `;
 
-const StyledButton = styled.button`
+const StyledInlineButton = styled.button`
     display: inline;
     font-size: 2rem;
     margin-left: 1rem;
@@ -79,6 +79,7 @@ class Trips extends Component {
                                     _id,
                                     image,
                                     name,
+                                    slug,
                                     startDate,
                                     endDate,
                                     duration,
@@ -89,6 +90,7 @@ class Trips extends Component {
                                             id={_id}
                                             image={image}
                                             name={name}
+                                            slug={slug}
                                             startDate={startDate}
                                             endDate={endDate}
                                             duration={duration}
@@ -101,10 +103,10 @@ class Trips extends Component {
                     ) : (
                         <h2>
                             You don&apos;t have any trips, do you want to
-                            <StyledButton onClick={toggleAddItemForm}>
+                            <StyledInlineButton onClick={toggleAddItemForm}>
                                 {' '}
                                 ADD TRIP?
-                            </StyledButton>
+                            </StyledInlineButton>
                         </h2>
                     )}
                 </StyledWrapper>
@@ -120,6 +122,7 @@ Trips.propTypes = {
                 .isRequired,
             image: PropTypes.string,
             name: PropTypes.string.isRequired,
+            slug: PropTypes.string.isRequired,
             startDate: PropTypes.oneOfType([
                 PropTypes.instanceOf(Date),
                 PropTypes.string,

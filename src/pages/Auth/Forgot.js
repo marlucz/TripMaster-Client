@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Formik } from 'formik';
+import { NavLink } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 
@@ -11,6 +12,7 @@ import {
     StyledTopForm,
     StyledBottomForm,
     StyledInput,
+    StyledLink,
 } from 'pages/Auth/Auth.styles';
 
 const Login = () => (
@@ -44,6 +46,9 @@ const Login = () => (
                         <Button secondary type="submit">
                             Reset your password
                         </Button>
+                        <StyledLink as={NavLink} to="/auth/login">
+                            Back to Login page
+                        </StyledLink>
                     </StyledBottomForm>
                 </StyledForm>
             )}

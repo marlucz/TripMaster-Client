@@ -6,7 +6,7 @@ export const fetchTrips = () => (dispatch, getState) => {
     return axios
         .get('http://localhost:3000/api/trips', {
             params: {
-                userID: getState().user.userID,
+                userID: getState().user.currentUser.id,
             },
         })
         .then(({ data }) => {
@@ -35,7 +35,7 @@ export const addTrip = tripContent => (dispatch, getState) => {
 
     return axios
         .post('http://localhost:3000/api/trips', {
-            userID: getState().userID,
+            userID: getState().user.currentUser.id,
             ...tripContent,
         })
         .then(payload => {

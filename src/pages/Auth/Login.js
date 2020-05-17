@@ -49,7 +49,7 @@ const Login = ({ currentUser, authenticate }) => (
                                 onBlur={handleBlur}
                                 value={values.title}
                             />
-                            <StyledLink as={NavLink} to="/forgot">
+                            <StyledLink as={NavLink} to="/auth/forgot">
                                 Forgot you password?
                             </StyledLink>
                         </StyledTopForm>
@@ -57,7 +57,7 @@ const Login = ({ currentUser, authenticate }) => (
                             <Button secondary type="submit">
                                 Sign In
                             </Button>
-                            <StyledLink as={NavLink} to="/register">
+                            <StyledLink as={NavLink} to="/auth/register">
                                 Don&apos;t have an account?
                             </StyledLink>
                         </StyledBottomForm>

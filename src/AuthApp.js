@@ -15,11 +15,10 @@ const AuthApp = () => (
             <Switch>
                 <Route exact path="/" component={Trips} />
                 <Route exact path="/trips" component={Trips} />
-                <Route path="/trip/:id/expenses" component={Expenses} />
-                <Route path="/trip/:id/itinerary" component={Itinerary} />
-                <Route path="/trip/:id/todo" component={TodoList} />
-                <Route path="/register" render={() => <Redirect to="/" />} />
-                <Route path="/login" render={() => <Redirect to="/" />} />
+                <Route path="/trips/:id/expenses" component={Expenses} />
+                <Route path="/trips/:id/itinerary" component={Itinerary} />
+                <Route path="/trips/:id/todo" component={TodoList} />
+                <Route path="/auth" render={() => <Redirect to="/" />} />
                 <Route component={NotFound} />
             </Switch>
         </GlobalTemplate>

@@ -75,7 +75,7 @@ const Register = ({ currentUser, register }) => (
                             <Button secondary type="submit">
                                 Sign Up
                             </Button>
-                            <StyledLink as={NavLink} to="/login">
+                            <StyledLink as={NavLink} to="/auth/login">
                                 Already have an account?
                             </StyledLink>
                         </StyledBottomForm>

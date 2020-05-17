@@ -6,8 +6,9 @@ import { checkSession as checkSessionAction } from 'store/user/user.actions';
 const withSession = Component => {
     const WithSession = ({ isAuth, checkSession }, ...props) => {
         useEffect(() => {
+            console.log('test');
             checkSession();
-        });
+        }, [checkSession, isAuth]);
 
         return <Component {...props} isAuth={isAuth} />;
     };

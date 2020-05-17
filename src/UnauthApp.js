@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import NotFound from 'pages/NotFound/NotFound';
 import Register from 'pages/Auth/Register';
 import Login from 'pages/Auth/Login';
 import Forgot from 'pages/Auth/Forgot';
@@ -13,10 +12,10 @@ const UnathApp = () => (
         <GlobalTemplate>
             <Switch>
                 <Route exact path="/" component={Login} />
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                <Route path="/forgot" component={Forgot} />
-                <Route component={NotFound} />
+                <Route path="/auth/register" component={Register} />
+                <Route path="/auth/login" component={Login} />
+                <Route path="/auth/forgot" component={Forgot} />
+                <Route render={() => <Redirect to="/" />} />
             </Switch>
         </GlobalTemplate>
     </BrowserRouter>

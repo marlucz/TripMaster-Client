@@ -10,6 +10,8 @@ import ExpenseItem from 'components/ExpenseItem/ExpenseItem';
 import PageHeader from 'components/PageHeader/PageHeader';
 import Button from 'components/Button/Button';
 
+import { theme } from 'theme/GlobalStyle';
+
 const StyledItineraryList = styled.ul`
     height: 90%;
     list-style: none;
@@ -29,31 +31,51 @@ const StyledButton = styled(Button)`
     }
 `;
 
+const StyledInlinEButton = styled.button`
+    display: inline;
+    font-size: 2rem;
+    margin-left: 1rem;
+    color: ${theme.secondary};
+    border: none;
+    background: none;
+    cursor: pointer;
+`;
+
 const Expenses = ({
     expenses,
     pageContext: { pageType, toggleAddItemForm },
 }) => (
     <AuthUserTemplate withTrip>
         <PageHeader header="My trip" subHeader={pageType} />
-        <StyledItineraryList>
-            {expenses.map(
-                ({ _id, date, hour, name, tags, value, currency }) => (
-                    <ExpenseItem
-                        id={_id}
-                        key={name}
-                        date={date}
-                        hour={hour}
-                        name={name}
-                        tags={tags}
-                        value={value}
-                        currency={currency}
-                    />
-                ),
-            )}
-            <StyledButton secondary onClick={toggleAddItemForm}>
-                Add Expense
-            </StyledButton>
-        </StyledItineraryList>
+        {expenses.length ? (
+            <StyledItineraryList>
+                {expenses.map(
+                    ({ _id, date, hour, name, tags, value, currency }) => (
+                        <ExpenseItem
+                            id={_id}
+                            key={name}
+                            date={date}
+                            hour={hour}
+                            name={name}
+                            tags={tags}
+                            value={value}
+                            currency={currency}
+                        />
+                    ),
+                )}
+                <StyledButton secondary onClick={toggleAddItemForm}>
+                    Add Expense
+                </StyledButton>
+            </StyledItineraryList>
+        ) : (
+            <h2>
+                You don&apos;t have any trips, do you want to
+                <StyledInlinEButton onClick={toggleAddItemForm}>
+                    {' '}
+                    ADD FIRST EXPENSE?
+                </StyledInlinEButton>
+            </h2>
+        )}
     </AuthUserTemplate>
 );
 

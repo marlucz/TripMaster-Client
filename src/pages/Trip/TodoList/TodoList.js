@@ -10,6 +10,8 @@ import TodoListTagged from 'components/TodoListTagged/TodoListTagged';
 import PageHeader from 'components/PageHeader/PageHeader';
 import Button from 'components/Button/Button';
 
+import { theme } from 'theme/GlobalStyle';
+
 const StyledTagsList = styled.ul`
     height: 90%;
     list-style: none;
@@ -29,18 +31,39 @@ const StyledButton = styled(Button)`
     }
 `;
 
+const StyledInlinEButton = styled.button`
+    display: inline;
+    font-size: 2rem;
+    margin-left: 1rem;
+    color: ${theme.secondary};
+    border: none;
+    background: none;
+    cursor: pointer;
+`;
+
 const TodoList = ({ todos, pageContext: { pageType, toggleAddItemForm } }) => {
     return (
         <AuthUserTemplate withTrip>
             <PageHeader header="My Trip" subHeader={pageType} />
-            <StyledTagsList>
-                {todos.map(({ tag, list }) => (
-                    <TodoListTagged list={list} tag={tag} key={tag} />
-                ))}
-                <StyledButton secondary onClick={toggleAddItemForm}>
-                    Add Todo Item
-                </StyledButton>
-            </StyledTagsList>
+
+            {todos.length ? (
+                <StyledTagsList>
+                    {todos.map(({ tag, list }) => (
+                        <TodoListTagged list={list} tag={tag} key={tag} />
+                    ))}
+                    <StyledButton secondary onClick={toggleAddItemForm}>
+                        Add Todo Item
+                    </StyledButton>
+                </StyledTagsList>
+            ) : (
+                <h2>
+                    You don&apos;t have any todos, do you want to
+                    <StyledInlinEButton onClick={toggleAddItemForm}>
+                        {' '}
+                        ADD TODO ITEM?
+                    </StyledInlinEButton>
+                </h2>
+            )}
         </AuthUserTemplate>
     );
 };

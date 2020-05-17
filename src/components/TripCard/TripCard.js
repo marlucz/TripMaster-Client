@@ -121,6 +121,20 @@ class TripCard extends Component {
     handleCardClick = () => this.setState({ redirect: true });
 
     render() {
+        const {
+            id,
+            image,
+            name,
+            slug,
+            startDate,
+            endDate,
+            duration,
+            removeTrip,
+            startsIn,
+        } = this.props;
+        const { redirect } = this.state;
+        const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
+
         const getDateOnly = date => {
             const year = date.getUTCFullYear();
             const month = date.getUTCMonth() + 1;
@@ -131,21 +145,8 @@ class TripCard extends Component {
             }`;
         };
 
-        const {
-            id,
-            image,
-            name,
-            startDate,
-            endDate,
-            duration,
-            startsIn,
-            removeTrip,
-        } = this.props;
-        const { redirect } = this.state;
-        const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
-
         if (redirect) {
-            return <Redirect to={`trip/${id}/itinerary`} />;
+            return <Redirect to={`trips/${slug}/itinerary`} />;
         }
 
         return (
@@ -191,6 +192,7 @@ TripCard.propTypes = {
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
     startDate: PropTypes.oneOfType([
         PropTypes.instanceOf(Date),
         PropTypes.string,
@@ -198,8 +200,8 @@ TripCard.propTypes = {
     endDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
         .isRequired,
     duration: PropTypes.number.isRequired,
-    startsIn: PropTypes.number.isRequired,
     removeTrip: PropTypes.func.isRequired,
+    startsIn: PropTypes.number.isRequired,
 };
 
 TripCard.defaultProps = {

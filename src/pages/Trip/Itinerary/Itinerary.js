@@ -11,7 +11,7 @@ import PageHeader from 'components/PageHeader/PageHeader';
 import Button from 'components/Button/Button';
 
 import mapPlaceholder from 'assets/photos/map_placeholder.JPG';
-import { breakpoints, shadow, gradient } from 'theme/GlobalStyle';
+import { theme, breakpoints, shadow, gradient } from 'theme/GlobalStyle';
 
 const StyledWrapper = styled.div`
     height: 100%;
@@ -82,44 +82,64 @@ const StyledButton = styled(Button)`
     }
 `;
 
+const StyledInlinEButton = styled.button`
+    display: inline;
+    font-size: 2rem;
+    margin-left: 1rem;
+    color: ${theme.secondary};
+    border: none;
+    background: none;
+    cursor: pointer;
+`;
+
 const Itinerary = ({
     itinerary,
     pageContext: { pageType, toggleAddItemForm },
 }) => (
     <AuthUserTemplate withTrip>
         <PageHeader header="My Trip" subHeader={pageType} />
-        <StyledWrapper>
-            <StyledMapContainer>
-                <StyledMap />
-            </StyledMapContainer>
-            <StyledItineraryList>
-                {itinerary.map(
-                    ({
-                        _id,
-                        date,
-                        hour,
-                        name,
-                        location,
-                        description,
-                        status,
-                    }) => (
-                        <ItineraryItem
-                            key={_id}
-                            id={_id}
-                            date={date}
-                            hour={hour}
-                            name={name}
-                            location={location}
-                            description={description}
-                            status={status}
-                        />
-                    ),
-                )}
-                <StyledButton secondary onClick={toggleAddItemForm}>
-                    Add Next Stop
-                </StyledButton>
-            </StyledItineraryList>
-        </StyledWrapper>
+        {itinerary.length ? (
+            <StyledWrapper>
+                <StyledMapContainer>
+                    <StyledMap />
+                </StyledMapContainer>
+                <StyledItineraryList>
+                    {itinerary.map(
+                        ({
+                            _id,
+                            date,
+                            hour,
+                            name,
+                            location,
+                            description,
+                            status,
+                        }) => (
+                            <ItineraryItem
+                                key={_id}
+                                id={_id}
+                                date={date}
+                                hour={hour}
+                                name={name}
+                                location={location}
+                                description={description}
+                                status={status}
+                            />
+                        ),
+                    )}
+                    <StyledButton secondary onClick={toggleAddItemForm}>
+                        Add Next Stop
+                    </StyledButton>
+                </StyledItineraryList>
+            </StyledWrapper>
+        ) : (
+            <h2>
+                You don&apos;t have any trips, do you want to
+                <StyledInlinEButton onClick={toggleAddItemForm}>
+                    {' '}
+                    ADD TRIP STOP?
+                </StyledInlinEButton>
+            </h2>
+        )}
     </AuthUserTemplate>
 );
 
