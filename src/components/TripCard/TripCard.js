@@ -17,7 +17,10 @@ import EditItems from 'components/EditItems/EditItems';
 import { ReactComponent as CalendarLogo } from 'assets/icons/calendar.svg';
 import { ReactComponent as ClockLogo } from 'assets/icons/clock.svg';
 
-import { removeTrip as removeTripAction } from 'store/trips/trips.actions';
+import {
+    removeTrip as removeTripAction,
+    setCurrentActiveTrip as setCurrentActiveTripAction,
+} from 'store/trips/trips.actions';
 
 class TripCard extends Component {
     state = {
@@ -37,6 +40,7 @@ class TripCard extends Component {
             duration,
             removeTrip,
             startsIn,
+            setCurrentActiveTrip,
         } = this.props;
         const { redirect } = this.state;
         const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
@@ -52,6 +56,7 @@ class TripCard extends Component {
         };
 
         if (redirect) {
+            setCurrentActiveTrip(slug);
             return <Redirect to={`trips/${slug}/itinerary`} />;
         }
 
@@ -116,6 +121,7 @@ TripCard.defaultProps = {
 
 const mapDispatchToProps = dispatch => ({
     removeTrip: id => dispatch(removeTripAction(id)),
+    setCurrentActiveTrip: slug => dispatch(setCurrentActiveTripAction(slug)),
 });
 
 export default connect(null, mapDispatchToProps)(TripCard);

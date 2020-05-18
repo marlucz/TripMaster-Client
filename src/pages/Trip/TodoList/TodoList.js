@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -13,10 +14,22 @@ import AuthUserTemplate from 'templates/AuthUserTemplate';
 import TodoListTagged from 'components/TodoListTagged/TodoListTagged';
 import PageHeader from 'components/PageHeader/PageHeader';
 
-const TodoList = ({ todos, pageContext: { pageType, toggleAddItemForm } }) => {
+const TodoList = ({
+    todos,
+    pageContext: { pageType, toggleAddItemForm },
+    activeTrip,
+}) => {
+    useEffect(() => {
+        axios
+            .get(`http://localhost:3000/api/trips/${activeTrip}/todos`)
+            .then(({ data }) => {
+                console.log(data);
+            })
+            .catch(err => console.log(err));
+    });
     return (
         <AuthUserTemplate withTrip>
-            <PageHeader header="My Trip" subHeader={pageType} />
+            <PageHeader header={activeTrip} subHeader={pageType} />
 
             {todos.length ? (
                 <StyledTagsList>
@@ -54,6 +67,11 @@ TodoList.propTypes = {
     }).isRequired,
 };
 
-const mapStateToProps = ({ todos }) => todos;
+const mapStateToProps = ({ todos }, ownProps) => {
+    return {
+        activeTrip: ownProps.match.params.id,
+        todos: todos.items,
+    };
+};
 
 export default connect(mapStateToProps)(withPageContext(TodoList));

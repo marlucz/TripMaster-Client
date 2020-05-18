@@ -76,6 +76,8 @@ Expenses.propTypes = {
     }).isRequired,
 };
 
-const mapStateToProps = ({ expenses }) => expenses;
+const mapStateToProps = ({ expenses }) => ({
+    expenses: expenses.items,
+});
 
 export default connect(mapStateToProps)(withPageContext(Expenses));

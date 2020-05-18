@@ -23,11 +23,6 @@ export const fetchTrips = () => (dispatch, getState) => {
         );
 };
 
-export const removeTrip = id => ({
-    type: TripsActionsTypes.REMOVE_TRIP,
-    payload: { id },
-});
-
 export const addTrip = tripContent => (dispatch, getState) => {
     dispatch({
         type: TripsActionsTypes.ADD_TRIP_REQUEST,
@@ -50,4 +45,29 @@ export const addTrip = tripContent => (dispatch, getState) => {
                 payload: err,
             });
         });
+};
+
+export const removeTrip = id => dispatch => {
+    dispatch({ type: TripsActionsTypes.REMOVE_TRIP_REQUEST });
+
+    return axios
+        .delete(`http://localhost:3000/api/trips/${id}`)
+        .then(() => {
+            dispatch({
+                type: TripsActionsTypes.REMOVE_TRIP_SUCCESS,
+                payload: {
+                    id,
+                },
+            });
+        })
+        .catch(err =>
+            dispatch({
+                type: TripsActionsTypes.REMOVE_TRIP_FAILURE,
+                payload: err,
+            }),
+        );
+};
+
+export const setCurrentActiveTrip = slug => dispatch => {
+    dispatch({ type: TripsActionsTypes.SET_ACTIVE_TRIP, payload: slug });
 };

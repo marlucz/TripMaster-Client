@@ -18,12 +18,16 @@ class PageProvider extends Component {
     }
 
     setCurrentPage = (prevState = '') => {
-        const pageTypes = ['trips', 'itinerary', 'expenses', 'todo'];
+        const pageTypes = ['itinerary', 'expenses', 'todo'];
         const {
             location: { pathname },
         } = this.props;
 
-        const [currentPage] = pageTypes.filter(page => pathname.includes(page));
+        let [currentPage] = pageTypes.filter(page => pathname.includes(page));
+
+        if (!currentPage) {
+            currentPage = 'trips';
+        }
 
         if (prevState.pageType !== currentPage) {
             this.setState({ pageType: currentPage });

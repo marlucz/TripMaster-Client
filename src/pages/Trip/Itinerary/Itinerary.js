@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import withPageContext from 'hoc/withPageContext';
 
+import { setCurrentActiveTrip as setCurrentActiveTripAction } from 'store/trips/trips.actions';
+
 import {
     StyledWrapper,
     StyledMapContainer,
@@ -20,21 +22,32 @@ import PageHeader from 'components/PageHeader/PageHeader';
 const Itinerary = ({
     itinerary,
     pageContext: { pageType, toggleAddItemForm },
+    tripSlug,
+    setCurrentActiveTrip,
     activeTrip,
 }) => {
     useEffect(() => {
-        console.log(activeTrip);
+        let slug;
+        if (!activeTrip) {
+            setCurrentActiveTrip(tripSlug);
+            slug = tripSlug;
+        } else {
+            slug = activeTrip;
+        }
+
         axios
-            .get(`http://localhost:3000/api/trips/${activeTrip}/itinerary`)
+            .get(`http://localhost:3000/api/trips/${slug}/itinerary`)
             .then(({ data }) => {
+                // eslint-disable-next-line
                 console.log(data);
             })
+            // eslint-disable-next-line
             .catch(err => console.log(err));
     });
 
     return (
         <AuthUserTemplate withTrip>
-            <PageHeader header="My Trip" subHeader={pageType} />
+            <PageHeader header={activeTrip} subHeader={pageType} />
             {itinerary.length ? (
                 <StyledWrapper>
                     <StyledMapContainer>
@@ -107,11 +120,18 @@ Itinerary.propTypes = {
     }).isRequired,
 };
 
-const mapStateToProps = ({ itinerary }, ownProps) => {
+const mapDispatchToProps = dispatch => ({
+    setCurrentActiveTrip: slug => dispatch(setCurrentActiveTripAction(slug)),
+});
+
+const mapStateToProps = ({ itinerary, trips }, ownProps) => {
     return {
-        activeTrip: ownProps.match.params.id,
+        activeTrip: trips.activeTrip,
+        tripSlug: ownProps.match.params.id,
         itinerary: itinerary.items,
     };
 };
 
-export default withPageContext(connect(mapStateToProps)(Itinerary));
+export default withPageContext(
+    connect(mapStateToProps, mapDispatchToProps)(Itinerary),
+);
