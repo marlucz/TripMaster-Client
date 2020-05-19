@@ -36,7 +36,7 @@ const Itinerary = ({
         }
 
         axios
-            .get(`http://localhost:3000/api/trips/${slug}/itinerary`)
+            .get(`http://localhost:4000/api/trips/${slug}/itinerary`)
             .then(({ data }) => {
                 // eslint-disable-next-line
                 console.log(data);

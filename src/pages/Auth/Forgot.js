@@ -22,7 +22,7 @@ const Login = () => (
             initialValues={{ email: '', password: '' }}
             onSubmit={({ email, password }) =>
                 axios
-                    .post('http://localhost:3000/api/user/forgot', {
+                    .post('http://localhost:4000/api/user/forgot', {
                         email,
                         password,
                     })

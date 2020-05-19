@@ -14,7 +14,7 @@ export const register = (
     dispatch({ type: UserActionsTypes.REGISTER_REQUEST });
 
     return axios
-        .post('http://localhost:3000/api/user/register', {
+        .post('http://localhost:4000/api/user/register', {
             name,
             email,
             password,
@@ -37,7 +37,7 @@ export const authenticate = (email, password) => dispatch => {
     dispatch({ type: UserActionsTypes.AUTH_REQUEST });
 
     return axios
-        .post('http://localhost:3000/api/user/login', {
+        .post('http://localhost:4000/api/user/login', {
             email,
             password,
         })

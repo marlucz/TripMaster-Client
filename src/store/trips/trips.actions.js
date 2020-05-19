@@ -4,7 +4,7 @@ import axios from 'axios';
 export const fetchTrips = () => (dispatch, getState) => {
     dispatch({ type: TripsActionsTypes.FETCH_TRIPS_REQUEST });
     return axios
-        .get('http://localhost:3000/api/trips', {
+        .get('http://localhost:4000/api/trips', {
             params: {
                 userID: getState().user.currentUser.id,
             },
@@ -29,7 +29,7 @@ export const addTrip = tripContent => (dispatch, getState) => {
     });
 
     return axios
-        .post('http://localhost:3000/api/trips', {
+        .post('http://localhost:4000/api/trips', {
             userID: getState().user.currentUser.id,
             ...tripContent,
         })
@@ -51,7 +51,7 @@ export const removeTrip = id => dispatch => {
     dispatch({ type: TripsActionsTypes.REMOVE_TRIP_REQUEST });
 
     return axios
-        .delete(`http://localhost:3000/api/trips/${id}`)
+        .delete(`http://localhost:4000/api/trips/${id}`)
         .then(() => {
             dispatch({
                 type: TripsActionsTypes.REMOVE_TRIP_SUCCESS,

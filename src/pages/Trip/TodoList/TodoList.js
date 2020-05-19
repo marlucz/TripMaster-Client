@@ -21,7 +21,7 @@ const TodoList = ({
 }) => {
     useEffect(() => {
         axios
-            .get(`http://localhost:3000/api/trips/${activeTrip}/todos`)
+            .get(`http://localhost:4000/api/trips/${activeTrip}/todos`)
             .then(({ data }) => {
                 console.log(data);
             })
