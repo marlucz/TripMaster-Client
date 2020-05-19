@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -10,6 +11,7 @@ import {
     StyledWrapper,
     StyledForm,
     StyledInput,
+    StyledDateInput,
     StyledButton,
     StyledLocationSearchInput,
     StyledRowInputsWrapper,
@@ -35,6 +37,16 @@ class AddItemForm extends Component {
         const handleLocationSelect = (loc, lat, lng) => {
             this.setState({ location: loc, latitude: lat, longitude: lng });
         };
+        const AddTripSchema = Yup.object().shape({
+            name: Yup.string()
+                .min(2, 'Too short name')
+                .max(30, 'Name too long')
+                .required('Trip name is required'),
+            startDate: Yup.date()
+                .min(new Date(Date.now()))
+                .required('Please provide start date'),
+            endDate: Yup.date().min(Yup.ref('startDate')),
+        });
 
         return (
             <StyledWrapper>
@@ -48,6 +60,7 @@ class AddItemForm extends Component {
                         startDate: '',
                         endDate: '',
                     }}
+                    validationSchema={AddTripSchema}
                     onSubmit={values => {
                         let newValues = { ...values };
                         newValues = {
@@ -60,7 +73,13 @@ class AddItemForm extends Component {
                         toggleAddItemForm();
                     }}
                 >
-                    {({ values, handleChange, handleBlur }) => (
+                    {({
+                        values,
+                        handleChange,
+                        handleBlur,
+                        errors,
+                        touched,
+                    }) => (
                         <StyledForm>
                             <StyledInput
                                 type="text"
@@ -70,12 +89,19 @@ class AddItemForm extends Component {
                                 onBlur={handleBlur}
                                 value={values.name}
                             />
+                            {errors.name && touched.name ? (
+                                <div>{errors.name}</div>
+                            ) : null}
                             <StyledLocationSearchInput
+                                name="location"
                                 setLocation={handleLocationSelect}
                                 onChange={() => values.location}
                                 onBlur={handleBlur}
                                 value={values.location}
                             />
+                            {errors.location && touched.location ? (
+                                <div>{errors.location}</div>
+                            ) : null}
                             <StyledRowInputsWrapper>
                                 <StyledInput
                                     type="number"
@@ -97,7 +123,7 @@ class AddItemForm extends Component {
                                     touched
                                 />
                             </StyledRowInputsWrapper>
-                            <StyledInput
+                            <StyledDateInput
                                 type="date"
                                 name="startDate"
                                 placeholder="Start date"
@@ -105,7 +131,10 @@ class AddItemForm extends Component {
                                 onBlur={handleBlur}
                                 value={values.startDate}
                             />
-                            <StyledInput
+                            {errors.startDate && touched.startDate ? (
+                                <div>{errors.startDate}</div>
+                            ) : null}
+                            <StyledDateInput
                                 type="date"
                                 name="endDate"
                                 placeholder="End date"
@@ -113,6 +142,9 @@ class AddItemForm extends Component {
                                 onBlur={handleBlur}
                                 value={values.endDate}
                             />
+                            {errors.endDate && touched.endDate ? (
+                                <div>{errors.endDate}</div>
+                            ) : null}
                             <StyledButton type="submit">Add item</StyledButton>
                         </StyledForm>
                     )}

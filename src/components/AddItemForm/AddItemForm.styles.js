@@ -40,6 +40,21 @@ export const StyledInput = styled.input`
     }
 `;
 
+export const StyledDateInput = styled(StyledInput)`
+    &:before {
+        content: attr(placeholder) !important;
+        color: ${color.grayDark};
+        margin-right: 0.5em;
+    }
+
+    &:focus:before {
+        content: '';
+    }
+    &:valid:before {
+        content: '';
+    }
+`;
+
 export const StyledButton = styled(Button)`
     margin: 1rem auto;
     margin-top: auto;
