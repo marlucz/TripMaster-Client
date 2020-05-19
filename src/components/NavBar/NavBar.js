@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -17,6 +18,7 @@ import { navTop, navInTrip } from './NavItemsHelper';
 const NavBar = ({
     isInTrip,
     pageContext: { isAddItemFormVisible, toggleAddItemForm, setCurrentToTrips },
+    activeTrip,
 }) => {
     const handleChangeRoute = () =>
         isAddItemFormVisible ? toggleAddItemForm() : '';
@@ -60,7 +62,7 @@ const NavBar = ({
                     >
                         <StyledIcon
                             as={NavLink}
-                            to={item.route}
+                            to={item.route.replace(':slug', activeTrip)}
                             exact
                             icon={item.icon}
                             activeclass="active"
@@ -86,4 +88,6 @@ NavBar.defaultProps = {
     isInTrip: false,
 };
 
-export default withPageContext(NavBar);
+const mapStateToProps = ({ trips: { activeTrip } }) => ({ activeTrip });
+
+export default connect(mapStateToProps)(withPageContext(NavBar));

@@ -27,7 +27,11 @@ class TripCard extends Component {
         redirect: false,
     };
 
-    handleCardClick = () => this.setState({ redirect: true });
+    handleCardClick = () => {
+        const { setCurrentActiveTrip, slug } = this.props;
+        setCurrentActiveTrip(slug);
+        this.setState({ redirect: true });
+    };
 
     render() {
         const {
@@ -40,7 +44,6 @@ class TripCard extends Component {
             duration,
             removeTrip,
             startsIn,
-            setCurrentActiveTrip,
         } = this.props;
         const { redirect } = this.state;
         const stockImage = `https://source.unsplash.com/600x600/?city,${name}`;
@@ -56,7 +59,6 @@ class TripCard extends Component {
         };
 
         if (redirect) {
-            setCurrentActiveTrip(slug);
             return <Redirect to={`trips/${slug}/itinerary`} />;
         }
 
