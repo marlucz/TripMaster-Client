@@ -83,7 +83,7 @@ const Itinerary = ({
                 </StyledWrapper>
             ) : (
                 <h2>
-                    You don&apos;t have any trips, do you want to
+                    You don&apos;t have any trip stops, do you want to
                     <StyledInlinEButton onClick={toggleAddItemForm}>
                         {' '}
                         ADD TRIP STOP?

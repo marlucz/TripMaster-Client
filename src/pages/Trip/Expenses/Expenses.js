@@ -16,9 +16,10 @@ import PageHeader from 'components/PageHeader/PageHeader';
 const Expenses = ({
     expenses,
     pageContext: { pageType, toggleAddItemForm },
+    activeTrip,
 }) => (
     <AuthUserTemplate withTrip>
-        <PageHeader header="My trip" subHeader={pageType} />
+        <PageHeader header={activeTrip} subHeader={pageType} />
         {expenses.length ? (
             <StyledExpensesList>
                 {expenses.map(
@@ -41,7 +42,7 @@ const Expenses = ({
             </StyledExpensesList>
         ) : (
             <h2>
-                You don&apos;t have any trips, do you want to
+                You don&apos;t have any expenses yet, do you want to
                 <StyledInlinEButton onClick={toggleAddItemForm}>
                     {' '}
                     ADD FIRST EXPENSE?
@@ -76,8 +77,9 @@ Expenses.propTypes = {
     }).isRequired,
 };
 
-const mapStateToProps = ({ expenses }) => ({
+const mapStateToProps = ({ expenses, trips: { activeTrip } }) => ({
     expenses: expenses.items,
+    activeTrip,
 });
 
 export default connect(mapStateToProps)(withPageContext(Expenses));
