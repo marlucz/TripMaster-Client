@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
@@ -19,140 +19,128 @@ import {
 
 import { addTrip as addTripAction } from 'store/trips/trips.actions';
 
-class AddItemForm extends Component {
-    state = {
-        location: '',
-        latitude: '',
-        longitude: '',
+const AddItemForm = ({
+    pageContext: { pageType, toggleAddItemForm },
+    addTrip,
+}) => {
+    const [location, setLocation] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+
+    const handleLocationSelect = (loc, lat, lng) => {
+        setLocation(loc);
+        setLatitude(lat);
+        setLongitude(lng);
     };
+    const AddTripSchema = Yup.object().shape({
+        name: Yup.string()
+            .min(2, 'Too short name')
+            .max(30, 'Name too long')
+            .required('Trip name is required'),
+        startDate: Yup.date()
+            .min(new Date(Date.now()))
+            .required('Please provide start date'),
+        endDate: Yup.date().min(Yup.ref('startDate')),
+    });
 
-    render() {
-        const {
-            pageContext: { pageType, toggleAddItemForm },
-            addTrip,
-        } = this.props;
-
-        const { location, latitude, longitude } = this.state;
-
-        const handleLocationSelect = (loc, lat, lng) => {
-            this.setState({ location: loc, latitude: lat, longitude: lng });
-        };
-        const AddTripSchema = Yup.object().shape({
-            name: Yup.string()
-                .min(2, 'Too short name')
-                .max(30, 'Name too long')
-                .required('Trip name is required'),
-            startDate: Yup.date()
-                .min(new Date(Date.now()))
-                .required('Please provide start date'),
-            endDate: Yup.date().min(Yup.ref('startDate')),
-        });
-
-        return (
-            <StyledWrapper>
-                <PageHeader header={pageType} subHeader="Add new" />
-                <Formik
-                    initialValues={{
-                        name: '',
-                        location: '',
-                        lat: '',
-                        lng: '',
-                        startDate: '',
-                        endDate: '',
-                    }}
-                    validationSchema={AddTripSchema}
-                    onSubmit={values => {
-                        let newValues = { ...values };
-                        newValues = {
-                            ...newValues,
-                            location,
-                            lat: latitude,
-                            lng: longitude,
-                        };
-                        addTrip(newValues);
-                        toggleAddItemForm();
-                    }}
-                >
-                    {({
-                        values,
-                        handleChange,
-                        handleBlur,
-                        errors,
-                        touched,
-                    }) => (
-                        <StyledForm>
+    return (
+        <StyledWrapper>
+            <PageHeader header={pageType} subHeader="Add new" />
+            <Formik
+                initialValues={{
+                    name: '',
+                    location: '',
+                    lat: '',
+                    lng: '',
+                    startDate: '',
+                    endDate: '',
+                }}
+                validationSchema={AddTripSchema}
+                onSubmit={values => {
+                    let newValues = { ...values };
+                    newValues = {
+                        ...newValues,
+                        location,
+                        lat: latitude,
+                        lng: longitude,
+                    };
+                    addTrip(newValues);
+                    toggleAddItemForm();
+                }}
+            >
+                {({ values, handleChange, handleBlur, errors, touched }) => (
+                    <StyledForm>
+                        <StyledInput
+                            type="text"
+                            name="name"
+                            placeholder={`${pageType} title`}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                        />
+                        {errors.name && touched.name ? (
+                            <div>{errors.name}</div>
+                        ) : null}
+                        <StyledLocationSearchInput
+                            name="location"
+                            setLocation={handleLocationSelect}
+                            onChange={() => values.location}
+                            onBlur={handleBlur}
+                            value={values.location}
+                        />
+                        {errors.location && touched.location ? (
+                            <div>{errors.location}</div>
+                        ) : null}
+                        <StyledRowInputsWrapper>
                             <StyledInput
-                                type="text"
-                                name="name"
-                                placeholder={`${pageType} title`}
+                                type="number"
+                                name="lat"
+                                placeholder="latitude"
+                                value={latitude}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.name}
+                                touched
+                                dirty
                             />
-                            {errors.name && touched.name ? (
-                                <div>{errors.name}</div>
-                            ) : null}
-                            <StyledLocationSearchInput
-                                name="location"
-                                setLocation={handleLocationSelect}
-                                onChange={() => values.location}
-                                onBlur={handleBlur}
-                                value={values.location}
-                            />
-                            {errors.location && touched.location ? (
-                                <div>{errors.location}</div>
-                            ) : null}
-                            <StyledRowInputsWrapper>
-                                <StyledInput
-                                    type="number"
-                                    name="lat"
-                                    placeholder="latitude"
-                                    value={latitude}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    touched
-                                    dirty
-                                />
-                                <StyledInput
-                                    type="number"
-                                    name="lng"
-                                    placeholder="longitude"
-                                    value={longitude}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    touched
-                                />
-                            </StyledRowInputsWrapper>
-                            <StyledDateInput
-                                type="date"
-                                name="startDate"
-                                placeholder="Start date"
+                            <StyledInput
+                                type="number"
+                                name="lng"
+                                placeholder="longitude"
+                                value={longitude}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.startDate}
+                                touched
                             />
-                            {errors.startDate && touched.startDate ? (
-                                <div>{errors.startDate}</div>
-                            ) : null}
-                            <StyledDateInput
-                                type="date"
-                                name="endDate"
-                                placeholder="End date"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.endDate}
-                            />
-                            {errors.endDate && touched.endDate ? (
-                                <div>{errors.endDate}</div>
-                            ) : null}
-                            <StyledButton type="submit">Add item</StyledButton>
-                        </StyledForm>
-                    )}
-                </Formik>
-            </StyledWrapper>
-        );
-    }
-}
+                        </StyledRowInputsWrapper>
+                        <StyledDateInput
+                            type="date"
+                            name="startDate"
+                            placeholder="Start date"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.startDate}
+                        />
+                        {errors.startDate && touched.startDate ? (
+                            <div>{errors.startDate}</div>
+                        ) : null}
+                        <StyledDateInput
+                            type="date"
+                            name="endDate"
+                            placeholder="End date"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.endDate}
+                        />
+                        {errors.endDate && touched.endDate ? (
+                            <div>{errors.endDate}</div>
+                        ) : null}
+                        <StyledButton type="submit">Add item</StyledButton>
+                    </StyledForm>
+                )}
+            </Formik>
+        </StyledWrapper>
+    );
+};
 
 AddItemForm.propTypes = {
     pageContext: PropTypes.shape({
