@@ -1,48 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import withPageContext from 'hoc/withPageContext';
 
+import { LayoutWrapper, Main } from 'templates/AuthUserTemplate.styles';
 import NavBar from 'components/NavBar/NavBar';
 import AddItemForm from 'components/AddItemForm/AddItemForm';
-
-import { breakpoints } from 'theme/GlobalStyle';
-
-const LayoutWrapper = styled.div`
-    position: relative;
-`;
-
-const Main = styled.main`
-  width: 100%;
-  padding: 1rem 1rem 1.5rem 1rem;
-  margin: 0 auto;
-  margin-top: 4.1rem;
-
-  ${({ withTrip }) =>
-      withTrip
-          ? css`
-                height: calc(100vh - 8rem);
-            `
-          : css`
-                height: calc(100vh - 4.1rem);
-            `}
-
-  @media ${breakpoints.md} {
-    width: 90%;
-    max-width: 140rem;
-    padding: 1.5rem 2rem 2rem 2rem;
-    margin-top: 6rem;
-
-    ${({ withTrip }) =>
-        withTrip
-            ? css`
-                  height: calc(100vh - 10rem);
-              `
-            : css`
-                  height: calc(100vh - 6rem);
-              `}
-  }
-`;
 
 const AuthUserTemplate = ({
     children,
