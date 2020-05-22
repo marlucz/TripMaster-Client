@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -19,7 +18,10 @@ import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ItineraryItem from 'components/ItineraryItem/ItineraryItem';
 import PageHeader from 'components/PageHeader/PageHeader';
 
+import { fetchItinerary as fetchItineraryAction } from 'store/itinerary/itinerary.actions';
+
 const Itinerary = ({
+    fetchItinerary,
     itinerary,
     pageContext: { pageType, toggleAddItemForm },
     tripSlug,
@@ -35,14 +37,7 @@ const Itinerary = ({
             slug = activeTrip;
         }
 
-        axios
-            .get(`http://localhost:4000/api/trips/${slug}/itinerary`)
-            .then(({ data }) => {
-                // eslint-disable-next-line
-                console.log(data);
-            })
-            // eslint-disable-next-line
-            .catch(err => console.log(err));
+        fetchItinerary(slug);
     });
 
     return (
@@ -122,6 +117,7 @@ Itinerary.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
     setCurrentActiveTrip: slug => dispatch(setCurrentActiveTripAction(slug)),
+    fetchItinerary: slug => dispatch(fetchItineraryAction(slug)),
 });
 
 const mapStateToProps = ({ itinerary, trips }, ownProps) => {

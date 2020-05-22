@@ -67,10 +67,15 @@ const INITIAL_STATE = {
 
 const itineraryReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case ItineraryActionsTypes.GET_ITINERARY:
+        case ItineraryActionsTypes.FETCH_ITINERARY_SUCCESS:
             return {
                 ...state,
-                itinerary: state.itinerary,
+                itinerary: [...action.payload],
+            };
+        case ItineraryActionsTypes.ADD_ITINERARY_ITEM_SUCCESS:
+            return {
+                ...state,
+                itinerary: [...state.itinerary, action.payload.data],
             };
         default:
             return state;
