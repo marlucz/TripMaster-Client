@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -15,6 +16,7 @@ import TripCard from 'components/TripCard/TripCard';
 import PageHeader from 'components/PageHeader/PageHeader';
 
 import { fetchTrips } from 'store/trips/trips.actions';
+import { selectAllTripsDateAscending } from 'store/trips/trips.selectors';
 
 class Trips extends Component {
     componentDidMount() {
@@ -101,7 +103,9 @@ Trips.propTypes = {
     }).isRequired,
 };
 
-const mapStateToProps = ({ trips }) => trips;
+const mapStateToProps = createStructuredSelector({
+    trips: selectAllTripsDateAscending,
+});
 
 const mapDispatchToProps = dispatch => ({
     fetchTrips: () => dispatch(fetchTrips()),

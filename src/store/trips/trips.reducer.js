@@ -1,7 +1,7 @@
 import TripsActionsTypes from 'store/trips/trips.types';
 
 const INITIAL_STATE = {
-    trips: [],
+    items: [],
     activeTrip: null,
 };
 
@@ -10,17 +10,17 @@ const tripsReducer = (state = INITIAL_STATE, action) => {
         case TripsActionsTypes.FETCH_TRIPS_SUCCESS:
             return {
                 ...state,
-                trips: [...action.payload],
+                items: [...action.payload],
             };
         case TripsActionsTypes.ADD_TRIP_SUCCESS:
             return {
                 ...state,
-                trips: [...state.trips, action.payload.data],
+                items: [...state.trips, action.payload.data],
             };
         case TripsActionsTypes.REMOVE_TRIP_SUCCESS:
             return {
                 ...state,
-                trips: [
+                items: [
                     ...state.trips.filter(
                         trip => trip._id !== action.payload.id,
                     ),
