@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { checkSession as checkSessionAction } from 'store/user/user.actions';
+import { selectIsAuth } from 'store/user/user.selectors';
 
 const withSession = Component => {
     const WithSession = ({ isAuth, checkSession }, ...props) => {
@@ -16,8 +18,9 @@ const withSession = Component => {
         checkSession: () => dispatch(checkSessionAction()),
     });
 
-    const mapStateToProps = ({ user: { isAuth = false } }) => ({ isAuth });
-
+    const mapStateToProps = createStructuredSelector({
+        isAuth: selectIsAuth,
+    });
     return connect(mapStateToProps, mapDispatchToProps)(WithSession);
 };
 
