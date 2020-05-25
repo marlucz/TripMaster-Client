@@ -15,13 +15,13 @@ const tripsReducer = (state = INITIAL_STATE, action) => {
         case TripsActionsTypes.ADD_TRIP_SUCCESS:
             return {
                 ...state,
-                items: [...state.trips, action.payload.data],
+                items: [...state.items, action.payload.data],
             };
         case TripsActionsTypes.REMOVE_TRIP_SUCCESS:
             return {
                 ...state,
                 items: [
-                    ...state.trips.filter(
+                    ...state.items.filter(
                         trip => trip._id !== action.payload.id,
                     ),
                 ],

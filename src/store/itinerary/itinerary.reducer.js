@@ -75,7 +75,7 @@ const itineraryReducer = (state = INITIAL_STATE, action) => {
         case ItineraryActionsTypes.ADD_ITINERARY_ITEM_SUCCESS:
             return {
                 ...state,
-                itinerary: [...state.itinerary, action.payload.data],
+                itinerary: [...state.items, action.payload.data],
             };
         default:
             return state;

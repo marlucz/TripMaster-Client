@@ -83,7 +83,7 @@ const expensesReducer = (state = INITIAL_STATE, action) => {
         case ExpensesActionsTypes.GET_EXPENSES:
             return {
                 ...state,
-                expenses: state.expenses,
+                expenses: state.items,
             };
 
         default:

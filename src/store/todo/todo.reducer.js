@@ -39,7 +39,7 @@ const todoReducer = (state = INITIAL_STATE, action) => {
         case TodoActionsTypes.GET_TODOS:
             return {
                 ...state,
-                todos: state.todos,
+                todos: state.items,
             };
         default:
             return state;
