@@ -38,7 +38,7 @@ const Itinerary = ({
         }
 
         fetchItinerary(slug);
-    });
+    }, [tripSlug, activeTrip]);
 
     return (
         <AuthUserTemplate withTrip>
@@ -52,9 +52,8 @@ const Itinerary = ({
                         {itinerary.map(
                             ({
                                 _id,
-                                date,
-                                hour,
                                 name,
+                                startDate,
                                 location,
                                 description,
                                 status,
@@ -62,8 +61,7 @@ const Itinerary = ({
                                 <ItineraryItem
                                     key={_id}
                                     id={_id}
-                                    date={date}
-                                    hour={hour}
+                                    startDate={startDate}
                                     name={name}
                                     location={location}
                                     description={description}
@@ -92,18 +90,18 @@ const Itinerary = ({
 Itinerary.propTypes = {
     itinerary: PropTypes.arrayOf(
         PropTypes.shape({
-            _id: PropTypes.number.isRequired,
+            _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+                .isRequired,
             name: PropTypes.string.isRequired,
-            slug: PropTypes.string,
-            date: PropTypes.oneOfType([
+            startDate: PropTypes.oneOfType([
                 PropTypes.instanceOf(Date),
                 PropTypes.string,
             ]).isRequired,
-            hour: PropTypes.oneOfType([
-                PropTypes.instanceOf(Date),
-                PropTypes.string,
-            ]).isRequired,
-            location: PropTypes.string.isRequired,
+            location: PropTypes.shape({
+                address: PropTypes.string,
+                lat: PropTypes.number,
+                lng: PropTypes.number,
+            }).isRequired,
             description: PropTypes.string,
             status: PropTypes.string.isRequired,
         }),

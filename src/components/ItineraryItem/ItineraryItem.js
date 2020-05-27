@@ -21,8 +21,7 @@ import Chevron from 'components/Chevron/Chevron';
 const ItineraryItem = ({
     id,
     name,
-    date,
-    hour,
+    startDate,
     location,
     description,
     status,
@@ -38,8 +37,8 @@ const ItineraryItem = ({
     return (
         <StyledWrapper key={id}>
             <TimeContainer>
-                <Paragraph>{date}</Paragraph>
-                <Paragraph>{hour}</Paragraph>
+                <Paragraph>{startDate}</Paragraph>
+                <Paragraph>{startDate}</Paragraph>
             </TimeContainer>
             <StyledPinIcon status={status}>
                 {status === 'done' && <PinDone />}
@@ -48,7 +47,7 @@ const ItineraryItem = ({
             </StyledPinIcon>
             <StyledDetails>
                 <StyledHeader status={status}>{name}</StyledHeader>
-                <StyledSpan>{location}</StyledSpan>
+                <StyledSpan>{location.address}</StyledSpan>
                 <Chevron
                     onClick={handleChevronClick}
                     rotate={isChevronRotated ? 1 : undefined}
@@ -63,13 +62,17 @@ const ItineraryItem = ({
 };
 
 ItineraryItem.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     name: PropTypes.string.isRequired,
-    date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
-        .isRequired,
-    hour: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
-        .isRequired,
-    location: PropTypes.string.isRequired,
+    startDate: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+    ]).isRequired,
+    location: PropTypes.shape({
+        address: PropTypes.string,
+        lat: PropTypes.number,
+        lng: PropTypes.number,
+    }).isRequired,
     description: PropTypes.string,
     status: PropTypes.string.isRequired,
 };

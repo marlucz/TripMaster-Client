@@ -70,12 +70,12 @@ const itineraryReducer = (state = INITIAL_STATE, action) => {
         case ItineraryActionsTypes.FETCH_ITINERARY_SUCCESS:
             return {
                 ...state,
-                itinerary: [...action.payload],
+                items: [...action.payload],
             };
         case ItineraryActionsTypes.ADD_ITINERARY_ITEM_SUCCESS:
             return {
                 ...state,
-                itinerary: [...state.items, action.payload.data],
+                items: [...state.items, action.payload.data],
             };
         default:
             return state;

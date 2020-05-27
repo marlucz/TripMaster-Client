@@ -11,6 +11,7 @@ export const fetchItinerary = slug => (dispatch, getState) => {
             },
         })
         .then(({ data }) => {
+            console.log(data);
             dispatch({
                 type: ItineraryActionsTypes.FETCH_ITINERARY_SUCCESS,
                 payload: data,
@@ -24,13 +25,15 @@ export const fetchItinerary = slug => (dispatch, getState) => {
         );
 };
 
-export const addItineraryItem = (itemContent, slug) => (dispatch, getState) => {
+export const addItineraryItem = itemContent => (dispatch, getState) => {
     dispatch({
         type: ItineraryActionsTypes.ADD_ITINERARY_ITEM_REQUEST,
     });
 
+    const slug = getState().trips.activeTrip;
+
     return axios
-        .post(`http://localhost:4000/api/trips/${slug}`, {
+        .post(`http://localhost:4000/api/trips/${slug}/itinerary`, {
             userID: getState().user.currentUser.id,
             ...itemContent,
         })

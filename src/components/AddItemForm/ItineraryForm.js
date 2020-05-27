@@ -19,6 +19,7 @@ import { addItineraryItem as addItineraryItemAction } from 'store/itinerary/itin
 const ItineraryForm = ({
     pageContext: { pageType, toggleAddItemForm },
     addItineraryItem,
+    activeTrip,
 }) => {
     const [location, setLocation] = useState({});
 
@@ -29,10 +30,13 @@ const ItineraryForm = ({
         name: Yup.string()
             .min(2, 'Too short name')
             .max(30, 'Name too long')
-            .required('Trip name is required'),
+            .required('Itinerary name is required'),
+        description: Yup.string()
+            .min(2, 'Too short description')
+            .max(300, 'Description too long'),
         startDate: Yup.date()
             .min(new Date(Date.now()))
-            .required('Please provide start date'),
+            .required('Please provide start date and hour'),
         endDate: Yup.date().min(Yup.ref('startDate')),
     });
 
@@ -40,6 +44,7 @@ const ItineraryForm = ({
         <Formik
             initialValues={{
                 name: '',
+                description: '',
                 startDate: '',
                 endDate: '',
             }}
@@ -50,6 +55,7 @@ const ItineraryForm = ({
                     ...newValues,
                     ...location,
                 };
+                console.log(newValues, activeTrip);
                 addItineraryItem(newValues);
                 toggleAddItemForm();
             }}
@@ -67,6 +73,17 @@ const ItineraryForm = ({
                     {errors.name && touched.name ? (
                         <div>{errors.name}</div>
                     ) : null}
+                    <StyledInput
+                        type="textarea"
+                        name="description"
+                        placeholder={`${pageType} description`}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.description}
+                    />
+                    {errors.name && touched.name ? (
+                        <div>{errors.name}</div>
+                    ) : null}
                     <StyledLocationSearchInput
                         name="location"
                         setLocation={handleLocationSelect}
@@ -79,7 +96,7 @@ const ItineraryForm = ({
                     ) : null}
 
                     <StyledDateInput
-                        type="date"
+                        type="datetime-local"
                         name="startDate"
                         placeholder="Start date"
                         onChange={handleChange}
@@ -90,7 +107,7 @@ const ItineraryForm = ({
                         <div>{errors.startDate}</div>
                     ) : null}
                     <StyledDateInput
-                        type="date"
+                        type="datetime-local"
                         name="endDate"
                         placeholder="End date"
                         onChange={handleChange}
