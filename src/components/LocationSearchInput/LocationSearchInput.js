@@ -7,11 +7,14 @@ import PlacesAutocomplete, {
 import {
     StyledWrapper,
     StyledInput,
+    StyledRowInputsWrapper,
 } from 'components/LocationSearchInput/LocationSearchInput.styles';
 
 const LocationSearchInput = ({ setLocation }) => {
     const [address, setAddress] = useState('');
     const [error, setError] = useState(null);
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
 
     const handleChange = inputAddress => {
         setError(null);
@@ -25,11 +28,13 @@ const LocationSearchInput = ({ setLocation }) => {
 
     const handleSelect = inputAddress => {
         setAddress(inputAddress);
-        geocodeByAddress(address)
+        geocodeByAddress(inputAddress)
             .then(results => getLatLng(results[0]))
             .then(({ lat, lng }) => {
+                setLatitude(lat);
+                setLongitude(lng);
                 // eslint-disable-next-line
-                setLocation(address, lat, lng);
+                setLocation({ location: inputAddress, lat, lng });
             })
             .catch(err => {
                 setError(`${err}: Please try again`);
@@ -86,6 +91,24 @@ const LocationSearchInput = ({ setLocation }) => {
                             );
                         })}
                     </div>
+                    <StyledRowInputsWrapper>
+                        <StyledInput
+                            type="number"
+                            name="lat"
+                            placeholder="latitude"
+                            value={latitude}
+                            onChange={handleChange}
+                            readOnly
+                        />
+                        <StyledInput
+                            type="number"
+                            name="lng"
+                            placeholder="longitude"
+                            value={longitude}
+                            onChange={handleChange}
+                            readOnly
+                        />
+                    </StyledRowInputsWrapper>
                 </StyledWrapper>
             )}
         </PlacesAutocomplete>

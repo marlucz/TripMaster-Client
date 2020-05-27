@@ -14,7 +14,6 @@ import {
     StyledDateInput,
     StyledButton,
     StyledLocationSearchInput,
-    StyledRowInputsWrapper,
 } from 'components/AddItemForm/AddItemForm.styles';
 
 import { addTrip as addTripAction } from 'store/trips/trips.actions';
@@ -23,14 +22,10 @@ const AddItemForm = ({
     pageContext: { pageType, toggleAddItemForm },
     addTrip,
 }) => {
-    const [location, setLocation] = useState('');
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
+    const [location, setLocation] = useState({});
 
-    const handleLocationSelect = (loc, lat, lng) => {
-        setLocation(loc);
-        setLatitude(lat);
-        setLongitude(lng);
+    const handleLocationSelect = locObj => {
+        setLocation(locObj);
     };
     const AddTripSchema = Yup.object().shape({
         name: Yup.string()
@@ -49,9 +44,6 @@ const AddItemForm = ({
             <Formik
                 initialValues={{
                     name: '',
-                    location: '',
-                    lat: '',
-                    lng: '',
                     startDate: '',
                     endDate: '',
                 }}
@@ -60,9 +52,7 @@ const AddItemForm = ({
                     let newValues = { ...values };
                     newValues = {
                         ...newValues,
-                        location,
-                        lat: latitude,
-                        lng: longitude,
+                        ...location,
                     };
                     addTrip(newValues);
                     toggleAddItemForm();
@@ -91,27 +81,7 @@ const AddItemForm = ({
                         {errors.location && touched.location ? (
                             <div>{errors.location}</div>
                         ) : null}
-                        <StyledRowInputsWrapper>
-                            <StyledInput
-                                type="number"
-                                name="lat"
-                                placeholder="latitude"
-                                value={latitude}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                touched
-                                dirty
-                            />
-                            <StyledInput
-                                type="number"
-                                name="lng"
-                                placeholder="longitude"
-                                value={longitude}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                touched
-                            />
-                        </StyledRowInputsWrapper>
+
                         <StyledDateInput
                             type="date"
                             name="startDate"

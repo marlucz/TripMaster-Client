@@ -23,3 +23,8 @@ export const StyledInput = styled.input`
         text-transform: capitalize;
     }
 `;
+
+export const StyledRowInputsWrapper = styled.div`
+    display: flex;
+    width: 100%;
+`;
