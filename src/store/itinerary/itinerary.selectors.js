@@ -13,22 +13,24 @@ export const selectAllItinerary = createSelector(
 export const selectAllitineraryDateAscending = createSelector(
     [selectAllItinerary],
     items => {
-        const sortedItems = sortByKey(items, 'startDate');
+        const sorted = sortByKey(items, 'startDate');
         const dateNow = new Date(Date.now());
 
-        sortedItems.forEach((item, i) => {
-            if (new Date(item.startDate) > dateNow) {
-                item.status = 'next';
+        for (let i = 0; i < sorted.length; i++) {
+            if (new Date(sorted[i].startDate) > dateNow) {
+                sorted[i].status = 'next';
             } else if (
                 i > 0 &&
-                new Date(item.startDate) >= dateNow &&
-                new Date(item.startDate) > new Date(item[i - 1].startDate)
+                new Date(sorted[i].startDate) >
+                    new Date(sorted[i - 1].startDate) &&
+                dateNow >= new Date(sorted[i].startDate) &&
+                dateNow <= new Date(sorted[i + 1].startDate)
             ) {
-                item.status = 'now';
+                sorted[i].status = 'now';
             } else {
-                item.status = 'done';
+                sorted[i].status = 'done';
             }
-        });
-        return sortedItems;
+        }
+        return sorted;
     },
 );
