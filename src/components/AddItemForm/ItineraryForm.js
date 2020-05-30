@@ -9,6 +9,7 @@ import withPageContext from 'hoc/withPageContext';
 import {
     StyledForm,
     StyledInput,
+    StyledTextArea,
     StyledDateInput,
     StyledButton,
     StyledLocationSearchInput,
@@ -19,7 +20,6 @@ import { addItineraryItem as addItineraryItemAction } from 'store/itinerary/itin
 const ItineraryForm = ({
     pageContext: { pageType, toggleAddItemForm },
     addItineraryItem,
-    activeTrip,
 }) => {
     const [location, setLocation] = useState({});
 
@@ -37,7 +37,6 @@ const ItineraryForm = ({
         startDate: Yup.date()
             .min(new Date(Date.now()))
             .required('Please provide start date and hour'),
-        endDate: Yup.date().min(Yup.ref('startDate')),
     });
 
     return (
@@ -46,7 +45,6 @@ const ItineraryForm = ({
                 name: '',
                 description: '',
                 startDate: '',
-                endDate: '',
             }}
             validationSchema={AddItinerarySchema}
             onSubmit={values => {
@@ -55,7 +53,6 @@ const ItineraryForm = ({
                     ...newValues,
                     ...location,
                 };
-                console.log(newValues, activeTrip);
                 addItineraryItem(newValues);
                 toggleAddItemForm();
             }}
@@ -73,8 +70,8 @@ const ItineraryForm = ({
                     {errors.name && touched.name ? (
                         <div>{errors.name}</div>
                     ) : null}
-                    <StyledInput
-                        type="textarea"
+                    <StyledTextArea
+                        as="textarea"
                         name="description"
                         placeholder={`${pageType} description`}
                         onChange={handleChange}
@@ -105,17 +102,6 @@ const ItineraryForm = ({
                     />
                     {errors.startDate && touched.startDate ? (
                         <div>{errors.startDate}</div>
-                    ) : null}
-                    <StyledDateInput
-                        type="datetime-local"
-                        name="endDate"
-                        placeholder="End date"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.endDate}
-                    />
-                    {errors.endDate && touched.endDate ? (
-                        <div>{errors.endDate}</div>
                     ) : null}
                     <StyledButton type="submit">Add item</StyledButton>
                 </StyledForm>

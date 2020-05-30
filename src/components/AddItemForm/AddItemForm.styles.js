@@ -40,6 +40,15 @@ export const StyledInput = styled.input`
     }
 `;
 
+export const StyledTextArea = styled(StyledInput)`
+    height: 15vh;
+    resize: none;
+
+    @media (min-width: 360px) {
+        height: 20vh;
+    }
+`;
+
 export const StyledDateInput = styled(StyledInput)`
     &:before {
         content: attr(placeholder) !important;

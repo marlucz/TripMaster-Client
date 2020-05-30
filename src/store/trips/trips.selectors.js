@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { sortByKey } from 'utils/selectorsUtils';
+import { sortByKey } from 'utils/sortByKey';
 
 const selectTrips = state => state.trips;
 

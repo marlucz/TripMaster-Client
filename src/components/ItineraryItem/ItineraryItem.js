@@ -29,6 +29,9 @@ const ItineraryItem = ({
     const [isCollapsed, setCollapsed] = useState(true);
     const [isChevronRotated, rotateChevron] = useState(false);
 
+    const startDay = new Date(startDate).toLocaleDateString();
+    const startTime = new Date(startDate).toLocaleTimeString();
+
     const handleChevronClick = () => {
         setCollapsed(!isCollapsed);
         rotateChevron(!isChevronRotated);
@@ -37,8 +40,8 @@ const ItineraryItem = ({
     return (
         <StyledWrapper key={id}>
             <TimeContainer>
-                <Paragraph>{startDate}</Paragraph>
-                <Paragraph>{startDate}</Paragraph>
+                <Paragraph>{startDay}</Paragraph>
+                <Paragraph>{startTime}</Paragraph>
             </TimeContainer>
             <StyledPinIcon status={status}>
                 {status === 'done' && <PinDone />}
