@@ -11,7 +11,6 @@ export const fetchItinerary = slug => (dispatch, getState) => {
             },
         })
         .then(({ data }) => {
-            console.log(data);
             dispatch({
                 type: ItineraryActionsTypes.FETCH_ITINERARY_SUCCESS,
                 payload: data,

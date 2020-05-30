@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createStructuredSelector, createSelector } from 'reselect';
 
 import withPageContext from 'hoc/withPageContext';
 
 import { setCurrentActiveTrip as setCurrentActiveTripAction } from 'store/trips/trips.actions';
+
+import { selectActiveTrip } from 'store/trips/trips.selectors';
+import { selectAllitineraryDateAscending } from 'store/itinerary/itinerary.selectors';
 
 import {
     StyledWrapper,
@@ -30,6 +34,7 @@ const Itinerary = ({
 }) => {
     useEffect(() => {
         let slug;
+        // eslint-disable-next-line
         if (!activeTrip) {
             setCurrentActiveTrip(tripSlug);
             slug = tripSlug;
@@ -118,12 +123,19 @@ const mapDispatchToProps = dispatch => ({
     fetchItinerary: slug => dispatch(fetchItineraryAction(slug)),
 });
 
-const mapStateToProps = ({ itinerary, trips }, ownProps) => {
-    return {
-        activeTrip: trips.activeTrip,
-        tripSlug: ownProps.match.params.id,
-        itinerary: itinerary.items,
-    };
+const mapStateToProps = (state, ownProps) => {
+    // ownProps selector to memoize params.id and pass it to props
+    const selectPageParams = () => ownProps.match.params;
+    const selectPageId = createSelector(
+        [selectPageParams],
+        params => params.id,
+    );
+
+    return createStructuredSelector({
+        activeTrip: selectActiveTrip,
+        itinerary: selectAllitineraryDateAscending,
+        tripSlug: selectPageId,
+    });
 };
 
 export default withPageContext(

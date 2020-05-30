@@ -12,3 +12,8 @@ export const selectAllTripsDateAscending = createSelector(
     [selectAllTrips],
     items => sortByKey(items, 'startDate'),
 );
+
+export const selectActiveTrip = createSelector(
+    [selectTrips],
+    trips => trips.activeTrip,
+);
