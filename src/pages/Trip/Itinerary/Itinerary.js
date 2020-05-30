@@ -71,6 +71,7 @@ const Itinerary = ({
                                     location={location}
                                     description={description}
                                     status={status}
+                                    slug={activeTrip}
                                 />
                             ),
                         )}

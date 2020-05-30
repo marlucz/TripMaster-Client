@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
     StyledWrapper,
@@ -18,6 +19,8 @@ import TimeContainer from 'components/TimeContainer/TimeContainer';
 import Paragraph from 'components/Paragraph/Paragraph';
 import Chevron from 'components/Chevron/Chevron';
 
+import { removeItineraryItem as removeItineraryItemAction } from 'store/itinerary/itinerary.actions';
+
 const ItineraryItem = ({
     id,
     name,
@@ -25,6 +28,8 @@ const ItineraryItem = ({
     location,
     description,
     status,
+    slug,
+    removeItineraryItem,
 }) => {
     const [isCollapsed, setCollapsed] = useState(true);
     const [isChevronRotated, rotateChevron] = useState(false);
@@ -57,7 +62,9 @@ const ItineraryItem = ({
                 />
                 <StyledDescription collapsed={isCollapsed}>
                     {description}
-                    <StyledEditItems />
+                    <StyledEditItems
+                        handleClickRemove={() => removeItineraryItem(slug, id)}
+                    />
                 </StyledDescription>
             </StyledDetails>
         </StyledWrapper>
@@ -78,10 +85,16 @@ ItineraryItem.propTypes = {
     }).isRequired,
     description: PropTypes.string,
     status: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
 };
 
 ItineraryItem.defaultProps = {
     description: null,
 };
 
-export default ItineraryItem;
+const mapDispatchToProps = dispatch => ({
+    removeItineraryItem: (slug, id) =>
+        dispatch(removeItineraryItemAction(slug, id)),
+});
+
+export default connect(null, mapDispatchToProps)(ItineraryItem);

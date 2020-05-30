@@ -49,3 +49,24 @@ export const addItineraryItem = itemContent => (dispatch, getState) => {
             });
         });
 };
+
+export const removeItineraryItem = (slug, id) => dispatch => {
+    dispatch({ type: ItineraryActionsTypes.REMOVE_ITINERARY_ITEM_REQUEST });
+
+    return axios
+        .delete(`http://localhost:4000/api/trips/${slug}/itinerary/${id}`)
+        .then(() => {
+            dispatch({
+                type: ItineraryActionsTypes.REMOVE_ITINERARY_ITEM_SUCCESS,
+                payload: {
+                    id,
+                },
+            });
+        })
+        .catch(err =>
+            dispatch({
+                type: ItineraryActionsTypes.REMOVE_ITINERARY_ITEM_FAILURE,
+                payload: err,
+            }),
+        );
+};

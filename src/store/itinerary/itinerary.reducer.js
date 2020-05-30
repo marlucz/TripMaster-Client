@@ -77,6 +77,15 @@ const itineraryReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 items: [...state.items, action.payload.data],
             };
+        case ItineraryActionsTypes.REMOVE_ITINERARY_ITEM_SUCCESS:
+            return {
+                ...state,
+                items: [
+                    ...state.items.filter(
+                        item => item._id !== action.payload.id,
+                    ),
+                ],
+            };
         default:
             return state;
     }

@@ -22,7 +22,7 @@ const tripsReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 items: [
                     ...state.items.filter(
-                        trip => trip._id !== action.payload.id,
+                        item => item._id !== action.payload.id,
                     ),
                 ],
             };
