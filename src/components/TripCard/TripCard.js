@@ -32,12 +32,18 @@ const TripCard = ({
     duration,
     removeTrip,
     startsIn,
+    location,
     setCurrentActiveTrip,
 }) => {
     const [redirect, setRedirect] = useState(false);
 
     const handleCardClick = () => {
-        setCurrentActiveTrip(slug);
+        setCurrentActiveTrip({
+            id,
+            name,
+            slug,
+            location,
+        });
         setRedirect(true);
     };
 
@@ -109,6 +115,10 @@ TripCard.propTypes = {
     duration: PropTypes.number.isRequired,
     removeTrip: PropTypes.func.isRequired,
     startsIn: PropTypes.number.isRequired,
+    location: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number),
+        address: PropTypes.string,
+    }).isRequired,
 };
 
 TripCard.defaultProps = {
@@ -117,7 +127,8 @@ TripCard.defaultProps = {
 
 const mapDispatchToProps = dispatch => ({
     removeTrip: id => dispatch(removeTripAction(id)),
-    setCurrentActiveTrip: slug => dispatch(setCurrentActiveTripAction(slug)),
+    setCurrentActiveTrip: activeTrip =>
+        dispatch(setCurrentActiveTripAction(activeTrip)),
 });
 
 export default connect(null, mapDispatchToProps)(TripCard);

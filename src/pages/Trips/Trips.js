@@ -45,6 +45,7 @@ class Trips extends Component {
                                     endDate,
                                     duration,
                                     startsIn,
+                                    location,
                                 }) => (
                                     <StyledListItem key={_id}>
                                         <TripCard
@@ -56,6 +57,7 @@ class Trips extends Component {
                                             endDate={endDate}
                                             duration={duration}
                                             startsIn={startsIn}
+                                            location={location}
                                         />
                                     </StyledListItem>
                                 ),
@@ -94,6 +96,10 @@ Trips.propTypes = {
             ]).isRequired,
             duration: PropTypes.number.isRequired,
             startsIn: PropTypes.number.isRequired,
+            location: PropTypes.shape({
+                coordinates: PropTypes.arrayOf(PropTypes.number),
+                address: PropTypes.string,
+            }).isRequired,
         }),
     ).isRequired,
     pageContext: PropTypes.shape({
