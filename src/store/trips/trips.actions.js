@@ -68,6 +68,6 @@ export const removeTrip = id => dispatch => {
         );
 };
 
-export const setCurrentActiveTrip = slug => dispatch => {
-    dispatch({ type: TripsActionsTypes.SET_ACTIVE_TRIP, payload: slug });
+export const setCurrentActiveTrip = trip => dispatch => {
+    dispatch({ type: TripsActionsTypes.SET_ACTIVE_TRIP, payload: trip });
 };
