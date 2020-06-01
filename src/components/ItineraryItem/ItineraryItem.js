@@ -80,8 +80,7 @@ ItineraryItem.propTypes = {
     ]).isRequired,
     location: PropTypes.shape({
         address: PropTypes.string,
-        lat: PropTypes.number,
-        lng: PropTypes.number,
+        coordinates: PropTypes.array,
     }).isRequired,
     description: PropTypes.string,
     status: PropTypes.string.isRequired,

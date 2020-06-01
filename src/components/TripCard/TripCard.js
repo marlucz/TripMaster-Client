@@ -32,18 +32,12 @@ const TripCard = ({
     duration,
     removeTrip,
     startsIn,
-    location,
     setCurrentActiveTrip,
 }) => {
     const [redirect, setRedirect] = useState(false);
 
     const handleCardClick = () => {
-        setCurrentActiveTrip({
-            id,
-            name,
-            slug,
-            location,
-        });
+        setCurrentActiveTrip(slug);
         setRedirect(true);
     };
 
@@ -115,10 +109,6 @@ TripCard.propTypes = {
     duration: PropTypes.number.isRequired,
     removeTrip: PropTypes.func.isRequired,
     startsIn: PropTypes.number.isRequired,
-    location: PropTypes.shape({
-        coordinates: PropTypes.arrayOf(PropTypes.number),
-        address: PropTypes.string,
-    }).isRequired,
 };
 
 TripCard.defaultProps = {

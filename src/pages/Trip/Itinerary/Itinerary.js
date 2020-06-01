@@ -13,7 +13,6 @@ import { selectAllitineraryDateAscending } from 'store/itinerary/itinerary.selec
 import {
     StyledWrapper,
     StyledMapContainer,
-    StyledMap,
     StyledItineraryList,
     StyledButton,
     StyledInlinEButton,
@@ -21,6 +20,7 @@ import {
 import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ItineraryItem from 'components/ItineraryItem/ItineraryItem';
 import PageHeader from 'components/PageHeader/PageHeader';
+import Map from 'components/Map/Map';
 
 import { fetchItinerary as fetchItineraryAction } from 'store/itinerary/itinerary.actions';
 
@@ -51,7 +51,7 @@ const Itinerary = ({
             {itinerary.length ? (
                 <StyledWrapper>
                     <StyledMapContainer>
-                        <StyledMap />
+                        <Map itinerary={itinerary} />
                     </StyledMapContainer>
                     <StyledItineraryList>
                         {itinerary.map(
@@ -105,8 +105,7 @@ Itinerary.propTypes = {
             ]).isRequired,
             location: PropTypes.shape({
                 address: PropTypes.string,
-                lat: PropTypes.number,
-                lng: PropTypes.number,
+                coordinates: PropTypes.array,
             }).isRequired,
             description: PropTypes.string,
             status: PropTypes.string.isRequired,
