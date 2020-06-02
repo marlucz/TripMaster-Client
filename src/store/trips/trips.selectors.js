@@ -18,8 +18,9 @@ export const selectActiveTrip = createSelector(
     trips => trips.activeTrip,
 );
 
-export const selectActiveTripObject = createSelector([selectTrips], trips =>
-    trips.items.filter(trip => {
+export const selectActiveTripObject = createSelector([selectTrips], trips => {
+    const [item] = trips.items.filter(trip => {
         return trip.slug === trips.activeTrip;
-    }),
-);
+    });
+    return item;
+});
