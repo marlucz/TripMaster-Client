@@ -18,7 +18,7 @@ export const StyledPopup = styled.div`
     display: none;
 `;
 
-export const StyledPinWrapper = styled.li`
+export const StyledPinWrapper = styled.div`
     position: relative;
     &:hover ${StyledPopup} {
         display: flex;

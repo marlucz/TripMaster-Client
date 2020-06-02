@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -6,6 +8,7 @@ import { ReactComponent as PinDone } from 'assets/icons/pin-done.svg';
 import { ReactComponent as PinNow } from 'assets/icons/pin-now.svg';
 import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
 
+import { selectActiveTripObject } from 'store/trips/trips.selectors';
 import {
     StyledMapWrapper,
     StyledNavigation,
@@ -23,14 +26,22 @@ const INITIAL_VIEWPORT = {
     zoom: 13,
 };
 
-const Map = ({ handleCordsChange, initViewport, itinerary }) => {
-    const [viewport, setViewport] = useState(initViewport || INITIAL_VIEWPORT);
+const Map = ({ activeTripData, itinerary }) => {
+    const [viewport, setViewport] = useState(INITIAL_VIEWPORT);
 
-    const onMapClick = ({ lngLat, leftButton }) => {
-        if (!leftButton) return;
-        const [longitude, latitude] = lngLat;
-        handleCordsChange(longitude, latitude);
-    };
+    useEffect(() => {
+        if (!activeTripData) return;
+
+        const [lng, lat] = activeTripData.location.coordinates;
+
+        const initViewport = {
+            latitude: lat,
+            longitude: lng,
+            zoom: 12,
+        };
+
+        setViewport(initViewport);
+    }, [activeTripData]);
 
     return (
         <StyledMapWrapper>
@@ -40,7 +51,6 @@ const Map = ({ handleCordsChange, initViewport, itinerary }) => {
                 mapStyle="mapbox://styles/bukacz/ck0e93vsg1gd61cn5qwr6ljq9"
                 mapboxApiAccessToken="pk.eyJ1IjoiYnVrYWN6IiwiYSI6ImNrMGU5MTk2NjA0d2ozcHBsZGU4Z2Y4d2gifQ.dOvbuvm8OvaACvUMDkiY4w"
                 onViewportChange={newViewport => setViewport(newViewport)}
-                onClick={handleCordsChange && onMapClick}
                 {...viewport}
             >
                 <StyledNavigation>
@@ -64,8 +74,8 @@ const Map = ({ handleCordsChange, initViewport, itinerary }) => {
                             <Marker
                                 latitude={lat}
                                 longitude={lng}
-                                offsetLeft={-19}
-                                offsetTop={-37}
+                                offsetLeft={-10}
+                                offsetTop={-20}
                             >
                                 <StyledPinIcon status={status}>
                                     {status === 'done' && <PinDone />}
@@ -92,12 +102,6 @@ const Map = ({ handleCordsChange, initViewport, itinerary }) => {
 };
 
 Map.propTypes = {
-    handleCordsChange: PropTypes.func,
-    initViewport: PropTypes.shape({
-        latitude: PropTypes.number,
-        longitude: PropTypes.number,
-        zoom: PropTypes.number,
-    }),
     itinerary: PropTypes.arrayOf(
         PropTypes.shape({
             _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
@@ -117,9 +121,8 @@ Map.propTypes = {
     ).isRequired,
 };
 
-Map.defaultProps = {
-    handleCordsChange: undefined,
-    initViewport: INITIAL_VIEWPORT,
-};
+const mapStateToProps = createStructuredSelector({
+    activeTripData: selectActiveTripObject,
+});
 
-export default Map;
+export default connect(mapStateToProps)(Map);
