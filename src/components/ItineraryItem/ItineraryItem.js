@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
@@ -20,6 +19,8 @@ import Paragraph from 'components/Paragraph/Paragraph';
 import Chevron from 'components/Chevron/Chevron';
 
 import { removeItineraryItem as removeItineraryItemAction } from 'store/itinerary/itinerary.actions';
+
+import { ItineraryItemPropTypes } from 'utils/propTypes';
 
 const ItineraryItem = ({
     id,
@@ -71,21 +72,7 @@ const ItineraryItem = ({
     );
 };
 
-ItineraryItem.propTypes = {
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    name: PropTypes.string.isRequired,
-    startDate: PropTypes.oneOfType([
-        PropTypes.instanceOf(Date),
-        PropTypes.string,
-    ]).isRequired,
-    location: PropTypes.shape({
-        address: PropTypes.string,
-        coordinates: PropTypes.array,
-    }).isRequired,
-    description: PropTypes.string,
-    status: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-};
+ItineraryItem.propTypes = ItineraryItemPropTypes.isRequired;
 
 ItineraryItem.defaultProps = {
     description: null,
