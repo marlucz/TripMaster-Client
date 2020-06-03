@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+
 import { ReactComponent as PinDone } from 'assets/icons/pin-done.svg';
 import { ReactComponent as PinNow } from 'assets/icons/pin-now.svg';
 import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
 
-import { selectActiveTripObject } from 'store/trips/trips.selectors';
+import { ItineraryItemPropTypes } from 'utils/propTypes';
 import {
     StyledMapWrapper,
     StyledNavigation,
@@ -102,27 +101,7 @@ const Map = ({ activeTripData, itinerary }) => {
 };
 
 Map.propTypes = {
-    itinerary: PropTypes.arrayOf(
-        PropTypes.shape({
-            _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-                .isRequired,
-            name: PropTypes.string.isRequired,
-            startDate: PropTypes.oneOfType([
-                PropTypes.instanceOf(Date),
-                PropTypes.string,
-            ]).isRequired,
-            location: PropTypes.shape({
-                address: PropTypes.string,
-                coordinates: PropTypes.array,
-            }).isRequired,
-            description: PropTypes.string,
-            status: PropTypes.string.isRequired,
-        }),
-    ).isRequired,
+    itinerary: PropTypes.arrayOf(ItineraryItemPropTypes).isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-    activeTripData: selectActiveTripObject,
-});
-
-export default connect(mapStateToProps)(Map);
+export default Map;
