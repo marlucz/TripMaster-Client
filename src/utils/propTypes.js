@@ -14,3 +14,22 @@ export const ItineraryItemPropTypes = PropTypes.shape({
     description: PropTypes.string,
     status: PropTypes.string.isRequired,
 });
+
+export const TripsItemPropTypes = PropTypes.shape({
+    _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    image: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    startDate: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+    ]).isRequired,
+    endDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+        .isRequired,
+    duration: PropTypes.number.isRequired,
+    startsIn: PropTypes.number.isRequired,
+    location: PropTypes.shape({
+        coordinates: PropTypes.arrayOf(PropTypes.number),
+        address: PropTypes.string,
+    }),
+});

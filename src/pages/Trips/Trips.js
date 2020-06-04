@@ -18,6 +18,8 @@ import PageHeader from 'components/PageHeader/PageHeader';
 import { fetchTrips } from 'store/trips/trips.actions';
 import { selectAllTripsDateAscending } from 'store/trips/trips.selectors';
 
+import { TripsItemPropTypes } from 'utils/propTypes';
+
 class Trips extends Component {
     componentDidMount() {
         // eslint-disable-next-line
@@ -79,29 +81,7 @@ class Trips extends Component {
 }
 
 Trips.propTypes = {
-    trips: PropTypes.arrayOf(
-        PropTypes.shape({
-            _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-                .isRequired,
-            image: PropTypes.string,
-            name: PropTypes.string.isRequired,
-            slug: PropTypes.string.isRequired,
-            startDate: PropTypes.oneOfType([
-                PropTypes.instanceOf(Date),
-                PropTypes.string,
-            ]).isRequired,
-            endDate: PropTypes.oneOfType([
-                PropTypes.instanceOf(Date),
-                PropTypes.string,
-            ]).isRequired,
-            duration: PropTypes.number.isRequired,
-            startsIn: PropTypes.number.isRequired,
-            location: PropTypes.shape({
-                coordinates: PropTypes.arrayOf(PropTypes.number),
-                address: PropTypes.string,
-            }).isRequired,
-        }),
-    ).isRequired,
+    trips: PropTypes.arrayOf(TripsItemPropTypes).isRequired,
     pageContext: PropTypes.shape({
         pageType: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo']),
         isAddItemFormVisible: PropTypes.bool,

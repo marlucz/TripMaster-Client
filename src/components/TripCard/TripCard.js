@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
@@ -21,6 +20,8 @@ import {
     removeTrip as removeTripAction,
     setCurrentActiveTrip as setCurrentActiveTripAction,
 } from 'store/trips/trips.actions';
+
+import { TripsItemPropTypes } from 'utils/propTypes';
 
 const TripCard = ({
     id,
@@ -95,21 +96,7 @@ const TripCard = ({
     );
 };
 
-TripCard.propTypes = {
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    image: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    startDate: PropTypes.oneOfType([
-        PropTypes.instanceOf(Date),
-        PropTypes.string,
-    ]).isRequired,
-    endDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
-        .isRequired,
-    duration: PropTypes.number.isRequired,
-    removeTrip: PropTypes.func.isRequired,
-    startsIn: PropTypes.number.isRequired,
-};
+TripCard.propTypes = TripsItemPropTypes.isRequired;
 
 TripCard.defaultProps = {
     image: null,
