@@ -9,8 +9,12 @@ export const selectAllItinerary = createSelector(
     [selectItinerary],
     itinerary => itinerary.items,
 );
+export const selectItineraryIsLoading = createSelector(
+    [selectItinerary],
+    itinerary => itinerary.isLoading,
+);
 
-export const selectAllitineraryDateAscending = createSelector(
+export const selectAllItineraryDateAscending = createSelector(
     [selectAllItinerary],
     items => {
         const sorted = sortByKey(items, 'startDate');

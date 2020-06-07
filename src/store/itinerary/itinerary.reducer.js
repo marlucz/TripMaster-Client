@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 const itineraryReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ItineraryActionsTypes.FETCH_ITINERARY_REQUEST:
-        case ItineraryActionsTypes.ADD_ITINERARY_REQUEST:
+        case ItineraryActionsTypes.ADD_ITINERARY_ITEM_REQUEST:
         case ItineraryActionsTypes.REMOVE_ITINERARY_ITEM_REQUEST:
             return {
                 ...state,

@@ -8,6 +8,11 @@ export const selectAllTrips = createSelector(
     trips => trips.items,
 );
 
+export const selectTripsIsLoading = createSelector(
+    [selectTrips],
+    trips => trips.isLoading,
+);
+
 export const selectAllTripsDateAscending = createSelector(
     [selectAllTrips],
     items => sortByKey(items, 'startDate'),

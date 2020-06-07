@@ -29,7 +29,7 @@ export const addItineraryItem = itemContent => (dispatch, getState) => {
         type: ItineraryActionsTypes.ADD_ITINERARY_ITEM_REQUEST,
     });
 
-    const slug = getState().trips.activeTrip;
+    const { slug } = getState().trips.activeTrip;
 
     return axios
         .post(`http://localhost:4000/api/trips/${slug}/itinerary`, {
