@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import withPageContext from 'hoc/withPageContext';
+
+import { selectActiveTrip } from 'store/trips/trips.selectors';
 
 import {
     StyledWrapper,
@@ -62,7 +65,7 @@ const NavBar = ({
                     >
                         <StyledIcon
                             as={NavLink}
-                            to={item.route.replace(':slug', activeTrip)}
+                            to={item.route.replace(':slug', activeTrip.slug)}
                             exact
                             icon={item.icon}
                             activeclass="active"
@@ -82,12 +85,16 @@ NavBar.propTypes = {
         isAddItemFormVisible: PropTypes.bool,
         toggleAddItemForm: PropTypes.func,
     }).isRequired,
+    // activeTripSlug: PropTypes.string,
 };
 
 NavBar.defaultProps = {
     isInTrip: false,
+    // activeTripSlug: null,
 };
 
-const mapStateToProps = ({ trips: { activeTrip } }) => ({ activeTrip });
+const mapStateToProps = createStructuredSelector({
+    activeTrip: selectActiveTrip,
+});
 
-export default connect(mapStateToProps)(withPageContext(NavBar));
+export default withPageContext(connect(mapStateToProps)(NavBar));

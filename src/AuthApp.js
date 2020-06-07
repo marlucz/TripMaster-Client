@@ -14,7 +14,7 @@ const AuthApp = () => (
         <GlobalTemplate>
             <Switch>
                 <Route exact path="/" component={Trips} />
-                <Route exact path="/trips" component={Trips} />
+                <Route exact path="/trips" render={() => <Redirect to="/" />} />
                 <Route path="/trips/:id/expenses" component={Expenses} />
                 <Route path="/trips/:id/itinerary" component={Itinerary} />
                 <Route path="/trips/:id/todo" component={TodoList} />

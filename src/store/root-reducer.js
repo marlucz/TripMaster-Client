@@ -11,7 +11,7 @@ import expensesReducer from 'store/expenses/expenses.reducer';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: [],
+    whitelist: ['trips'],
 };
 
 const rootReducer = combineReducers({

@@ -19,7 +19,7 @@ const Expenses = ({
     activeTrip,
 }) => (
     <AuthUserTemplate withTrip>
-        <PageHeader header={activeTrip} subHeader={pageType} />
+        <PageHeader header={activeTrip.slug} subHeader={pageType} />
         {expenses.length ? (
             <StyledExpensesList>
                 {expenses.map(

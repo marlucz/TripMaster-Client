@@ -21,7 +21,7 @@ const TodoList = ({
 }) => {
     useEffect(() => {
         axios
-            .get(`http://localhost:4000/api/trips/${activeTrip}/todos`)
+            .get(`http://localhost:4000/api/trips/${activeTrip}/todo`)
             .then(({ data }) => {
                 console.log(data);
             })
@@ -29,7 +29,7 @@ const TodoList = ({
     });
     return (
         <AuthUserTemplate withTrip>
-            <PageHeader header={activeTrip} subHeader={pageType} />
+            <PageHeader header={activeTrip.slug} subHeader={pageType} />
 
             {todos.length ? (
                 <StyledTagsList>
