@@ -24,6 +24,7 @@ export const selectAllItineraryDateAscending = createSelector(
             if (new Date(sorted[i].startDate) > dateNow) {
                 sorted[i].status = 'next';
             } else if (
+                sorted[i + 1] &&
                 i > 0 &&
                 new Date(sorted[i].startDate) >
                     new Date(sorted[i - 1].startDate) &&

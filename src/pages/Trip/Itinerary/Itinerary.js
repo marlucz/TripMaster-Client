@@ -57,7 +57,7 @@ const Itinerary = ({
             setCurrentActiveTrip(activeTrip);
             fetchItinerary(activeTrip.slug);
         }
-    }, [currentActiveTrip]);
+    }, []);
 
     return (
         <AuthUserTemplate withTrip>
