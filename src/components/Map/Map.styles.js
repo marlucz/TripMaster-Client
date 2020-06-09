@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { breakpoints, pinColor } from 'theme/GlobalStyle';
+import styled from 'styled-components';
+import { breakpoints, color } from 'theme/GlobalStyle';
 
 export const StyledMapWrapper = styled.div`
     position: relative;
@@ -8,11 +8,12 @@ export const StyledMapWrapper = styled.div`
 `;
 
 export const StyledPopup = styled.div`
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 50px;
     left: 30px;
     width: 300px;
-    height: 75px;
     padding: 0.2em;
     background: white;
     display: none;
@@ -34,27 +35,6 @@ export const StyledPinWrapper = styled.div`
     }
 `;
 
-export const StyledPinIcon = styled.div`
-    svg {
-        width: 2rem;
-        height: 2rem;
-        z-index: 1;
-
-        @media ${breakpoints.md} {
-            width: 2.5rem;
-            height: 2.5rem;
-        }
-
-        path {
-            ${({ status }) =>
-                status &&
-                css`
-                    fill: ${pinColor[status]};
-                `}
-        }
-    }
-`;
-
 export const StyledNavigation = styled.div`
     position: absolute;
     top: 0;
@@ -67,10 +47,19 @@ export const StyledInfo = styled.div`
 `;
 
 export const StyledTitle = styled.h2`
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 `;
 
 export const StyledDesc = styled.p`
     font-size: 0.9em;
     color: grey;
+`;
+
+export const StyledAddress = styled.span`
+    color: ${color.grayDark};
+    line-height: 1.2;
+
+    @media ${breakpoints.md} {
+        font-size: 1.2rem;
+    }
 `;

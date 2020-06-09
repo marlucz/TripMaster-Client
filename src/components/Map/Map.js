@@ -14,6 +14,7 @@ import {
     StyledInfo,
     StyledTitle,
     StyledDesc,
+    StyledAddress,
 } from './Map.styles';
 
 const INITIAL_VIEWPORT = {
@@ -62,6 +63,7 @@ const Map = ({ activeTripData, itinerary }) => {
                         name,
                         location: {
                             coordinates: [lng, lat],
+                            address,
                         },
                         description,
                         status,
@@ -78,6 +80,9 @@ const Map = ({ activeTripData, itinerary }) => {
                                     <StyledPopup>
                                         <StyledInfo>
                                             <StyledTitle>{name}</StyledTitle>
+                                            <StyledAddress>
+                                                {address}
+                                            </StyledAddress>
                                             <StyledDesc>
                                                 {description}
                                             </StyledDesc>
