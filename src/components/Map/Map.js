@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { ReactComponent as PinDone } from 'assets/icons/pin-done.svg';
-import { ReactComponent as PinNow } from 'assets/icons/pin-now.svg';
-import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
+import PinIcon from 'components/PinIcon/PinIcon';
 
 import { ItineraryItemPropTypes } from 'utils/propTypes';
 import {
@@ -13,7 +11,6 @@ import {
     StyledNavigation,
     StyledPopup,
     StyledPinWrapper,
-    StyledPinIcon,
     StyledInfo,
     StyledTitle,
     StyledDesc,
@@ -76,11 +73,7 @@ const Map = ({ activeTripData, itinerary }) => {
                                 offsetLeft={-10}
                                 offsetTop={-20}
                             >
-                                <StyledPinIcon status={status}>
-                                    {status === 'done' && <PinDone />}
-                                    {status === 'now' && <PinNow />}
-                                    {status === 'next' && <PinNext />}
-                                </StyledPinIcon>
+                                <PinIcon status={status} />
                                 {name && (
                                     <StyledPopup>
                                         <StyledInfo>

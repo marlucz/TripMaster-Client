@@ -4,19 +4,16 @@ import { connect } from 'react-redux';
 import {
     StyledWrapper,
     StyledDetails,
-    StyledPinIcon,
     StyledHeader,
     StyledDescription,
     StyledSpan,
     StyledEditItems,
 } from 'components/ItineraryItem/ItineraryItem.styles';
 
-import { ReactComponent as PinDone } from 'assets/icons/pin-done.svg';
-import { ReactComponent as PinNow } from 'assets/icons/pin-now.svg';
-import { ReactComponent as PinNext } from 'assets/icons/pin-next.svg';
 import TimeContainer from 'components/TimeContainer/TimeContainer';
 import Paragraph from 'components/Paragraph/Paragraph';
 import Chevron from 'components/Chevron/Chevron';
+import PinIcon from 'components/PinIcon/PinIcon';
 
 import { removeItineraryItem as removeItineraryItemAction } from 'store/itinerary/itinerary.actions';
 
@@ -49,11 +46,7 @@ const ItineraryItem = ({
                 <Paragraph>{startDay}</Paragraph>
                 <Paragraph>{startTime}</Paragraph>
             </TimeContainer>
-            <StyledPinIcon status={status}>
-                {status === 'done' && <PinDone />}
-                {status === 'now' && <PinNow />}
-                {status === 'next' && <PinNext />}
-            </StyledPinIcon>
+            <PinIcon status={status} inList />
             <StyledDetails>
                 <StyledHeader status={status}>{name}</StyledHeader>
                 <StyledSpan>{location.address}</StyledSpan>
