@@ -12,6 +12,8 @@ import {
     StyledButton,
 } from 'components/AddItemForm/AddItemForm.styles';
 
+import InputTag from 'components/InputTag/InputTag';
+
 import { addExpenseItem as addExpenseItemAction } from 'store/expenses/expenses.actions';
 
 const ExpenseForm = ({
@@ -34,6 +36,7 @@ const ExpenseForm = ({
             initialValues={{
                 name: '',
                 value: '',
+                tags: [],
                 currency: '',
             }}
             validationSchema={ExpenseFormSchema}
@@ -63,6 +66,7 @@ const ExpenseForm = ({
                         onBlur={handleBlur}
                         value={values.value}
                     />
+                    <InputTag placeholder={`${pageType} tags`} />
                     {errors.name && touched.name ? (
                         <div>{errors.name}</div>
                     ) : null}
