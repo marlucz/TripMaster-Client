@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -11,7 +12,12 @@ import {
     StyledButton,
 } from 'components/AddItemForm/AddItemForm.styles';
 
-const ExpenseForm = ({ pageContext: { pageType, toggleAddItemForm } }) => {
+import { addExpenseItem as addExpenseItemAction } from 'store/expenses/expenses.actions';
+
+const ExpenseForm = ({
+    pageContext: { pageType, toggleAddItemForm },
+    addExpenseItem,
+}) => {
     const ExpenseFormSchema = Yup.object().shape({
         name: Yup.string()
             .min(2, 'Too short name')
@@ -32,7 +38,7 @@ const ExpenseForm = ({ pageContext: { pageType, toggleAddItemForm } }) => {
             }}
             validationSchema={ExpenseFormSchema}
             onSubmit={values => {
-                console.log(values);
+                addExpenseItem(values);
                 toggleAddItemForm();
             }}
         >
@@ -89,9 +95,8 @@ ExpenseForm.propTypes = {
 
 // hidden until proper actions are made
 
-// const mapDispatchToProps = dispatch => ({
-//     addTrip: tripContent => dispatch(addTripAction(tripContent)),
-// });
+const mapDispatchToProps = dispatch => ({
+    addExpenseItem: expenseItem => dispatch(addExpenseItemAction(expenseItem)),
+});
 
-// export default connect(null, mapDispatchToProps)(withPageContext(ExpenseForm));
-export default withPageContext(ExpenseForm);
+export default connect(null, mapDispatchToProps)(withPageContext(ExpenseForm));
