@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import NotFoundBackground from 'assets/photos/404.jpg';
+import NotFoundBackground from 'assets/photos/404.webp';
 import { color } from 'theme/GlobalStyle';
 
 import Button from 'components/Button/Button';

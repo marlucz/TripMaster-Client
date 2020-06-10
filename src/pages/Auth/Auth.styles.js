@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form } from 'formik';
 
-import HeroBackground from 'assets/photos/hero.jpg';
+import HeroBackground from 'assets/photos/hero.webp';
 import { color, gradient, shadow } from 'theme/GlobalStyle';
 
 export const StyledWrapper = styled.div`
