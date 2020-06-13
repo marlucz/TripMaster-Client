@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 import withPageContext from 'hoc/withPageContext';
 
@@ -10,6 +11,7 @@ import {
     StyledForm,
     StyledInput,
     StyledButton,
+    StyledSelect,
 } from 'components/AddItemForm/AddItemForm.styles';
 
 import InputTag from 'components/InputTag/InputTag';
@@ -21,10 +23,21 @@ const ExpenseForm = ({
     addExpenseItem,
 }) => {
     const [tags, setTags] = useState([]);
+    const [currency, setCurrency] = useState('EUR');
+    const [currencies, setCurrencies] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const url =
+                'https://api.nbp.pl/api/exchangerates/tables/A?format=json';
+            const { data } = await axios.get(url);
+            setCurrencies(data[0].rates);
+        };
+
+        fetchData();
+    }, []);
 
     const handleSetTags = tagsArr => {
-        console.log(tagsArr);
-
         setTags(tagsArr);
     };
 
@@ -36,7 +49,6 @@ const ExpenseForm = ({
         value: Yup.number()
             .min(0)
             .required('Please provide expense value'),
-        currency: Yup.string().required('Please provide currency'),
     });
 
     return (
@@ -44,13 +56,13 @@ const ExpenseForm = ({
             initialValues={{
                 name: '',
                 value: '',
-                currency: '',
             }}
             validationSchema={ExpenseFormSchema}
             onSubmit={values => {
                 let newValues = { ...values };
                 newValues = {
                     ...newValues,
+                    currency,
                     tags,
                 };
                 addExpenseItem(newValues);
@@ -81,21 +93,24 @@ const ExpenseForm = ({
                     {errors.value && touched.value ? (
                         <div>{errors.name}</div>
                     ) : null}
-                    <InputTag
-                        placeholder={`${pageType} tags`}
-                        getTags={handleSetTags}
-                    />
-                    <StyledInput
-                        type="text"
+                    <StyledSelect
+                        type="select"
                         name="currency"
                         placeholder={`${pageType} currency`}
-                        onChange={handleChange}
+                        onChange={e => setCurrency(e.target.value)}
                         onBlur={handleBlur}
-                        value={values.currency}
+                        value={currency}
+                    >
+                        {currencies.map(c => (
+                            <option key={c.code} value={c.code}>
+                                {c.code} - {c.currency}
+                            </option>
+                        ))}
+                    </StyledSelect>
+                    <InputTag
+                        placeholder={`${pageType} tags - 3 max`}
+                        getTags={handleSetTags}
                     />
-                    {errors.currency && touched.currency ? (
-                        <div>{errors.name}</div>
-                    ) : null}
 
                     <StyledButton type="submit">Add item</StyledButton>
                 </StyledForm>
