@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
@@ -20,6 +20,14 @@ const ExpenseForm = ({
     pageContext: { pageType, toggleAddItemForm },
     addExpenseItem,
 }) => {
+    const [tags, setTags] = useState([]);
+
+    const handleSetTags = tagsArr => {
+        console.log(tagsArr);
+
+        setTags(tagsArr);
+    };
+
     const ExpenseFormSchema = Yup.object().shape({
         name: Yup.string()
             .min(2, 'Too short name')
@@ -36,12 +44,16 @@ const ExpenseForm = ({
             initialValues={{
                 name: '',
                 value: '',
-                tags: [],
                 currency: '',
             }}
             validationSchema={ExpenseFormSchema}
             onSubmit={values => {
-                addExpenseItem(values);
+                let newValues = { ...values };
+                newValues = {
+                    ...newValues,
+                    tags,
+                };
+                addExpenseItem(newValues);
                 toggleAddItemForm();
             }}
         >
@@ -66,10 +78,13 @@ const ExpenseForm = ({
                         onBlur={handleBlur}
                         value={values.value}
                     />
-                    <InputTag placeholder={`${pageType} tags`} />
-                    {errors.name && touched.name ? (
+                    {errors.value && touched.value ? (
                         <div>{errors.name}</div>
                     ) : null}
+                    <InputTag
+                        placeholder={`${pageType} tags`}
+                        getTags={handleSetTags}
+                    />
                     <StyledInput
                         type="text"
                         name="currency"
@@ -78,7 +93,7 @@ const ExpenseForm = ({
                         onBlur={handleBlur}
                         value={values.currency}
                     />
-                    {errors.name && touched.name ? (
+                    {errors.currency && touched.currency ? (
                         <div>{errors.name}</div>
                     ) : null}
 

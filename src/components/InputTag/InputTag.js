@@ -8,14 +8,19 @@ import {
     StyledButton,
 } from 'components/InputTag/InputTag.styles';
 
-const InputTag = ({ placeholder }) => {
+const InputTag = ({ placeholder, getTags }) => {
     const [tags, setTags] = useState([]);
     const [inputValue, setInputValue] = useState('');
+
+    const passTagsToParent = tagsArr => {
+        getTags(tagsArr);
+    };
 
     const removeTag = i => {
         const newTags = [...tags];
         newTags.splice(i, 1);
         setTags(newTags);
+        passTagsToParent(newTags);
     };
 
     const changeInputValue = e => {
@@ -31,6 +36,7 @@ const InputTag = ({ placeholder }) => {
                 return;
             }
             setTags([...tags, val]);
+            passTagsToParent([...tags, val]);
             setInputValue('');
         } else if (e.key === 'Backspace' && !val) {
             removeTag(tags.length - 1);
@@ -55,6 +61,7 @@ const InputTag = ({ placeholder }) => {
                 ))}
                 <StyledTagListItem input>
                     <StyledInput
+                        name="tags"
                         placeholder={placeholder}
                         value={inputValue}
                         onChange={changeInputValue}
