@@ -32,6 +32,7 @@ const InputTag = ({ placeholder, getTags }) => {
         const val = e.target.value;
 
         if (e.key === 'Enter' && val) {
+            e.preventDefault();
             if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
                 return;
             }
