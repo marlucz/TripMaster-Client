@@ -62,6 +62,7 @@ export const StyledTagListItem = styled.li`
     font-weight: 300;
     list-style: none;
     padding: 0 1rem;
+    margin-right: 0.5rem;
 
     ${({ input }) =>
         input &&

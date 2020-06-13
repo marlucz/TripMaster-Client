@@ -11,12 +11,16 @@ import {
 const InputTag = ({ placeholder, getTags }) => {
     const [tags, setTags] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [maxTags, setMaxTags] = useState(false);
 
     const passTagsToParent = tagsArr => {
         getTags(tagsArr);
     };
 
     const removeTag = i => {
+        if (tags.length === 3) {
+            setMaxTags(false);
+        }
         const newTags = [...tags];
         newTags.splice(i, 1);
         setTags(newTags);
@@ -35,6 +39,9 @@ const InputTag = ({ placeholder, getTags }) => {
             e.preventDefault();
             if (tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
                 return;
+            }
+            if (tags.length === 2) {
+                setMaxTags(true);
             }
             setTags([...tags, val]);
             passTagsToParent([...tags, val]);
@@ -60,16 +67,18 @@ const InputTag = ({ placeholder, getTags }) => {
                         </StyledButton>
                     </StyledTagListItem>
                 ))}
-                <StyledTagListItem input>
-                    <StyledInput
-                        name="tags"
-                        placeholder={placeholder}
-                        value={inputValue}
-                        onChange={changeInputValue}
-                        type="text"
-                        onKeyDown={inputKeyDown}
-                    />
-                </StyledTagListItem>
+                {maxTags === false && (
+                    <StyledTagListItem input>
+                        <StyledInput
+                            name="tags"
+                            placeholder={placeholder}
+                            value={inputValue}
+                            onChange={changeInputValue}
+                            type="text"
+                            onKeyDown={inputKeyDown}
+                        />
+                    </StyledTagListItem>
+                )}
             </StyledTagsWrapper>
         </StyledWrapper>
     );
