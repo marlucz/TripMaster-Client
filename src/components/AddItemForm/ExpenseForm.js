@@ -23,15 +23,21 @@ const ExpenseForm = ({
     addExpenseItem,
 }) => {
     const [tags, setTags] = useState([]);
-    const [currency, setCurrency] = useState('EUR');
+    const [currency, setCurrency] = useState('PLN');
     const [currencies, setCurrencies] = useState([]);
+
+    const plnCurrency = {
+        currency: 'polski nowy złoty',
+        code: 'PLN',
+        mid: 1.0,
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             const url =
                 'https://api.nbp.pl/api/exchangerates/tables/A?format=json';
             const { data } = await axios.get(url);
-            setCurrencies(data[0].rates);
+            setCurrencies([...data[0].rates, plnCurrency]);
         };
 
         fetchData();
