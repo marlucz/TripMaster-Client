@@ -70,6 +70,7 @@ const Expenses = ({
                                     tags={tags}
                                     value={value}
                                     currency={currency}
+                                    slug={activeTrip.slug}
                                 />
                             ),
                         )}

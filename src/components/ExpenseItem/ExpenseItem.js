@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { removeExpenseItem as removeExpenseItemAction } from 'store/expenses/expenses.actions';
 
 import { currencies } from 'components/ExpenseItem/currencies';
 import {
@@ -15,7 +18,17 @@ import EditItems from 'components/EditItems/EditItems';
 
 import { ExpenseItemPropTypes } from 'utils/propTypes';
 
-const ExpenseItem = ({ date, hour, name, tags, value, currency }) => (
+const ExpenseItem = ({
+    id,
+    date,
+    hour,
+    name,
+    tags,
+    value,
+    currency,
+    removeExpenseItem,
+    slug,
+}) => (
     <StyledWrapper>
         <StyledTimeContainer>
             <Paragraph>{date}</Paragraph>
@@ -33,10 +46,15 @@ const ExpenseItem = ({ date, hour, name, tags, value, currency }) => (
                 <span>{currencies[currency].symbol_native}</span>
             </StyledValue>
         </StyledDetails>
-        <EditItems />
+        <EditItems handleClickRemove={() => removeExpenseItem(slug, id)} />
     </StyledWrapper>
 );
 
 ExpenseItem.propTypes = ExpenseItemPropTypes.isRequired;
 
-export default ExpenseItem;
+const mapDispatchToProps = dispatch => ({
+    removeExpenseItem: (slug, id) =>
+        dispatch(removeExpenseItemAction(slug, id)),
+});
+
+export default connect(null, mapDispatchToProps)(ExpenseItem);

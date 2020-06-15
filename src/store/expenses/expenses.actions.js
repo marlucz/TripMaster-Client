@@ -50,7 +50,7 @@ export const addExpenseItem = itemContent => (dispatch, getState) => {
         });
 };
 
-export const removeItineraryItem = (slug, id) => dispatch => {
+export const removeExpenseItem = (slug, id) => dispatch => {
     dispatch({ type: ExpensesActionsTypes.REMOVE_EXPENSE_ITEM_REQUEST });
 
     return axios

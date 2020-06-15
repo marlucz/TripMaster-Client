@@ -27,7 +27,6 @@ import PageHeader from 'components/PageHeader/PageHeader';
 import Map from 'components/Map/Map';
 
 import { ItineraryItemPropTypes, TripsItemPropTypes } from 'utils/propTypes';
-// import { useIsMounted } from 'utils/isMounted';
 
 const Itinerary = ({
     isItineraryLoading,
