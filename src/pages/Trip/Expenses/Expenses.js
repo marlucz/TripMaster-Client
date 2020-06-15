@@ -13,6 +13,8 @@ import AuthUserTemplate from 'templates/AuthUserTemplate';
 import ExpenseItem from 'components/ExpenseItem/ExpenseItem';
 import PageHeader from 'components/PageHeader/PageHeader';
 
+import { ExpenseItemPropTypes } from 'utils/propTypes';
+
 const Expenses = ({
     expenses,
     pageContext: { pageType, toggleAddItemForm },
@@ -53,23 +55,7 @@ const Expenses = ({
 );
 
 Expenses.propTypes = {
-    expenses: PropTypes.arrayOf(
-        PropTypes.shape({
-            _id: PropTypes.number.isRequired,
-            date: PropTypes.oneOfType([
-                PropTypes.instanceOf(Date),
-                PropTypes.string,
-            ]).isRequired,
-            hour: PropTypes.oneOfType([
-                PropTypes.instanceOf(Date),
-                PropTypes.string,
-            ]).isRequired,
-            name: PropTypes.string.isRequired,
-            tags: PropTypes.arrayOf(PropTypes.string),
-            value: PropTypes.number.isRequired,
-            currency: PropTypes.string,
-        }),
-    ).isRequired,
+    expenses: PropTypes.arrayOf(ExpenseItemPropTypes).isRequired,
     pageContext: PropTypes.shape({
         pageType: PropTypes.oneOf(['trips', 'itinerary', 'expenses', 'todo']),
         isAddItemFormVisible: PropTypes.bool,

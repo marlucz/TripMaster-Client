@@ -33,3 +33,15 @@ export const TripsItemPropTypes = PropTypes.shape({
         address: PropTypes.string,
     }),
 });
+
+export const ExpenseItemPropTypes = PropTypes.shape({
+    _id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+        .isRequired,
+    hour: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+        .isRequired,
+    name: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    value: PropTypes.number.isRequired,
+    currency: PropTypes.string,
+});

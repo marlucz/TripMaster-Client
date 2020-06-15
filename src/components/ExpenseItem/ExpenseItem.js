@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { currencies } from 'components/ExpenseItem/currencies';
 import {
@@ -13,6 +12,8 @@ import {
 
 import Paragraph from 'components/Paragraph/Paragraph';
 import EditItems from 'components/EditItems/EditItems';
+
+import { ExpenseItemPropTypes } from 'utils/propTypes';
 
 const ExpenseItem = ({ date, hour, name, tags, value, currency }) => (
     <StyledWrapper>
@@ -36,20 +37,6 @@ const ExpenseItem = ({ date, hour, name, tags, value, currency }) => (
     </StyledWrapper>
 );
 
-ExpenseItem.propTypes = {
-    date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
-        .isRequired,
-    hour: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
-        .isRequired,
-    name: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string),
-    value: PropTypes.number.isRequired,
-    currency: PropTypes.string,
-};
-
-ExpenseItem.defaultProps = {
-    tags: null,
-    currency: 'USD',
-};
+ExpenseItem.propTypes = ExpenseItemPropTypes.isRequired;
 
 export default ExpenseItem;
